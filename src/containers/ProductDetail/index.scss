@@ -2,6 +2,7 @@
     max-width: 900px;
     margin: auto;
     padding-top: 50px;
+    width: 100%;
     .main{
         display: flex;
         align-items: flex-start;
@@ -30,9 +31,6 @@
             }
             @media screen and (min-width: 1024px){
                 padding-left: 30px;
-            }
-            .name{
-                padding: 10px 10px;
             }
             .green{
                 background: repeating-linear-gradient(-45deg, #41D87D, #41D87D 5px, #2BC769 5px, #2BC769 10px);
