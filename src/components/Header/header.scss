@@ -2,14 +2,22 @@
     background: gray;
     ul{
         margin: 0;
-        padding: 15px 0;
+        padding:  0;
         list-style: none;
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        .logo{
+            img{
+                width: 80px;
+            }
+        }
         li{
             display: inline-block;
             margin-right: 20px;
+            &:nth-child(2){
+                margin-left: auto;
+            }
             a{
                 text-decoration: none;
                 color: #fff;

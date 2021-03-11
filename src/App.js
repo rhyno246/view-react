@@ -1,15 +1,21 @@
 import React from 'react';
-import { Switch , Route } from 'react-router-dom'
+import { Switch , Route, Redirect } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Home from "./containers/Home/index"
 import Cart from './containers/Cart/index'
+import ProductDetail from './containers/ProductDetail/index'
+import NotFound from './containers/NotFound/index'
 function App() {
+
     return (
         <div className="App">
             <Header/>
             <Switch>
-                <Route exact path="/" component = { Home }/>
-                <Route exact path="/cart" component = { Cart } />
+                <Redirect exact from="/" to="/product" />
+                <Route path="/product" exact component = { Home }/>
+                <Route path="/product/:id" component ={ ProductDetail }/>
+                <Route path="/cart" component = { Cart } />
+                <Route path="*" component = { NotFound } />
             </Switch>
         </div>
     );

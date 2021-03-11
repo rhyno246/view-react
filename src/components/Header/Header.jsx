@@ -6,6 +6,7 @@ import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import imglogo from '../../logo.svg'
 
 
 const StyledBadge = withStyles((theme) => ({
@@ -22,7 +23,8 @@ const Header = () => {
         <div className="header">
             <Container>
                 <ul>
-                    <li><Link to="/">Home</Link></li> 
+                    <li  className="logo"><Link to="/product"><img src={ imglogo } alt=""/></Link></li>
+                    <li><Link to="/product">Product</Link></li> 
                     <li>
                         <Link to="/cart">
                             <IconButton aria-label="cart">
