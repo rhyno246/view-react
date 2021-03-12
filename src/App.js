@@ -4,8 +4,11 @@ import Header from './components/Header/Header'
 import Home from "./containers/Home/index"
 import Cart from './containers/Cart/index'
 import ProductDetail from './containers/ProductDetail/index'
+import SignUp from './containers/SignUp/index'
+import Login from './containers/Login/index'
+import Contact from './containers/Contact/index'
 import NotFound from './containers/NotFound/index'
-import Footer from './components/Footer';
+import Footer from './components/Footer'
 function App() {
 
     return (
@@ -16,6 +19,9 @@ function App() {
                     <Route path="/product" exact component = { Home }/>
                     <Route path="/product/:id" component ={ ProductDetail }/>
                     <Route path="/cart" component = { Cart } />
+                    <Route path="/sign-up" component = { SignUp }/>
+                    <Route path="/login" component = { Login }/>
+                    <Route path="/contact" component ={ Contact }/>
                     <Route path="*" component = { NotFound } />
                 </Switch>
             <Footer/>

@@ -1,3 +1,4 @@
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -6,10 +7,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './index.scss'
+import { AddToCart } from '../../Slice/cartSlice';
+import './index.scss';
 const useStyles = makeStyles({
     root: {
       maxWidth: 345,
@@ -27,6 +29,16 @@ const useStyles = makeStyles({
 const ProductItem = (props) => {
     const classes = useStyles();
     const { title , image , price , id} = props
+    const dispatch = useDispatch()
+    const handleAddToCart = () => {
+        dispatch(AddToCart({
+            id : id,
+            title : title,
+            price : price,
+            image : image
+        }))
+    }
+
     return ( 
         <>
             <div className="product-item">
@@ -45,7 +57,7 @@ const ProductItem = (props) => {
                     </CardActionArea>
                     <CardActions className={ classes.action }>
                         <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
-                            <Button variant="contained" color="primary">
+                            <Button variant="contained" color="primary" onClick ={ handleAddToCart }>
                                 Add To Cart
                             </Button>
                             <div className="price">{ price } $</div>

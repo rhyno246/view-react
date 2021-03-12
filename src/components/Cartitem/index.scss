@@ -1,0 +1,38 @@
+.cart-item{
+    height: 100%;
+    position: relative;
+    .cart-group{
+        display: flex;
+        align-items: flex-start;
+        padding: 10px;
+        .cart-img{
+            padding: 10px;
+            width: 40%;
+            img{
+                width: 100%;
+            }
+        }
+        .text{
+            margin-left: 10px;
+            width: 60%;
+            .cart-title{
+                font-size: 16px;
+                h4{
+                    margin: 0;
+                }
+            }
+            .pb-10{
+                padding-bottom: 18px;
+            }
+            .color-cart{
+                color: red;
+                font-weight: bold;
+            }
+        }
+        .delete-cart{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+}

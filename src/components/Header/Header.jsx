@@ -1,13 +1,15 @@
-import React from 'react'
-import './header.scss'
-import { Link } from 'react-router-dom'
-import { AppBar, Container } from "@material-ui/core"
+import { AppBar, Container } from "@material-ui/core";
 import Badge from '@material-ui/core/Badge';
-import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import { withStyles } from '@material-ui/core/styles';
+import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import imglogo from '../../logo.svg'
+import React from 'react';
+import { useSelector } from "react-redux";
+import { Link ,NavLink } from 'react-router-dom';
+import imglogo from '../../logo.svg';
 import Search from '../Search';
+import './header.scss';
 
 
 const StyledBadge = withStyles((theme) => ({
@@ -20,26 +22,48 @@ const StyledBadge = withStyles((theme) => ({
 
 
 const Header = () => {
+
+    const quantityCart = useSelector(state => state.cart.quantity)
+
+
+    const handleToggleNav = () => {
+        if(window.innerWidth <= 1024){
+            var parentMenu = document.querySelector('.group')
+            parentMenu.classList.toggle('active')
+        }
+    }
+    
     return (
         <div className="header">
             <AppBar position="static">
                 <Container>
-                    <ul>
-                        <li  className="logo"><Link to="/product"><img src={ imglogo } alt=""/></Link></li>
-                        <li><Link to="/product">Product</Link></li> 
-                        <li>
-                            <Search/>
-                        </li>
-                        <li>
+                    <div className="menu">
+                        <Link to="/product"  className="logo"><img src={ imglogo } alt=""/></Link>
+                        <ul className="group">
+                            <li className="item-menu"><NavLink to="/product" exact>Product</NavLink></li> 
+                            <li className="item-menu"><NavLink to="/contact">Contact</NavLink></li> 
+                            <li className="search-item">
+                                <Search/>
+                            </li>
+                            <li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
+                            <li className="item-menu"><NavLink to="/login">Login</NavLink></li> 
+                            {/* <div className="avartar">
+                                <Avatar src={ imglogo }/>
+                            </div> */}
+                        </ul>
+                        <div className="position-cart">
                             <Link to="/cart">
                                 <IconButton aria-label="cart">
-                                    <StyledBadge badgeContent={4} color="secondary">
+                                    <StyledBadge badgeContent={ quantityCart } color="secondary">
                                         <ShoppingCartIcon />
                                     </StyledBadge>
                                 </IconButton>
                             </Link>
-                        </li> 
-                    </ul>
+                        </div> 
+                        <IconButton edge="start" color="inherit" aria-label="menu" className="icon-menu" onClick={ handleToggleNav }>
+                            <MenuIcon />
+                        </IconButton>
+                    </div>
                 </Container>
             </AppBar>
         </div>

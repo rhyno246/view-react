@@ -1,3 +1,76 @@
 .cart{
-    padding-top: 50px;
+    padding-top: 100px;
+    padding-bottom: 70px;
+    .group-checkout{
+        text-align: right;
+        margin-top: 30px;
+        .total{
+            font-size: 20px;
+            color: brown;
+            margin-bottom: 20px;
+        }
+    }
+    .emtry-cart{
+        text-align: center;
+        padding-top: 90px;
+        img{
+            max-width: 100%;
+        }
+        .txt{
+            margin-top: 30px;
+            font-size: 22px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        .continue{
+            text-decoration: none;
+            background: #3f51b5;
+            padding: 10px 25px;
+            border-radius: 5px;
+            color: #fff;
+        }
+    }
+}
+
+.input-number{
+    width: 80px;
+    padding: 0 12px;
+    vertical-align: top;
+    text-align: center;
+    outline: none;
+}
+
+.input-number,
+.input-number-decrement,
+.input-number-increment{
+    border: 1px solid #ccc;
+    height: 40px;
+    user-select: none;
+}
+
+.input-number-decrement,
+.input-number-increment{
+    display: inline-block;
+    width: 30px;
+    line-height: 38px;
+    background: #f1f1f1;
+    color: #444;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    &:active{
+        background: #ddd
+    }
+}
+
+
+.input-number-decrement{
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.input-number-increment{
+    border-left: none;
+    border-radius: 0 4px 4px 0;
 }
