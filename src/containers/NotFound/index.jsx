@@ -2,7 +2,7 @@ import React from 'react'
 
 const NotFound = () => {
     return (
-        <div style={{ textAlign : "center" , paddingTop : "100px" }}>
+        <div style={{ textAlign : "center"}}>
             <h1> Page Not Found </h1>
         </div>
     )

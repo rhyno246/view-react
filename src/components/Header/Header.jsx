@@ -42,11 +42,11 @@ const Header = () => {
                         <ul className="group">
                             <li className="item-menu"><NavLink to="/product" exact>Product</NavLink></li> 
                             <li className="item-menu"><NavLink to="/contact">Contact</NavLink></li> 
+                            <li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
+                            <li className="item-menu"><NavLink to="/login">Login</NavLink></li>
                             <li className="search-item">
                                 <Search/>
-                            </li>
-                            <li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
-                            <li className="item-menu"><NavLink to="/login">Login</NavLink></li> 
+                            </li> 
                             {/* <div className="avartar">
                                 <Avatar src={ imglogo }/>
                             </div> */}
