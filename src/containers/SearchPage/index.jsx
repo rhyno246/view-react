@@ -13,9 +13,12 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.text.secondary,
     },
 }));
-const SearchPage = (props) => {
+const SearchPage = () => {
     const classes = useStyles();
     const search = useSelector(state => state.product.search)
+    
+
+
     // const strSearch = useSelector(state => state.product.searchTerm)
     return (
         <>

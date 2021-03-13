@@ -38,8 +38,6 @@ const Search = () => {
         setSearchTerm("")
         dispatch(SearchItem(searchTerm))
     }
-
-
     return (
         <div className="search">
             <Paper component="form" className={classes.root} onSubmit={ handleSubmitSearch }>
@@ -47,7 +45,7 @@ const Search = () => {
                     className={classes.input}
                     placeholder="Search....."
                     value={ searchTerm }
-                    onChange = {(e) => setSearchTerm(e.target.value)}
+                    onChange = { (e) => setSearchTerm(e.target.value) }
                 />
                 <IconButton type="submit" className={classes.iconButton} aria-label="search">
                     <SearchIcon />
