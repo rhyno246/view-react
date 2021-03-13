@@ -7,6 +7,7 @@ import ProductDetail from './containers/ProductDetail/index'
 import SignUp from './containers/SignUp/index'
 import Login from './containers/Login/index'
 import Contact from './containers/Contact/index'
+import Search from './containers/SearchPage/index'
 import NotFound from './containers/NotFound/index'
 import Footer from './components/Footer'
 function App() {
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/cart" component = { Cart } />
                     <Route path="/sign-up" component = { SignUp }/>
                     <Route path="/login" component = { Login }/>
+                    <Route path="/search" component = { Search }/>
                     <Route path="/contact" component ={ Contact }/>
                     <Route path="*" component = { NotFound } />
                 </Switch>

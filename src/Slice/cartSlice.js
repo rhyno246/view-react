@@ -43,6 +43,8 @@ const cartSlice = createSlice({
             state.quantity++;
             state.total += cartData.price
         },
+
+
         dashItemCart : ( state , action ) => {
             const prodData = action.payload;
             const productIndex = state.cart.findIndex(arr => arr.id === prodData.id);
@@ -54,10 +56,13 @@ const cartSlice = createSlice({
             state.quantity--;
             state.total -= cartData.price
             
+        },
+        BlurInputCart : (state,action) => {
+           console.log(action.payload)
         }
     }
 })
 
 const { reducer , actions } = cartSlice
-export const { AddToCart , RemoveProductToCart , plusCart , dashItemCart } = actions
+export const { AddToCart , RemoveProductToCart , plusCart , dashItemCart , BlurInputCart } = actions
 export default reducer

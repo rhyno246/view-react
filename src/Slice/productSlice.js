@@ -21,12 +21,19 @@ const productSlice = createSlice({
     initialState : {
         product : [],
         detailproduct : [],
+        search : [],
         loading : false,
         reRenderloading : true,
+        searchTerm : "",
         error : ""
     },
     reducers : {
-        
+        SearchItem : (state , action ) => {
+            state.searchTerm = action.payload
+            state.search = state.product.filter(search => {
+                return search.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+            })
+        }
     },
     extraReducers  : {
         [getAllProduct.pending] : (state) => {
@@ -59,5 +66,6 @@ const productSlice = createSlice({
     }
 })
 
-const { reducer : productReducer  } = productSlice
+const { reducer : productReducer , actions  } = productSlice
+export const { SearchItem } = actions
 export default productReducer

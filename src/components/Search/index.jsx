@@ -5,6 +5,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import React from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import { SearchItem } from '../../Slice/productSlice';
 import './index.scss';
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,14 +26,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Search = () => {
     const classes = useStyles();
+    const history = useHistory();
     const [searchTerm , setSearchTerm] = useState("")
-
+    const dispatch = useDispatch()
     const handleSubmitSearch = (e) => {
         e.preventDefault()
-        console.log(searchTerm)
         if(searchTerm === "") {
             return
         }
+        history.push('/search')
+        setSearchTerm("")
+        dispatch(SearchItem(searchTerm))
     }
 
 

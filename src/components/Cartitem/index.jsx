@@ -6,7 +6,7 @@ import Card from '@material-ui/core/Card'
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { plusCart, RemoveProductToCart , dashItemCart } from '../../Slice/cartSlice';
+import { plusCart, RemoveProductToCart , dashItemCart, BlurInputCart } from '../../Slice/cartSlice';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,7 +24,7 @@ const CartItem = (props) => {
     const classes = useStyles();
     const { id , title , image , price , quantity } = props
     const dispatch = useDispatch()
-    const [ input , setInput ] = useState("")
+    const [ input , setInput ] = useState(quantity)
     const handleDeleteCartItem = () => {
         dispatch(RemoveProductToCart({id : id}))
     }
@@ -32,18 +32,17 @@ const CartItem = (props) => {
         dispatch(dashItemCart({id : id}))
     }
     const handlePlusCart = () => {
-        dispatch(plusCart({id : id}))
+        dispatch(plusCart({id : id }))
     }
     
-
-
-
     const handleBlurInput = () => {
         if(input === ""){
-            return 
+            return
         }
-        console.log(input)
+        dispatch(BlurInputCart(input))
     }
+
+
 
 
     return (
@@ -61,7 +60,7 @@ const CartItem = (props) => {
                             <button className="input-number-decrement" onClick={  handleDashCart } disabled={ quantity <= 1 }>–</button>
                             <input type="number" className="input-number" 
                                 value={ quantity } 
-                                onChange={ (e) => setInput(e.target.value) } 
+                                onChange={ e => setInput(e.target.value) } 
                                 onBlur = { handleBlurInput }
                             />
                             <button className="input-number-increment" onClick={ handlePlusCart }>+</button>
