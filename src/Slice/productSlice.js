@@ -15,7 +15,6 @@ export const getAllProductDetail = createAsyncThunk('product/getAllProductDetail
     }
 )
 
-
 const productSlice = createSlice({
     name : 'product',
     initialState : {
