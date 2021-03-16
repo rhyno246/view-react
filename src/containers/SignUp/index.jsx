@@ -36,11 +36,9 @@ const SignupSchema = Yup.object().shape({
 const SignUp = () => {
     const [error , setError] = useState("")
     const [loading , setLoading] = useState(false)
-
-    const hanleSignUp = (values , dataResetForm) => {
+    const hanleSignUp = (values , resetForm) => {
         setLoading(true)
         setTimeout(() => {
-            console.log(dataResetForm)
             firebase.auth().createUserWithEmailAndPassword(values.email , values.password)
             .then(userCredential => {
                 var user = userCredential.user
@@ -50,6 +48,7 @@ const SignUp = () => {
                 })
             }).catch(error => {
                 if(error){
+                    resetForm.resetForm()
                     setError(error.message)
                     setLoading(false)
                     return
