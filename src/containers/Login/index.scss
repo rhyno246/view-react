@@ -16,7 +16,20 @@
     }
     .login-link{
         text-decoration: none;
-        color: lightcoral;
+        color: #3f51b5;
         margin-left: 8px;
+    }
+    .error{
+        margin-top: 0;
+        color: red;
+    }
+    .error-box {
+        background: red;
+        text-align: center;
+        color: #fff;
+        padding: 10px 0;
+    }
+    .err{
+        background-color: rgba($color: red, $alpha: .2);
     }
 }

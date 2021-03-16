@@ -6,7 +6,6 @@ import App from './App';
 import store from './app/store/store';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-
 ReactDOM.render(
     <Provider store ={ store }>
       <BrowserRouter>
