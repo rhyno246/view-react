@@ -37,7 +37,7 @@ const Login = () => {
                             <FastField name="email" component={ InputField } type="text" label="Email"/>
                             <FastField name="password" component={ InputField } type="text" label="Password"/>
                             <FormControl fullWidth>
-                                <Button variant="contained" color="primary" className="btn-login" type="submit">
+                                <Button variant="outlined" color="primary" className="btn-login" type="submit">
                                     Login
                                 </Button>
                                 <Link to="/sign-up" className="login-link">Don't have an account? Sign up.</Link>

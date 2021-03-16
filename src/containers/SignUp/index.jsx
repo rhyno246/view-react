@@ -7,7 +7,6 @@ import InputField from '../../components/InputField/InputField';
 import { Link } from 'react-router-dom';
 import checkBoxField from '../../components/InputField/checkBoxField';
 import firebase from "../../firebase/firebase";
-import { useDispatch, useSelector } from 'react-redux';
 
 
 const initialValues ={ 
@@ -35,12 +34,13 @@ const SignupSchema = Yup.object().shape({
 
 
 const SignUp = () => {
-    const dispatch = useDispatch()
     const [error , setError] = useState("")
     const [loading , setLoading] = useState(false)
-    const hanleSignUp = (values) => {
+
+    const hanleSignUp = (values , dataResetForm) => {
         setLoading(true)
         setTimeout(() => {
+            console.log(dataResetForm)
             firebase.auth().createUserWithEmailAndPassword(values.email , values.password)
             .then(userCredential => {
                 var user = userCredential.user
@@ -66,8 +66,8 @@ const SignUp = () => {
                     <Formik
                         initialValues={initialValues}
                         validationSchema={SignupSchema}
-                        onSubmit={values => hanleSignUp(values) }
-                    >
+                        onSubmit={(values , dataResetForm) => hanleSignUp(values , dataResetForm) }
+                    >   
                         <Form>
                             <FastField name="name" component={ InputField } type="text" label="Name"/>
                             <FastField name="email" component={ InputField } type="text" label="Email"/>
@@ -76,7 +76,7 @@ const SignUp = () => {
                             <FastField name="acceptTerms" component ={ checkBoxField } type="checkbox" label="You must agree to continue!"/>
                             <FormControl fullWidth>
                                 <Button variant="outlined" color="primary" className="btn-login" type="submit" disabled = { loading }>
-                                    { loading ?  <CircularProgress size={25} className="position"/> : "Login"}
+                                    { loading ?  <CircularProgress size={25} className="position"/> : "Sign Up"}
                                 </Button>
                                 <Link to="/login" className="login-link">Already have an account? Login.</Link>
                             </FormControl>
