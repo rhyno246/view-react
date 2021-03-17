@@ -4,9 +4,13 @@ import './index.scss'
 import * as Yup from 'yup';
 import { Button, Card , CircularProgress, Container, FormControl } from '@material-ui/core';
 import InputField from '../../components/InputField/InputField';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import checkBoxField from '../../components/InputField/checkBoxField';
-import firebase from "../../firebase/firebase";
+import Alert from '@material-ui/lab/Alert';
+import { useAuth } from '../../contexts/AuthContext'
+
+
+
 
 
 const initialValues ={ 
@@ -36,31 +40,38 @@ const SignupSchema = Yup.object().shape({
 const SignUp = () => {
     const [error , setError] = useState("")
     const [loading , setLoading] = useState(false)
-    const hanleSignUp = (values , resetForm) => {
-        setLoading(true)
-        setTimeout(() => {
-            firebase.auth().createUserWithEmailAndPassword(values.email , values.password)
-            .then(userCredential => {
-                var user = userCredential.user
-                setLoading(false)
-                user.updateProfile({
-                    displayName : values.name
-                })
-            }).catch(error => {
-                if(error){
-                    resetForm.resetForm()
-                    setError(error.message)
-                    setLoading(false)
-                    return
-                }
-            })
-        }, 500);
+    const history = useHistory()
+    const { signup , currentUser } = useAuth()
+    const hanleSignUp = async (values , form) => {
+        try {
+            setLoading(true)
+            setError('')
+            await signup(values.email , values.password , values.name)
+            history.push('/')
+        } catch (error) {
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                    form.resetForm({
+                        values : {
+                            ...values,
+                            email : ""
+                        }
+                    })
+                    break;
+                default:
+                    break;
+            }
+            setError(error.message)
+            setLoading(false)
+        }
+        setLoading(false)
     }
     return (
         <div className="sign-up">
             <Container>
                 <h1 className="heading-login">Signup</h1>
-                { error ? <p className="error-box">{ error }</p> : null}
+                <p>{ currentUser && currentUser.displayName }</p>
+                { error ? <Alert severity="error" style={{ marginBottom : "15px" }}>{ error }</Alert> : null}
                 <Card className="main">
                     <Formik
                         initialValues={initialValues}

@@ -3,16 +3,14 @@ const authSlice = createSlice({
     name : 'auth',
     initialState :  {
         isAuth : false,
-        validateForm : {}
     },
     reducers : {
-        setNullValidate : (state , action ) => {
-            state.validateForm = action.payload
-            console.log(state.validateForm)
+        setAuth : (state , action) => {
+            state.isAuth = action.payload
         }
     }
 })
 
 const { reducer : authReducer , actions } = authSlice
-export const { setNullValidate } = actions
+export const { setAuth } = actions
 export default authReducer

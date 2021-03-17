@@ -17,14 +17,18 @@
             padding: 0;
             list-style: none;
             background: #3f51b5;
+            display: flex;
+            align-items: center;
             @media screen and (min-width: 320px){
                 position: fixed;
+                display: unset;
+                align-items: unset;
                 width: 70%;
                 left: 0;
                 top: 0;
                 z-index: 9999;
                 height: 100%;
-                padding-top: 120px;
+                padding-top: 150px;
                 margin-left: -100%;
                 opacity: 0;
             }
@@ -35,7 +39,7 @@
                 top: 0;
                 z-index: 9999;
                 height: 100%;
-                padding-top: 120px;
+                padding-top: 150px;
                 margin-left: -100%;
                 opacity: 0;
             }
@@ -47,6 +51,8 @@
                 z-index: 9999;
                 padding-top: 0;
                 margin-left: 0;
+                display: flex;
+                align-items: center;
                 opacity: 1;
             }
             li{
@@ -64,6 +70,30 @@
                 }
                 .active{
                     color: #333;
+                }
+            }
+            .user{
+                display: flex;
+                align-items: center;
+                order: 4;
+                @media screen and (min-width: 320px){
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+                @media screen and (min-width: 768px){
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+                @media screen and (min-width: 1024px){
+                    position: unset;
+                    top: auto;
+                    left: auto;
+                }
+                .name{
+                    margin-left: 5px;
+                    margin-right: 5px;
                 }
             }
             .item-menu{
@@ -85,12 +115,12 @@
             .search-item{
                     @media screen and (min-width: 320px){
                         position: absolute;
-                        top: 60px;
+                        top: 90px;
                         left: 10px;
                     }
                     @media screen and (min-width: 768px){
                         position: absolute;
-                        top: 60px;
+                        top: 90px;
                         left: 10px;
                     }
                     @media screen and (min-width: 1024px){

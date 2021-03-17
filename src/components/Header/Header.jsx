@@ -1,9 +1,10 @@
-import { AppBar, Container } from "@material-ui/core";
+import { AppBar, Avatar, Container } from "@material-ui/core";
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React from 'react';
 import { useSelector } from "react-redux";
 import { Link ,NavLink } from 'react-router-dom';
@@ -24,7 +25,7 @@ const StyledBadge = withStyles((theme) => ({
 const Header = () => {
 
     const quantityCart = useSelector(state => state.cart.quantity)
-
+    const isAuth = useSelector(state => state.auth.isAuth)
 
     const handleToggleNav = () => {
         if(window.innerWidth <= 1024){
@@ -42,14 +43,17 @@ const Header = () => {
                         <ul className="group">
                             <li className="item-menu"><NavLink to="/product" exact>Product</NavLink></li> 
                             <li className="item-menu"><NavLink to="/contact">Contact</NavLink></li> 
-                            <li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
-                            <li className="item-menu"><NavLink to="/login">Login</NavLink></li>
+                            { isAuth ? 
+                                <li className="item-menu user">
+                                    <Avatar alt="Remy Sharp" src= { imglogo } />
+                                    <span className="name">Man Nguyen</span>
+                                    <ExitToAppIcon/>
+                                </li> : <div><li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
+                                <li className="item-menu"><NavLink to="/login">Login</NavLink></li> </div> 
+                            }
                             <li className="search-item">
                                 <Search/>
                             </li> 
-                            {/* <div className="avartar">
-                                <Avatar src={ imglogo }/>
-                            </div> */}
                         </ul>
                         <div className="position-cart">
                             <Link to="/cart">
