@@ -41,7 +41,7 @@ const SignUp = () => {
     const [error , setError] = useState("")
     const [loading , setLoading] = useState(false)
     const history = useHistory()
-    const { signup , currentUser } = useAuth()
+    const { signup } = useAuth()
     const hanleSignUp = async (values , form) => {
         try {
             setLoading(true)
@@ -70,7 +70,6 @@ const SignUp = () => {
         <div className="sign-up">
             <Container>
                 <h1 className="heading-login">Signup</h1>
-                <p>{ currentUser && currentUser.displayName }</p>
                 { error ? <Alert severity="error" style={{ marginBottom : "15px" }}>{ error }</Alert> : null}
                 <Card className="main">
                     <Formik

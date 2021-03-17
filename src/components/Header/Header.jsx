@@ -11,7 +11,7 @@ import { Link ,NavLink } from 'react-router-dom';
 import imglogo from '../../logo.svg';
 import Search from '../Search';
 import './header.scss';
-
+import { useAuth } from "../../contexts/AuthContext";
 
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -23,10 +23,9 @@ const StyledBadge = withStyles((theme) => ({
 
 
 const Header = () => {
-
+    const { currentUser , logout } = useAuth()
+    console.log(currentUser)
     const quantityCart = useSelector(state => state.cart.quantity)
-    const isAuth = useSelector(state => state.auth.isAuth)
-
     const handleToggleNav = () => {
         if(window.innerWidth <= 1024){
             var parentMenu = document.querySelector('.group')
@@ -43,10 +42,10 @@ const Header = () => {
                         <ul className="group">
                             <li className="item-menu"><NavLink to="/product" exact>Product</NavLink></li> 
                             <li className="item-menu"><NavLink to="/contact">Contact</NavLink></li> 
-                            { isAuth ? 
+                            { currentUser ? 
                                 <li className="item-menu user">
                                     <Avatar alt="Remy Sharp" src= { imglogo } />
-                                    <span className="name">Man Nguyen</span>
+                                    <span className="name">{ currentUser && currentUser.displayName }</span>
                                     <ExitToAppIcon/>
                                 </li> : <div><li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
                                 <li className="item-menu"><NavLink to="/login">Login</NavLink></li> </div> 

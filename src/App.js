@@ -14,8 +14,8 @@ import { AuthProvider } from './contexts/AuthContext';
 function App() {
     return (
             <div className="App" style={{ display : "flex" , flexDirection : "column" , height : "100vh" }}>
-                <Header/>
-                    <AuthProvider>
+                <AuthProvider>
+                    <Header/>
                         <Switch>
                             <Redirect exact from="/" to="/product" />
                             <Route path="/product" exact component = { Home }/>
@@ -27,8 +27,8 @@ function App() {
                             <Route path="/contact" component ={ Contact }/>
                             <Route path="*" component = { NotFound } />
                         </Switch>
-                    </AuthProvider>
-                <Footer/>
+                    <Footer/>
+                </AuthProvider>
             </div> 
     );
 }
