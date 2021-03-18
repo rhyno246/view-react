@@ -26,6 +26,7 @@ const Header = () => {
     const { currentUser , logout } = useAuth()
     const history  = useHistory()
     const quantityCart = useSelector(state => state.cart.quantity)
+    const nameUser = useSelector(state => state.auth.nameAuth)
     const handleToggleNav = () => {
         if(window.innerWidth <= 1024){
             var parentMenu = document.querySelector('.group')
@@ -50,7 +51,7 @@ const Header = () => {
                             { currentUser ? 
                                 <li className="item-menu user">
                                     <Avatar alt="Remy Sharp" src= { imglogo } />
-                                    <span className="name">{ currentUser && currentUser.displayName }</span>
+                                    <span className="name"> <Link to="/profile"> { nameUser || currentUser.displayName } </Link> </span>
                                     <ExitToAppIcon style={{ cursor : "pointer" }} onClick={ Logout }/>
                                 </li> : <div><li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
                                 <li className="item-menu"><NavLink to="/login">Login</NavLink></li> </div> 

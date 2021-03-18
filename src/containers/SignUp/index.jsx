@@ -8,6 +8,8 @@ import { Link, useHistory } from 'react-router-dom';
 import checkBoxField from '../../components/InputField/checkBoxField';
 import Alert from '@material-ui/lab/Alert';
 import { auth } from '../../firebase/firebase'
+import { useDispatch } from 'react-redux';
+import { setNameAuth } from '../../Slice/authSlice';
 
 
 
@@ -40,13 +42,15 @@ const SignUp = () => {
     const [error , setError] = useState("")
     const [loading , setLoading] = useState(false)
     const history = useHistory()
+    const dispatch = useDispatch()
     const hanleSignUp = async (values , form) => {
         setLoading(true)
-        auth.createUserWithEmailAndPassword(values.email , values.password)
+        await auth.createUserWithEmailAndPassword(values.email , values.password)
         .then(userCredential => {
             var user = userCredential.user;
             setLoading(false)
             history.push('/')
+            dispatch(setNameAuth(values.name))
             user.updateProfile({
                 displayName : values.name,
             })
@@ -76,7 +80,7 @@ const SignUp = () => {
                     <Formik
                         initialValues={initialValues}
                         validationSchema={SignupSchema}
-                        onSubmit={(values , dataResetForm) => hanleSignUp(values , dataResetForm) }
+                        onSubmit={(values , form) => hanleSignUp(values , form) }
                     >   
                         <Form>
                             <FastField name="name" component={ InputField } type="text" label="Name"/>

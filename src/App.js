@@ -10,6 +10,7 @@ import Contact from './containers/Contact/index'
 import Search from './containers/SearchPage/index'
 import NotFound from './containers/NotFound/index'
 import Footer from './components/Footer'
+import Profile from './containers/Profile/index'
 import { AuthProvider } from './contexts/AuthContext';
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                             <Route path="/login" component = { Login }/>
                             <Route path="/search" component = { Search }/>
                             <Route path="/contact" component ={ Contact }/>
+                            <Route path="/profile" component ={ Profile }/>
                             <Route path="*" component = { NotFound } />
                         </Switch>
                     <Footer/>
