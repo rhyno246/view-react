@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { auth } from '../firebase/firebase'
 
 const AuthContext = React.createContext()
@@ -9,14 +8,6 @@ export function useAuth(){
 }
 export function AuthProvider( { children }) {
     const [currentUser , setCurrentUser ] = useState()
-    function signup (email , password , name) {
-        auth.createUserWithEmailAndPassword(email , password).then(userCredential => {
-            var user = userCredential.user
-            user.updateProfile({
-                displayName : name
-            })
-        })
-    }
     function logout (){
         return auth.signOut()
     }
@@ -29,7 +20,6 @@ export function AuthProvider( { children }) {
     const value = {
         currentUser,
         logout,
-        signup
     }
     return (
         <AuthContext.Provider value = { value }>

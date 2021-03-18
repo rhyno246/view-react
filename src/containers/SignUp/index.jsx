@@ -7,8 +7,7 @@ import InputField from '../../components/InputField/InputField';
 import { Link, useHistory } from 'react-router-dom';
 import checkBoxField from '../../components/InputField/checkBoxField';
 import Alert from '@material-ui/lab/Alert';
-import { useAuth } from '../../contexts/AuthContext'
-
+import { auth } from '../../firebase/firebase'
 
 
 
@@ -41,14 +40,17 @@ const SignUp = () => {
     const [error , setError] = useState("")
     const [loading , setLoading] = useState(false)
     const history = useHistory()
-    const { signup } = useAuth()
     const hanleSignUp = async (values , form) => {
-        try {
-            setLoading(true)
-            setError('')
-            await signup(values.email , values.password , values.name)
+        setLoading(true)
+        auth.createUserWithEmailAndPassword(values.email , values.password)
+        .then(userCredential => {
+            var user = userCredential.user;
+            setLoading(false)
             history.push('/')
-        } catch (error) {
+            user.updateProfile({
+                displayName : values.name,
+            })
+        }).catch(error =>{
             switch (error.code) {
                 case 'auth/email-already-in-use':
                     form.resetForm({
@@ -63,8 +65,7 @@ const SignUp = () => {
             }
             setError(error.message)
             setLoading(false)
-        }
-        setLoading(false)
+        })
     }
     return (
         <div className="sign-up">

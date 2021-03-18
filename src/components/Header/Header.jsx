@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React from 'react';
 import { useSelector } from "react-redux";
-import { Link ,NavLink } from 'react-router-dom';
+import { Link ,NavLink, useHistory } from 'react-router-dom';
 import imglogo from '../../logo.svg';
 import Search from '../Search';
 import './header.scss';
@@ -24,13 +24,18 @@ const StyledBadge = withStyles((theme) => ({
 
 const Header = () => {
     const { currentUser , logout } = useAuth()
-    console.log(currentUser)
+    const history  = useHistory()
     const quantityCart = useSelector(state => state.cart.quantity)
     const handleToggleNav = () => {
         if(window.innerWidth <= 1024){
             var parentMenu = document.querySelector('.group')
             parentMenu.classList.toggle('active')
         }
+    }
+
+    const Logout = () => {
+        logout()
+        history.push("/")
     }
     
     return (
@@ -46,7 +51,7 @@ const Header = () => {
                                 <li className="item-menu user">
                                     <Avatar alt="Remy Sharp" src= { imglogo } />
                                     <span className="name">{ currentUser && currentUser.displayName }</span>
-                                    <ExitToAppIcon/>
+                                    <ExitToAppIcon style={{ cursor : "pointer" }} onClick={ Logout }/>
                                 </li> : <div><li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
                                 <li className="item-menu"><NavLink to="/login">Login</NavLink></li> </div> 
                             }
