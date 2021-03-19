@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Formik, Form , FastField } from 'formik';
 import './index.scss'
 import * as Yup from 'yup';
-import { Button, Card, CircularProgress, Container, FormControl } from '@material-ui/core';
 import InputField from '../../components/InputField/InputField';
 import { Link, useHistory } from 'react-router-dom';
 import { auth } from '../../firebase/firebase'
-import Alert from '@material-ui/lab/Alert';
 
 const initialValues ={ 
     password: '',
@@ -19,9 +17,6 @@ const LoginSchema = Yup.object().shape({
         .max(50, 'Name must be less than 50 characters')
         .required('Passwords Required'),
 });
-
-
-
 const Login = () => {
 
     const history = useHistory()
@@ -46,10 +41,10 @@ const Login = () => {
     }
     return (
         <div className="login">
-            <Container>
+            <div>
                 <h2 className="heading-login">Login</h2>
-                { error ?  <Alert severity="error" style={{ marginBottom : "15px" }}>{ error }</Alert> : null}
-                <Card className="main">
+                { error ?  <div>{ error }</div> : null}
+                <div className="main">
                     <Formik
                         initialValues={initialValues}
                         validationSchema={LoginSchema}
@@ -58,17 +53,17 @@ const Login = () => {
                         <Form>
                             <FastField name="email" component={ InputField } type="text" label="Email"/>
                             <FastField name="password" component={ InputField } type="password" label="Password"/>
-                            <FormControl fullWidth>
-                                <Button variant="outlined" color="primary" className="btn-login" type="submit" disabled={ loading }>
-                                    { loading ? <CircularProgress size={25} className="position"/> : "Login" }
-                                </Button>
+                            <div>
+                                <button className="btn-login" type="submit" disabled={ loading }>
+                                    { loading ? "Loading" : "Login" }
+                                </button>
                                 <Link to="/sign-up" className="login-link">Don't have an account? Sign up.</Link>
-                            </FormControl>
+                            </div>
                         </Form>
                         
                     </Formik>
-                </Card>
-            </Container>
+                </div>
+            </div>
         </div>
     );
 }

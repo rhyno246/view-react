@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Formik, Form , FastField  } from 'formik';
 import './index.scss'
 import * as Yup from 'yup';
-import { Button, Card , CircularProgress, Container, FormControl } from '@material-ui/core';
 import InputField from '../../components/InputField/InputField';
 import { Link, useHistory } from 'react-router-dom';
 import checkBoxField from '../../components/InputField/checkBoxField';
-import Alert from '@material-ui/lab/Alert';
 import { auth } from '../../firebase/firebase'
 import { useDispatch } from 'react-redux';
 import { setNameAuth } from '../../Slice/authSlice';
@@ -73,10 +71,10 @@ const SignUp = () => {
     }
     return (
         <div className="sign-up">
-            <Container>
+            <div>
                 <h1 className="heading-login">Signup</h1>
-                { error ? <Alert severity="error" style={{ marginBottom : "15px" }}>{ error }</Alert> : null}
-                <Card className="main">
+                { error ? <div>{ error }</div> : null}
+                <div className="main">
                     <Formik
                         initialValues={initialValues}
                         validationSchema={SignupSchema}
@@ -88,16 +86,16 @@ const SignUp = () => {
                             <FastField name="password" component={ InputField } type="password" label="Password"/>
                             <FastField name="cfmpassword" component={ InputField } type="password" label="Confirm Password"/>
                             <FastField name="acceptTerms" component ={ checkBoxField } type="checkbox" label="You must agree to continue!"/>
-                            <FormControl fullWidth>
-                                <Button variant="outlined" color="primary" className="btn-login" type="submit" disabled = { loading }>
-                                    { loading ?  <CircularProgress size={25} className="position"/> : "Sign Up"}
-                                </Button>
+                            <div>
+                                <button className="btn-login" type="submit" disabled = { loading }>
+                                    { loading ?  "loadding" : "Sign Up"}
+                                </button>
                                 <Link to="/login" className="login-link">Already have an account? Login.</Link>
-                            </FormControl>
+                            </div>
                         </Form>
                     </Formik>
-                </Card>
-            </Container>
+                </div>
+            </div>
         </div>
     )
 };
