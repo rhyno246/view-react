@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import InputField from '../../components/InputField/InputField';
 import { Link, useHistory } from 'react-router-dom';
 import { auth } from '../../firebase/firebase'
+import { Alert, Button } from 'antd';
 
 const initialValues ={ 
     password: '',
@@ -43,7 +44,7 @@ const Login = () => {
         <div className="login">
             <div>
                 <h2 className="heading-login">Login</h2>
-                { error ?  <div>{ error }</div> : null}
+                { error ? <Alert message={ error } type="error" showIcon /> : null}
                 <div className="main">
                     <Formik
                         initialValues={initialValues}
@@ -53,10 +54,10 @@ const Login = () => {
                         <Form>
                             <FastField name="email" component={ InputField } type="text" label="Email"/>
                             <FastField name="password" component={ InputField } type="password" label="Password"/>
-                            <div>
-                                <button className="btn-login" type="submit" disabled={ loading }>
-                                    { loading ? "Loading" : "Login" }
-                                </button>
+                            <div style={{ marginTop : "20px" }}>
+                                <Button type="primary" htmlType="submit" loading={ loading }>
+                                    { loading ?  "loadding" : "Sign Up"}
+                                </Button>
                                 <Link to="/sign-up" className="login-link">Don't have an account? Sign up.</Link>
                             </div>
                         </Form>

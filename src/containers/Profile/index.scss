@@ -5,5 +5,22 @@
         align-items: center;
         justify-content: center;
         padding: 20px 0;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: gray;
+        font-size: 30px;
+        color: #fff;
+        margin: 30px auto;
     }
+}
+
+.ant-tabs-nav{
+    &::before{
+        border-bottom : none !important
+    }
+}
+.w-profile{
+    max-width: 900px;
+    margin: 0 auto;
 }

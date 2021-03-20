@@ -6,7 +6,8 @@ import Search from '../Search';
 import './header.scss';
 import { useAuth } from "../../contexts/AuthContext";
 import Avatar from 'antd/lib/avatar/avatar';
-import { LoginOutlined , MenuOutlined } from '@ant-design/icons';
+import { LoginOutlined , MenuOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { Badge } from 'antd';
 
 
 const Header = () => {
@@ -49,9 +50,9 @@ const Header = () => {
                     </ul>
                     <div className="position-cart">
                         <Link to="/cart">
-                            <div>
-                                { quantityCart }
-                            </div>
+                            <Badge count={ quantityCart }>
+                                <ShoppingCartOutlined />
+                            </Badge> 
                         </Link>
                     </div> 
                     <MenuOutlined className="icon-menu" onClick={ handleToggleNav }/>

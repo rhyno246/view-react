@@ -8,6 +8,7 @@ import checkBoxField from '../../components/InputField/checkBoxField';
 import { auth } from '../../firebase/firebase'
 import { useDispatch } from 'react-redux';
 import { setNameAuth } from '../../Slice/authSlice';
+import { Alert, Button } from 'antd';
 
 
 
@@ -71,9 +72,9 @@ const SignUp = () => {
     }
     return (
         <div className="sign-up">
-            <div>
+            <div className="container">
                 <h1 className="heading-login">Signup</h1>
-                { error ? <div>{ error }</div> : null}
+                { error ? <Alert message={ error } type="error" showIcon /> : null}
                 <div className="main">
                     <Formik
                         initialValues={initialValues}
@@ -86,10 +87,10 @@ const SignUp = () => {
                             <FastField name="password" component={ InputField } type="password" label="Password"/>
                             <FastField name="cfmpassword" component={ InputField } type="password" label="Confirm Password"/>
                             <FastField name="acceptTerms" component ={ checkBoxField } type="checkbox" label="You must agree to continue!"/>
-                            <div>
-                                <button className="btn-login" type="submit" disabled = { loading }>
+                            <div style={{ marginTop : "20px" }}>
+                                <Button type="primary" htmlType="submit" loading={ loading }>
                                     { loading ?  "loadding" : "Sign Up"}
-                                </button>
+                                </Button>
                                 <Link to="/login" className="login-link">Already have an account? Login.</Link>
                             </div>
                         </Form>

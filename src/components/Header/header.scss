@@ -2,7 +2,7 @@
     position: fixed;
     width: 100%;
     z-index: 999;
-    background-color: #fffdf9;
+    background-color: gray;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     .menu{
         display: flex;
@@ -18,7 +18,7 @@
             margin: 0;
             padding: 0;
             list-style: none;
-            background-color: #fffdf9;
+            background-color: gray;
             display: flex;
             align-items: center;
             @media screen and (min-width: 320px){
@@ -68,11 +68,11 @@
                     color: #333;
                     font-size: 16px;
                     &:hover,&:active{
-                        color: #1890ff;
+                        color: #fff;
                     }
                 }
                 .active{
-                    color: #1890ff;
+                    color: #fff;
                 }
             }
             .user{
@@ -159,14 +159,17 @@
             }
         }
         .position-cart{
+            span{
+                font-size: 20px;
+            }
             @media screen and (min-width: 320px){
                 position: fixed;
-                top: 5px;
+                top: 17px;
                 right: 65px;
             }
             @media screen and (min-width: 768px){
                 position: fixed;
-                top: 5px;
+                top: 17px;
                 right: 65px;
             }
             @media screen and (min-width: 1024px){
@@ -178,10 +181,12 @@
             @media screen and (min-width: 320px){
                 display: inherit;
                 margin-right: 10px;
+                font-size: 20px;
             }
             @media screen and (min-width: 768px){
                 display: inherit;
                 margin-right: 10px;
+                font-size: 20px;
             }
             @media screen and (min-width: 1024px){
                 display: none;

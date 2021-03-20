@@ -10,7 +10,7 @@
         text-transform: uppercase;
     }
     .main{
-        padding: 20px;
+        padding: 20px 0;
     }
     .btn-login{
         margin: 8px;
@@ -26,6 +26,7 @@
     .error{
         margin-top: 0;
         color: #3f51b5;
+        margin-bottom: -10px !important;
     }
     .error-box {
         background: #3f51b5;
