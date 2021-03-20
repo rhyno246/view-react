@@ -32,7 +32,7 @@ const CartItem = (props) => {
 
     return (
        <div className="cart-item">
-           <div>
+           <div className="container">
                 <div className="cart-group">
                     <div className="cart-img">
                         <img src= { image } alt={ title } />

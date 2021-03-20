@@ -1,3 +1,4 @@
+import { Col, Row } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading';
@@ -20,16 +21,21 @@ const Home = () => {
         <>
             { isLoading ? <Loading/> : null }
             <div className="home">
-                { productList.map(item => (
-                    <div item xs={12} sm={6} md={3} key={ item.id }>
-                        <ProductItem 
-                            id={ item.id } 
-                            title ={ item.title }
-                            price ={ item.price }
-                            image={ item.image }
-                        />
-                    </div>
-                )) }
+               <div className="container">
+                    <Row gutter={ 24 }>
+                        { productList.map(item => (
+                            <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id }>
+                                <ProductItem 
+                                    id={ item.id } 
+                                    title ={ item.title }
+                                    price ={ item.price }
+                                    image={ item.image }
+                                />
+                            </Col>
+                            )) }
+                        
+                    </Row>
+               </div>
             </div>
         </>
     )

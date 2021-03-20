@@ -1,3 +1,4 @@
+import { Button, Card } from 'antd';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -18,13 +19,13 @@ const ProductItem = (props) => {
     return ( 
         <>
             <div className="product-item">
-
-                <div>
-                    <img src={ image } alt=""/>
+                <Card hoverable cover={ <img alt={ title } src={ image }/> }>
                     <p><Link to={`product/${id}`}>{title}</Link></p>
-                    <button onClick ={ handleAddToCart }>Add to cart</button>
-                    <div className="price">{ price } $</div>
-                </div>
+                    <div className="flex-btn">
+                        <Button onClick ={ handleAddToCart } type="primary">Add to cart</Button>
+                        <div className="price">{ price } $</div>
+                    </div>
+                </Card>
             </div>
         </>
     )

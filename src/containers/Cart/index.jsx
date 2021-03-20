@@ -15,6 +15,7 @@ const Cart = () => {
             <div className="main-cart"> 
                 { cartList.map(item => (
                     <CartItem 
+                        key={ item.id }
                         id={ item.id } 
                         title={ item.title } 
                         image={ item.image }
@@ -22,9 +23,11 @@ const Cart = () => {
                         quantity = { item.quantity }
                     />
                 )) }
-                <div className="group-checkout">
-                    <div className="total">Total Price : { totalCart.toFixed(2) } $</div>
-                    <button>Check Out</button>
+                <div className="container">
+                    <div className="group-checkout">
+                        <div className="total">Total Price : { totalCart.toFixed(2) } $</div>
+                        <button>Check Out</button>
+                    </div>
                 </div>
             </div>:
                 <div className="emtry-cart">

@@ -1,10 +1,11 @@
+import { Spin } from 'antd'
 import React from 'react'
 import './index.scss'
 const Loading = () => {
     return (
         <>
             <div className="loading">
-                Loadding
+                <Spin size="large" />
             </div>
         </>
     )
