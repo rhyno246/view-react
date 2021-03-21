@@ -13,13 +13,14 @@ import Footer from './components/Footer'
 import Profile from './containers/Profile/index'
 import { AuthProvider } from './contexts/AuthContext';
 function App() {
+    // const isAuth = useSelector(state => state.auth.setUser)
     return (
             <div className="App" style={{ display : "flex" , flexDirection : "column" , height : "100vh" }}>
                 <AuthProvider>
                     <Header/>
                         <Switch>
-                            <Redirect exact from="/" to="/product" />
-                            <Route path="/product" exact component = { Home }/>
+                            <Redirect from="/" to="/product" exact/>
+                            <Route path="/product" component = { Home } exact/>
                             <Route path="/product/:id" component ={ ProductDetail }/>
                             <Route path="/cart" component = { Cart } />
                             <Route path="/sign-up" component = { SignUp }/>

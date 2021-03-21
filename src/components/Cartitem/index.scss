@@ -4,7 +4,6 @@
     .cart-group{
         display: flex;
         align-items: flex-start;
-        padding: 10px;
         position: relative;
         .cart-img{
             padding: 10px;
@@ -36,8 +35,8 @@
         }
         .delete-cart{
             position: absolute;
-            bottom: 10px;
-            right: 10px;
+            bottom: 0;
+            right: 0;
         }
     }
 }

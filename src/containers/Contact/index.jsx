@@ -6,7 +6,9 @@ const Contact = (props) => {
     return (
         <>
             <div className="contact">
-                contact
+                <div className="container">
+                    contact
+                </div> 
             </div>
         </>
     );

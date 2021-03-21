@@ -3,7 +3,6 @@ import { Upload, Button, Space } from 'antd'
 import './index.scss'
 import { UploadOutlined } from '@ant-design/icons'
 function MyProfile(props) {
-    console.log(props)
     return (
         <div className="main">
             <Space direction="vertical" style={{ width: '100%' }} size="large">

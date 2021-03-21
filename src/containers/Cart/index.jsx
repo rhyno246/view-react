@@ -1,3 +1,4 @@
+import { Button, Card } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -13,20 +14,21 @@ const Cart = () => {
         <div className="cart">
             { cartList.length > 0 ?  
             <div className="main-cart"> 
-                { cartList.map(item => (
-                    <CartItem 
-                        key={ item.id }
-                        id={ item.id } 
-                        title={ item.title } 
-                        image={ item.image }
-                        price={ item.price }
-                        quantity = { item.quantity }
-                    />
-                )) }
                 <div className="container">
+                    { cartList.map(item => (
+                    <Card hoverable cover key={ item.id } style={{ marginBottom : "20px" }}>
+                        <CartItem 
+                            id={ item.id } 
+                            title={ item.title } 
+                            image={ item.image }
+                            price={ item.price }
+                            quantity = { item.quantity }
+                        />
+                    </Card>
+                    )) }
                     <div className="group-checkout">
                         <div className="total">Total Price : { totalCart.toFixed(2) } $</div>
-                        <button>Check Out</button>
+                        <Button type="primary">Check Out</Button>
                     </div>
                 </div>
             </div>:

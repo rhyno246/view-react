@@ -3,6 +3,7 @@ import "./index.scss"
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { plusCart, RemoveProductToCart , dashItemCart, BlurInputCart } from '../../Slice/cartSlice';
+import { Button } from 'antd';
 
 
 
@@ -52,7 +53,7 @@ const CartItem = (props) => {
                         </div>
                     </div>
                     <div className="delete-cart">
-                        <button onClick={ handleDeleteCartItem }>Delete</button>
+                        <Button onClick={ handleDeleteCartItem } type="danger">Delete</Button>
                     </div>
                 </div>
             </div>

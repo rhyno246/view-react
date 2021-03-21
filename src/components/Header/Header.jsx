@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link ,NavLink, useHistory } from 'react-router-dom';
 import imglogo from '../../logo.svg';
 import Search from '../Search';
@@ -8,6 +8,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import Avatar from 'antd/lib/avatar/avatar';
 import { LoginOutlined , MenuOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
+import { setIsAuth } from '../../Slice/authSlice';
 
 
 const Header = () => {
@@ -17,6 +18,7 @@ const Header = () => {
     const subUserName = nameUser && nameUser.substring(1, 0).toUpperCase()
     const subname = name && name.substring(1, 0).toUpperCase()
     const history  = useHistory()
+    const dispatch = useDispatch()
     const quantityCart = useSelector(state => state.cart.quantity)
     const handleToggleNav = () => {
         if(window.innerWidth <= 1024){
@@ -26,6 +28,7 @@ const Header = () => {
     }
     const Logout = () => {
         logout()
+        dispatch(setIsAuth(false))
         history.push("/")
     }
     return (
@@ -39,7 +42,7 @@ const Header = () => {
                         { currentUser ? 
                             <li className="item-menu user">
                                 <Avatar> { subUserName || subname } </Avatar>
-                                <span className="name"> <Link to="/profile"> { nameUser || name } </Link> </span>
+                                <span className="name"> <NavLink to="/profile"> { nameUser || name } </NavLink> </span>
                                 <LoginOutlined onClick={ Logout }/>
                             </li> : <div><li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
                             <li className="item-menu"><NavLink to="/login">Login</NavLink></li> </div> 
