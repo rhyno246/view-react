@@ -6,7 +6,7 @@ const authSlice = createSlice({
     name : 'auth',
     initialState :  {
         nameAuth : "",
-        setUser : Storage.get(auth, false)
+        setUser : Storage.get(auth, null)
     },
     reducers : {
         setNameAuth : (state , action) => {
