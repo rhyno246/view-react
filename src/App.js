@@ -21,14 +21,18 @@ function App() {
                     <Header/>
                         <Switch>
                             <Redirect from="/" to="/product" exact/>
-                            <Route path="/product" component = { Home } exact/>
+                            <Route path="/product" component = { Home } />
                             <Route path="/product/:id" component ={ ProductDetail }/>
                             <Route path="/cart" component = { Cart } />
-                            <Route path="/sign-up" component = { SignUp }/>
-                            { isAuth ? <Redirect from="/" to="/product" exact/> : <Route path="/login" component = { Login }/> } 
+                            <Route path="/sign-up">
+                                { isAuth ?  <Redirect to="/"/> :  <SignUp/>}
+                            </Route>
                             <Route path="/search" component = { Search }/>
                             <Route path="/contact" component ={ Contact }/>
                             <Route path="/profile" component ={ Profile }/>
+                            <Route path="/login">
+                                { isAuth ? <Redirect to="/"/> : <Login/> }
+                            </Route>
                             <Route path="*" component = { NotFound } />
                         </Switch>
                     <Footer/>
