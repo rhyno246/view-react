@@ -11,10 +11,12 @@ import Search from './containers/SearchPage/index'
 import NotFound from './containers/NotFound/index'
 import Footer from './components/Footer'
 import Profile from './containers/Profile/index'
+import ForGotPass from './containers/ResetPass/index'
 import { AuthProvider } from './contexts/AuthContext';
 import { useSelector } from 'react-redux';
 function App() {
     const isAuth = useSelector(state => state.auth.setUser)
+    
     return (
             <div className="App" style={{ display : "flex" , flexDirection : "column" , height : "100vh" }}>
                 <AuthProvider>
@@ -25,14 +27,17 @@ function App() {
                             <Route path="/product/:id" component ={ ProductDetail }/>
                             <Route path="/cart" component = { Cart } />
                             <Route path="/sign-up">
-                                { isAuth ?  <Redirect to="/"/> :  <SignUp/>}
+                                { isAuth ? <Redirect to="/"/> : <SignUp/>  }
                             </Route>
                             <Route path="/search" component = { Search }/>
                             <Route path="/contact" component ={ Contact }/>
-                            <Route path="/profile" component ={ Profile }/>
+                            <Route path="/profile">
+                                { !isAuth ? <Redirect to="/"/> : <Profile/> }
+                            </Route>
                             <Route path="/login">
                                 { isAuth ? <Redirect to="/"/> : <Login/> }
                             </Route>
+                            <Route path="/reset-password" component = { ForGotPass }/>
                             <Route path="*" component = { NotFound } />
                         </Switch>
                     <Footer/>

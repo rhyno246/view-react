@@ -47,7 +47,7 @@ const Login = () => {
         <div className="login">
             <div>
                 <h2 className="heading-login">Login</h2>
-                { error ? <Alert message={ error } type="error" showIcon /> : null}
+                { error ? <Alert message={ error } type="error" showIcon style={{ margin : "0 10px" }} /> : null}
                 <div className="main">
                     <Formik
                         initialValues={initialValues}
@@ -58,10 +58,15 @@ const Login = () => {
                             <FastField name="email" component={ InputField } type="text" label="Email"/>
                             <FastField name="password" component={ InputField } type="password" label="Password"/>
                             <div style={{ marginTop : "20px" }}>
-                                <Button type="primary" htmlType="submit" loading={ loading }>
-                                    { loading ?  "loadding" : "Login"}
+                                <Button type="primary" htmlType="submit" loading={ loading } style={{ width : "100%" , marginBottom : "10px" }}>
+                                    { loading ?  "loading" : "Login"}
                                 </Button>
-                                <Link to="/sign-up" className="login-link">Don't have an account? Sign up.</Link>
+                                <div>
+                                    <Link to="/sign-up" className="login-link">Don't have an account? Sign up.</Link>
+                                </div>
+                                <div>
+                                    <Link to="/reset-password" className="login-link">If you forgot password</Link>
+                                </div>
                             </div>
                         </Form>
                         

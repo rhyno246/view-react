@@ -8,7 +8,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import Avatar from 'antd/lib/avatar/avatar';
 import { LoginOutlined , MenuOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
-import { setIsAuth } from '../../Slice/authSlice';
+import { setRemoveAuth } from '../../Slice/authSlice';
 
 
 const Header = () => {
@@ -17,9 +17,10 @@ const Header = () => {
     const nameUser = useSelector(state => state.auth.nameAuth)
     const subUserName = nameUser && nameUser.substring(1, 0).toUpperCase()
     const subname = name && name.substring(1, 0).toUpperCase()
+    const quantityCart = useSelector(state => state.cart.quantity)
+    const isAuth = useSelector(state => state.auth.setUser)
     const history  = useHistory()
     const dispatch = useDispatch()
-    const quantityCart = useSelector(state => state.cart.quantity)
     const handleToggleNav = () => {
         if(window.innerWidth <= 1024){
             var parentMenu = document.querySelector('.group')
@@ -28,7 +29,7 @@ const Header = () => {
     }
     const Logout = () => {
         logout()
-        dispatch(setIsAuth(false))
+        dispatch(setRemoveAuth(false))
         history.push("/")
     }
     return (
@@ -39,7 +40,7 @@ const Header = () => {
                     <ul className="group">
                         <li className="item-menu"><NavLink to="/product" exact>Product</NavLink></li> 
                         <li className="item-menu"><NavLink to="/contact">Contact</NavLink></li> 
-                        { currentUser ? 
+                        { isAuth ? 
                             <li className="item-menu user">
                                 <Avatar> { subUserName || subname } </Avatar>
                                 <span className="name"> <NavLink to="/profile"> { nameUser || name } </NavLink> </span>

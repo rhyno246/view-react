@@ -1,8 +1,9 @@
 import { useAuth } from "../../contexts/AuthContext";
 import React, { useState } from 'react'
 import './index.scss'
-import { Tabs } from "antd";
+import { Empty, Tabs } from "antd";
 import MyProfile from "../../components/myProfile";
+import ChangePass from "../../components/ChangePass";
 const { TabPane } = Tabs;
 function Profile() {
     const { currentUser } = useAuth()
@@ -14,7 +15,7 @@ function Profile() {
                 <div className="avatar">
                     { name }
                 </div>
-                <div className="profile">
+                <div className="profile-control">
                     <Tabs tabPosition={tabPosition} centered>
                         <TabPane tab="My profile" key="1">
                             <div className="w-profile">
@@ -22,10 +23,14 @@ function Profile() {
                             </div>
                         </TabPane>
                         <TabPane tab="Wish list" key="2">
-                            <div className="w-profile">sadfojosdifh 2</div>
+                            <div className="w-profile" style={{ padding : "30px 0" }}>
+                                <Empty/>
+                            </div>
                         </TabPane>
                         <TabPane tab="Change PassWord" key="3">
-                            <div className="w-profile">sadfojosdifh 3</div>
+                            <div className="w-profile">
+                                <ChangePass/>
+                            </div>
                         </TabPane>
                     </Tabs>
                 </div>

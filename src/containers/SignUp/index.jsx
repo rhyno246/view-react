@@ -7,7 +7,7 @@ import { Link, useHistory } from 'react-router-dom';
 import checkBoxField from '../../components/InputField/checkBoxField';
 import { auth } from '../../firebase/firebase'
 import { useDispatch } from 'react-redux';
-import { setNameAuth } from '../../Slice/authSlice';
+import { setIsAuth, setNameAuth } from '../../Slice/authSlice';
 import { Alert, Button } from 'antd';
 
 
@@ -50,6 +50,7 @@ const SignUp = () => {
             setLoading(false)
             history.push('/')
             dispatch(setNameAuth(values.name))
+            dispatch(setIsAuth(true))
             user.updateProfile({
                 displayName : values.name,
             })
@@ -74,7 +75,7 @@ const SignUp = () => {
         <div className="sign-up">
             <div className="container">
                 <h1 className="heading-login">Signup</h1>
-                { error ? <Alert message={ error } type="error" showIcon /> : null}
+                { error ? <Alert message={ error } type="error" showIcon style={{ margin : "0 10px" }}/> : null}
                 <div className="main">
                     <Formik
                         initialValues={initialValues}

@@ -1,18 +1,33 @@
+import { Button } from 'antd';
 import React from 'react'
-import { Upload, Button, Space } from 'antd'
+import { useFileUpload } from "use-file-upload"
+import ChangeFormik from '../ChangeFormik/index'
 import './index.scss'
-import { UploadOutlined } from '@ant-design/icons'
 function MyProfile(props) {
+    const defaultSrc = "https://www.pngkit.com/png/full/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png";
+    const [files, selectFiles] = useFileUpload();
+    
+    const handleUpload = () => {
+        selectFiles({ accept: "image/*" }, ({ name, size, source, file }) => {
+            console.log("Files Selected", { name, size, source, file });
+        })
+    }
     return (
         <div className="main">
-            <Space direction="vertical" style={{ width: '100%' }} size="large">
-                <Upload
-                    listType="picture"
-                    maxCount={1}
-                >
-                    <Button icon={<UploadOutlined />}>Upload </Button>
-                </Upload>
-            </Space> 
+            <div className="default">
+                <div style={{ marginTop : "20px" , textAlign : "center" }}>
+                    <img src={files?.source || defaultSrc} alt="preview"/>
+                    <Button
+                        type="primary"
+                        onClick={handleUpload}
+                    >
+                        Upload Avatar
+                    </Button>
+                </div>
+            </div>
+            <div className="change-profile" style={{ marginTop : "25px" }}>
+                <ChangeFormik />
+            </div>
         </div>
     )
 }
