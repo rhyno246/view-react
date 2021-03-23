@@ -1,17 +1,95 @@
-import { Button } from 'antd';
-import React from 'react'
+import { Alert, Button, Input } from 'antd';
+import { withFormik } from 'formik';
+import * as Yup from 'yup';
+import React, { useState } from 'react'
 import { useFileUpload } from "use-file-upload"
-import ChangeFormik from '../ChangeFormik/index'
+import { useAuth } from '../../contexts/AuthContext';
 import './index.scss'
-function MyProfile(props) {
+import { useDispatch } from 'react-redux';
+import { setNameAuth } from '../../Slice/authSlice';
+
+
+const MyInnerForm = (props) => {
+    const {
+      values,
+      touched,
+      errors,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+    } = props;
+    return (
+        <form onSubmit={handleSubmit}>
+            <div style={{ marginBottom : "15px" }}>
+                <Input 
+                    value = { values.name } 
+                    onChange={handleChange}
+                    onBlur={handleBlur} 
+                    id="name"
+                />
+                {errors.name && touched.name && (
+                    <div className="error">{errors.name}</div>
+                )}
+            </div>
+            <div>
+                <Input 
+                    value = { values.email }
+                    onChange = { handleChange }
+                    onBlur = { handleBlur }
+                    id="email"
+                />
+                {errors.email && touched.email && (
+                    <div className="error">{errors.email}</div>
+                )}
+            </div>
+            <div style={{ marginTop : "20px" }}>
+                <Button type="primary" htmlType="submit">
+                    Update profile
+                </Button>
+            </div>
+        </form>
+    );
+};
+function MyProfile() {
     const defaultSrc = "https://www.pngkit.com/png/full/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png";
     const [files, selectFiles] = useFileUpload();
-    
+    const { currentUser , updateMail } = useAuth()
+    const name = currentUser && currentUser.displayName;
+    const email = currentUser && currentUser.email;
+    const dispatch = useDispatch()
+    const [err ,setError] = useState()
     const handleUpload = () => {
         selectFiles({ accept: "image/*" }, ({ name, size, source, file }) => {
             console.log("Files Selected", { name, size, source, file });
         })
     }
+    const EnhancedForm = withFormik({
+        mapPropsToValues: () => ({ 
+            name : name,
+            email : email
+        }),
+        validationSchema: Yup.object().shape({
+            name: Yup.string()
+                .min(3, 'Name must be at most 3 characters long')
+                .max(10, 'Name must be less than 10 characters')
+                .required("Name is required!"), 
+            email: Yup.string().email('Invalid Email').required('Email Required'),
+        }),
+        handleSubmit: (values, { setSubmitting }) => {
+          setTimeout(() => {
+            dispatch(setNameAuth(values.name))
+            currentUser.updateProfile({
+                displayName : values.name
+            })
+            updateMail(values.email).then(() =>{
+                
+            }).catch(error => {
+                setError(error.message)
+            })
+            setSubmitting(false);
+          }, 1000);
+        }
+    })(MyInnerForm);
     return (
         <div className="main">
             <div className="default">
@@ -26,7 +104,8 @@ function MyProfile(props) {
                 </div>
             </div>
             <div className="change-profile" style={{ marginTop : "25px" }}>
-                <ChangeFormik />
+                { err ? <Alert message={ err } type="error" showIcon style={{ margin : "10px 0px" }}/> : null}
+                <EnhancedForm/>
             </div>
         </div>
     )

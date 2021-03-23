@@ -23,7 +23,7 @@ function App() {
                     <Header/>
                         <Switch>
                             <Redirect from="/" to="/product" exact/>
-                            <Route path="/product" component = { Home } />
+                            <Route path="/product" component = { Home } exact/>
                             <Route path="/product/:id" component ={ ProductDetail }/>
                             <Route path="/cart" component = { Cart } />
                             <Route path="/sign-up">

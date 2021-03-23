@@ -11,6 +11,11 @@ export function AuthProvider( { children }) {
     function logout (){
         return auth.signOut()
     }
+
+    function updateMail (email) {
+        return currentUser.updateEmail(email)
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -19,6 +24,7 @@ export function AuthProvider( { children }) {
     },[])
     const value = {
         currentUser,
+        updateMail,
         logout,
     }
     return (
