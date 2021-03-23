@@ -4,9 +4,12 @@ import * as Yup from 'yup';
 import React, { useState } from 'react'
 import { useFileUpload } from "use-file-upload"
 import { useAuth } from '../../contexts/AuthContext';
-import './index.scss'
 import { useDispatch } from 'react-redux';
 import { setNameAuth } from '../../Slice/authSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './index.scss'
+
 
 
 const MyInnerForm = (props) => {
@@ -43,14 +46,14 @@ const MyInnerForm = (props) => {
                 )}
             </div>
             <div style={{ marginTop : "20px" }}>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" disabled = { errors.email || errors.name }>
                     Update profile
                 </Button>
             </div>
         </form>
     );
 };
-function MyProfile() {
+function MyProfile(props) {
     const defaultSrc = "https://www.pngkit.com/png/full/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png";
     const [files, selectFiles] = useFileUpload();
     const { currentUser , updateMail } = useAuth()
@@ -76,18 +79,37 @@ function MyProfile() {
             email: Yup.string().email('Invalid Email').required('Email Required'),
         }),
         handleSubmit: (values, { setSubmitting }) => {
-          setTimeout(() => {
-            dispatch(setNameAuth(values.name))
-            currentUser.updateProfile({
-                displayName : values.name
-            })
-            updateMail(values.email).then(() =>{
-                
-            }).catch(error => {
-                setError(error.message)
-            })
-            setSubmitting(false);
-          }, 1000);
+            if(values.name !== currentUser.displayName || values.email !== currentUser.email){
+                dispatch(setNameAuth(values.name))
+                currentUser.updateProfile({
+                    displayName : values.name
+                })
+                updateMail(values.email).then(() =>{
+                    toast.success('🦄 your profile success  ', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }).catch(error => {
+                    setError(error.message)
+                })
+                setSubmitting(false);
+            }else{
+                toast.warn('🦄 Opps !! your profile not change  ', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                return
+            }
         }
     })(MyInnerForm);
     return (
@@ -105,6 +127,7 @@ function MyProfile() {
             </div>
             <div className="change-profile" style={{ marginTop : "25px" }}>
                 { err ? <Alert message={ err } type="error" showIcon style={{ margin : "10px 0px" }}/> : null}
+                <ToastContainer/>
                 <EnhancedForm/>
             </div>
         </div>

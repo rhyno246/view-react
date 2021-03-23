@@ -48,12 +48,14 @@ const SignUp = () => {
         .then(userCredential => {
             var user = userCredential.user;
             setLoading(false)
-            history.push('/')
-            dispatch(setNameAuth(values.name))
-            dispatch(setIsAuth(true))
-            user.updateProfile({
-                displayName : values.name,
-            })
+            if(user){
+                history.push('/')
+                dispatch(setIsAuth(true))
+                dispatch(setNameAuth(values.name))
+                user.updateProfile({
+                    displayName : values.name,
+                })
+            }
         }).catch(error =>{
             switch (error.code) {
                 case 'auth/email-already-in-use':
@@ -75,7 +77,7 @@ const SignUp = () => {
         <div className="sign-up">
             <div className="container">
                 <h1 className="heading-login">Signup</h1>
-                { error ? <Alert message={ error } type="error" showIcon style={{ margin : "0 10px" }}/> : null}
+                { error ? <Alert message={ error } type="error" showIcon style={{ margin : "10px 0px" }}/> : null}
                 <div className="main">
                     <Formik
                         initialValues={initialValues}

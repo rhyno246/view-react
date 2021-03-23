@@ -1,10 +1,16 @@
 import { Input } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { setFormChangePass } from '../../Slice/authSlice';
 function InputField(props) {
     const { field ,  form , type, label } = props;
     const { errors, touched  }  = form;
     const { name , value} = field;
     const showError = errors[name] && touched[name];
+    // const dispatch = useDispatch()
+    // useEffect(() => {
+    //     dispatch(setFormChangePass(props))
+    // }, [dispatch , props])
     return (
         <div className="feild" style={{ marginBottom : "15px" }}>
             <Input 

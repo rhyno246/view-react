@@ -7,6 +7,7 @@ const authSlice = createSlice({
     initialState :  {
         nameAuth : "",
         setUser : Storage.get(auth, false),
+        FormChangePass : null
     },
     reducers : {
         setNameAuth : (state , action) => {
@@ -19,10 +20,14 @@ const authSlice = createSlice({
         setRemoveAuth : (state , action) => {
             state.setUser = action.payload
             Storage.remove(auth, JSON.stringify(action.payload), 60 * 24 * 3)
+        },
+        setFormChangePass : ( state , action ) => {
+            state.FormChangePass = action.payload
+            console.log(state.FormChangePass);
         }
     }
 })
 
 const { reducer : authReducer , actions } = authSlice
-export const { setNameAuth, setIsAuth , setRemoveAuth } = actions
+export const { setNameAuth, setIsAuth , setRemoveAuth , setFormChangePass } = actions
 export default authReducer

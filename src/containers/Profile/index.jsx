@@ -1,25 +1,34 @@
-import { useAuth } from "../../contexts/AuthContext";
-import React, { useState } from 'react'
-import './index.scss'
+import React, { useState } from 'react';
+import './index.scss';
 import { Empty, Tabs } from "antd";
 import MyProfile from "../../components/myProfile";
 import ChangePass from "../../components/ChangePass";
+//import { useSelector } from "react-redux";
+import { useAuth } from "../../contexts/AuthContext";
 const { TabPane } = Tabs;
-function Profile() {
+const Profile = () => {
     const { currentUser } = useAuth()
-    const name = currentUser && currentUser.displayName.substring(1, 0).toUpperCase()
     const [tabPosition] = useState("top")
+    //const nameUser = useSelector(state => state.auth.nameAuth)
+    const name = currentUser && currentUser.displayName
+    const subname = name && name.substring(1, 0).toUpperCase()
+
+    const changeTab = (index) => {
+        console.log(index);
+    }
+
+
     return (
         <div className="profile">
             <div className="container">
                 <div className="avatar">
-                    { name }
+                    { subname }
                 </div>
                 <div className="profile-control">
-                    <Tabs tabPosition={tabPosition} centered>
+                    <Tabs tabPosition={tabPosition} centered onChange={ changeTab }>
                         <TabPane tab="My profile" key="1">
                             <div className="w-profile">
-                                <MyProfile />
+                                <MyProfile/>
                             </div>
                         </TabPane>
                         <TabPane tab="Wish list" key="2">

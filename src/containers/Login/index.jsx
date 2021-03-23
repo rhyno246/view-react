@@ -47,7 +47,7 @@ const Login = () => {
         <div className="login">
             <div>
                 <h2 className="heading-login">Login</h2>
-                { error ? <Alert message={ error } type="error" showIcon style={{ margin : "0 10px" }} /> : null}
+                { error ? <Alert message={ error } type="error" showIcon style={{ margin : "10px 0" }} /> : null}
                 <div className="main">
                     <Formik
                         initialValues={initialValues}
