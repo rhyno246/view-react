@@ -24,7 +24,7 @@ const Home = () => {
                <div className="container">
                     <Row gutter={ 24 }>
                         { productList.map(item => (
-                            <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id }>
+                            <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
                                 <ProductItem 
                                     id={ item.id } 
                                     title ={ item.title }

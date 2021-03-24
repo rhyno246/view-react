@@ -6,6 +6,8 @@ import App from './App';
 import store from './app/store/store';
 import './index.css';
 import 'antd/dist/antd.css';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
     <Provider store ={ store }>

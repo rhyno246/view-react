@@ -28,6 +28,7 @@ const Cart = () => {
                     )) }
                     <div className="group-checkout">
                         <div className="total">Total Price : { totalCart } $</div>
+                        <Button type="danger" style={{ marginRight : "10px" }}>Clear All</Button>
                         <Button type="primary">Check Out</Button>
                     </div>
                 </div>
