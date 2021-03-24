@@ -36,7 +36,7 @@ const CartItem = (props) => {
            <div className="container">
                 <div className="cart-group">
                     <div className="cart-img">
-                        <img src= { image } alt={ title } />
+                        <img src= { image[0] } alt={ title } />
                     </div>
                     <div className="text">
                         <div className="pb-10 cart-title"><h4><Link to={`product/${id}`}>{ title }</Link></h4></div>

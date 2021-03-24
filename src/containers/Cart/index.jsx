@@ -27,7 +27,7 @@ const Cart = () => {
                     </Card>
                     )) }
                     <div className="group-checkout">
-                        <div className="total">Total Price : { totalCart.toFixed(2) } $</div>
+                        <div className="total">Total Price : { totalCart } $</div>
                         <Button type="primary">Check Out</Button>
                     </div>
                 </div>

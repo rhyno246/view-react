@@ -19,7 +19,7 @@ const ProductItem = (props) => {
     return ( 
         <>
             <div className="product-item">
-                <Card hoverable cover={ <img alt={ title } src={ image }/> }>
+                <Card hoverable cover={ <img alt={ title } src={ image[0] }/> }>
                     <p><Link to={`product/${id}`}>{title}</Link></p>
                     <div className="flex-btn">
                         <Button onClick ={ handleAddToCart } type="primary">Add to cart</Button>
