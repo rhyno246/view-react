@@ -20,7 +20,7 @@ const Search = () => {
     return (
         <div className="search">
             <Space direction="vertical">
-                <Search ref={ inputref } placeholder="Search....." onSearch={onSearch} enterButton />
+                <Search ref={ inputref } type="danger" placeholder="Search....." onSearch={onSearch} enterButton />
             </Space>
         </div>
     )

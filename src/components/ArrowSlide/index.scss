@@ -1,0 +1,21 @@
+.slick-prev span, .slick-next span {
+    color: red;
+    font-size: 40px;
+}
+.slick-prev{
+    left: 0 !important;
+    
+}
+.slick-next{
+    right: 0 !important;
+}
+.slick-prev, .slick-next {
+    background: none;
+    z-index: 999999;
+    width: auto !important; 
+    height: auto !important;
+}
+.button-slide{
+    background: none !important;
+    box-shadow: none !important;
+}

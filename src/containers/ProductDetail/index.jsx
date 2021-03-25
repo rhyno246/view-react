@@ -5,8 +5,10 @@ import { useParams } from 'react-router';
 import Loading from '../../components/Loading';
 import { AddToCart } from '../../Slice/cartSlice';
 import { getAllProductDetail } from '../../Slice/productSlice';
+import ReactReadMoreReadLess from "react-read-more-read-less";
 import Slider from 'react-slick';
 import './index.scss';
+import ArrowSlide from '../../components/ArrowSlide';
 
 const ProductDetail = () => {
     const param = useParams()
@@ -22,6 +24,7 @@ const ProductDetail = () => {
     const loading = useSelector(state => state.product.loading)
     const imageArr = listDetailProduct.image
     const size = listDetailProduct.size
+    let desc = listDetailProduct && listDetailProduct.description
     const handleAddToCart = () => {
         dispatch(AddToCart({
             id : listDetailProduct.id,
@@ -33,14 +36,18 @@ const ProductDetail = () => {
     const handleChange = (val) => {
         console.log(val);
     }
-    console.log(imageArr && imageArr.length);
     return (
         <>
             { loading ? <Loading/> : <div className="product-detail">
                 <div className="container">
                     <div className="main" style={{ maxWidth : "100%" }}>
                         <div className="img">
-                            <Slider asNavFor={nav2} ref={c => setNav1(c)} arrows={true}>
+                            <Slider 
+                                asNavFor={nav2} 
+                                ref={c => setNav1(c)} 
+                                prevArrow = {<ArrowSlide to="prev" /> }
+                                nextArrow = {<ArrowSlide to="next" />}
+                            >
                                 { imageArr && imageArr.map((item , index) =>(
                                     <div className="slide-img" key={ index }>
                                         <img src={ item } alt={ index }/>
@@ -54,6 +61,7 @@ const ProductDetail = () => {
                                 swipeToSlide={true}
                                 focusOnSelect={true}
                                 arrows={false}
+                                slidesToScroll = { 1 }
                             >
                                 { imageArr && imageArr.map((item , index) =>(
                                     <div className="thumb" key={ index }>
@@ -67,7 +75,15 @@ const ProductDetail = () => {
                             <div className="margin"><strong>Category :</strong> <span className="category">{ listDetailProduct.category }</span></div>
                             <div className="margin"><strong>Price :</strong> <span className="category">{ listDetailProduct.price } $</span></div>
                             <div className="margin"><strong>Description :</strong> <span className="description">
-                                { listDetailProduct.description }
+                                <ReactReadMoreReadLess
+                                    charLimit={250}
+                                    readMoreText={"Read more"}
+                                    readLessText={"Read less"}
+                                    readMoreClassName="read-more-less--more"
+                                    readLessClassName="read-more-less--less"
+                                >
+                                    { desc ? desc : "" }
+                                </ReactReadMoreReadLess>
                             </span></div>
                             <div className="margin">
                                 <strong>Choose size :</strong>
