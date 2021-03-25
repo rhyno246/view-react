@@ -1,6 +1,7 @@
 import { Col, Row } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Banner from '../../components/Banner';
 import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
 import { getAllProduct } from '../../Slice/productSlice';
@@ -19,6 +20,7 @@ const Home = () => {
 
     return (
         <>
+            <Banner/>
             { isLoading ? <Loading/> : null }
             <div className="home">
                <div className="container">

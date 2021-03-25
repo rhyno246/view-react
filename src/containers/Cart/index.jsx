@@ -2,7 +2,7 @@ import { Button, Card } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import cartEmtry from '../../cart.png';
+import cartEmtry from '../../img_local/cart.png';
 import CartItem from "../../components/Cartitem";
 import './index.scss';
 

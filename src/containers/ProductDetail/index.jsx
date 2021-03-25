@@ -17,6 +17,7 @@ const ProductDetail = () => {
     const dispatch = useDispatch()
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
+    const [sizeChange , setSizeChange] = useState(null)
     useEffect(() => {
         dispatch(getAllProductDetail(id))
     } , [ dispatch , id ])
@@ -25,16 +26,17 @@ const ProductDetail = () => {
     const imageArr = listDetailProduct.image
     const size = listDetailProduct.size
     let desc = listDetailProduct && listDetailProduct.description
+    const handleChange = (val) => {
+        setSizeChange(val)
+    }
     const handleAddToCart = () => {
         dispatch(AddToCart({
             id : listDetailProduct.id,
             title : listDetailProduct.title,
             price : listDetailProduct.price,
             image : listDetailProduct.image,
+            size : sizeChange || listDetailProduct.size[0]
         }))
-    }
-    const handleChange = (val) => {
-        console.log(val);
     }
     return (
         <>

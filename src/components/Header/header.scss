@@ -1,9 +1,10 @@
 .header{
     position: fixed;
     width: 100%;
-    z-index: 999;
-    background-color: gray;
+    z-index: 9999999999999999;
+    background-color: #000;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 5px 0;
     .menu{
         display: flex;
         align-items: center;
@@ -11,14 +12,14 @@
         .logo{
             margin-right: auto;
             img{
-                width: 80px;
+                width: 120px;
             }
         }
         .group{
             margin: 0;
             padding: 0;
             list-style: none;
-            background-color: gray;
+            background-color: #000;
             display: flex;
             align-items: center;
             @media screen and (min-width: 320px){
@@ -65,14 +66,14 @@
                 }
                 a{
                     text-decoration: none;
-                    color: #333;
+                    color: #fff;
                     font-size: 16px;
                     &:hover,&:active{
-                        color: #fff;
+                        color: #80CBC4;
                     }
                 }
                 .active{
-                    color: #fff;
+                    color: #80CBC4;
                 }
             }
             .user{
@@ -164,12 +165,12 @@
             }
             @media screen and (min-width: 320px){
                 position: fixed;
-                top: 17px;
+                top: 20px;
                 right: 65px;
             }
             @media screen and (min-width: 768px){
                 position: fixed;
-                top: 17px;
+                top: 20px;
                 right: 65px;
             }
             @media screen and (min-width: 1024px){
@@ -193,4 +194,8 @@
             }
         }
     }
+}
+
+span.anticon.anticon-login, span.anticon.anticon-shopping-cart,span.anticon.anticon-menu.icon-menu {
+    color: #fff;
 }

@@ -57,7 +57,15 @@ const cartSlice = createSlice({
             
         },
         BlurInputCart : (state,action) => {
-           console.log(action.payload)
+           const number = action.payload.number
+           const id = action.payload.id
+           const productIndex = state.cart.findIndex(arr => arr.id === id);
+           const cartData = state.cart[productIndex]
+           if(!number){
+                console.log(11111111111111);
+           }else{
+                cartData.quantity = number;
+           }
         }
     }
 })

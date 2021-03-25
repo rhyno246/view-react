@@ -7,6 +7,8 @@
       "title": "PEGASUS TURBO 2",
       "category" : "Nike",
       "sale" : 5,
+      "sex" : "Men",
+      "quantity" : 10,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/at8242-0091.jpg",
@@ -22,6 +24,8 @@
       "price": 552.00,
       "title": "PEGASUS 37 BETRUE",
       "category" : "Nike",
+      "sex" : "Men",
+      "quantity" : 2,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/cv0266-0011.jpg",
@@ -37,6 +41,8 @@
       "price": 127.00,
       "title": "AIR FORCE 1 RED/BLUE SWOOSH",
       "category" : "Nike",
+      "sex" : "Men",
+      "quantity" : 3,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/ct2816-1001.jpg",
@@ -52,6 +58,8 @@
       "price": 428.00,
       "title": "AIR FORCE 1",
       "category" : "Nike",
+      "sex" : "Men",
+      "quantity" : 5,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/SNEAKER-315122-111-AIR-FORCE-1-07-NIKE-KINGSHOES.VN-TPHCM-TANBINH-17-logo-1551924204-.jpg",
@@ -68,6 +76,8 @@
       "price": 63.00,
       "title": "DUNK LOW DISRUPT GYM RED",
       "category" : "Nike",
+      "sex" : "Men",
+      "quantity" : 6,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/ck6654-1011.jpg",
@@ -84,6 +94,8 @@
       "price": 921.00,
       "title": "DUNK LOW DISRUPT GAME ROYAL",
       "category" : "Nike",
+      "sex" : "Men",
+      "quantity" : 12,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/ck6654-1001.jpg",
@@ -98,6 +110,8 @@
       "price": 796.00,
       "title": "JORDAN 1 LOW BLACK SIREN RED",
       "category" : "Nike",
+      "sex" : "Men",
+      "quantity" : 3,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/dc0774-0041.jpg",
@@ -114,6 +128,8 @@
       "price": 627.00,
       "title": "JORDAN 1 LOW WHITE GYM RED",
       "category" : "Nike",
+      "sex" : "Men",
+      "quantity" : 5,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/dc0774-0161.jpg",
@@ -131,6 +147,8 @@
       "price": 938.00,
       "title": "DUNK LOW RETRO BLACK/WH",
       "category" : "Nike",
+      "sex" : "Men",
+      "quantity" : 2,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/dd1391-1001.jpg",
@@ -148,6 +166,8 @@
       "price": 213.00,
       "title": "AIR JORDAN 1 LOW UNIVERSITY BLUE",
       "category" : "Nike",
+      "sex" : "Men",
+      "quantity" : 1,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/553560-4031.jpg",
@@ -162,6 +182,8 @@
       "price": 196.00,
       "title": "X9000L4 GREY",
       "category" : "Addidas",
+      "sex" : "Men",
+      "quantity" : 23,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/fw84141.jpg",
@@ -177,6 +199,8 @@
       "price": 41.00,
       "title": "ZX 2K BOOST",
       "category" : "Addidas",
+      "sex" : "Men",
+      "quantity" : 5,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/fx88351.jpg",
@@ -191,6 +215,8 @@
       "price": 164.00,
       "title": "NMD R1 METALLIC GOLD",
       "category" : "Addidas",
+      "sex" : "Men",
+      "quantity" : 22,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/eg56651.jpg",
@@ -207,6 +233,8 @@
       "price": 971.00,
       "title": "X9000L4",
       "category" : "Addidas",
+      "sex" : "Men",
+      "quantity" : 12,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/adidas-x9000l4-djen-fw8386-king-shoes-sneaker-real-hcm-1.jpg",
@@ -220,6 +248,8 @@
       "price": 896.00,
       "title": "STAN SMITH GREEN",
       "category" : "Addidas",
+      "sex" : "Men",
+      "quantity" : 3,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/SNEAKER-M20324-STAN-SMITH-adidas-kingshoes.vn-tphcm-tanbinh-28.jpg",
@@ -234,6 +264,8 @@
       "price": 816.00,
       "title": "EGDE LUX 4",
       "category" : "Addidas",
+      "sex" : "Men",
+      "quantity" : 3,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/fw92621.jpg",
@@ -247,6 +279,8 @@
       "price": 369.00,
       "title": "ULTRABOOST 20 BLACK CAMO",
       "category" : "Addidas",
+      "sex" : "Men",
+      "quantity" : 8,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/fv83291.jpg",
@@ -262,6 +296,8 @@
       "price": 350.00,
       "title": "NMD R1 LIGHT GRANITE",
       "category" : "Addidas",
+      "sex" : "Men",
+      "quantity" : 5,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/b376471.jpg",
@@ -275,6 +311,8 @@
       "price": 42.00,
       "title": "YEEZY BOOST 700 MAGNET",
       "category" : "Yeezy",
+      "sex" : "Men",
+      "quantity" : 25,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "sale" : 10,
       "image" : [
@@ -289,6 +327,8 @@
       "price": 507.00,
       "title": "YEEZY BOOST 350 V2 BLACK RED",
       "category" : "Yeezy",
+      "sex" : "Men",
+      "quantity" : 2,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/cp96521.jpg",
@@ -303,6 +343,8 @@
       "price": 439.00,
       "title": "YEEZY BOOST 350 V2 ZEBRA",
       "category" : "Yeezy",
+      "sex" : "Men",
+      "quantity" : 0,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/giay-Adidas-Yeezy-Boost-350-V2-Zebra-nam-nu-chinh-hang-tai-tphcm-CP9654-king-shoes-tan-binh-9.jpg",
@@ -317,6 +359,8 @@
       "title": "YEEZY BOOST 700 V2 VANTA",
       "category" : "Yeezy",
       "sale" : 20,
+      "sex" : "Men",
+      "quantity" : 0,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/adidasyeezyboost700v2vantafu66840.jpg",
@@ -330,6 +374,8 @@
       "price": 190.00,
       "title": "YEEZY BOOST 700 INERTIA",
       "category" : "Yeezy",
+      "sex" : "Women",
+      "quantity" : 10,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/giay-adidas-Yeezy-Boost-700-Inertia-EG7597-chinh-hang-hcm-king-shoes-sneaker-real-tan-binh-4.jpg",
@@ -346,6 +392,8 @@
       "price": 806.00,
       "title": "YEEZY BOOST 700 ANALOG ",
       "category" : "Yeezy",
+      "sex" : "Women",
+      "quantity" : 2,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/giay-adidas-yeezy-boost-700-analog-EG7596-chinh-hang-hcm-king-shoes-sneaker-real-tan-binh-9.jpg",
@@ -360,6 +408,8 @@
       "price": 840.00,
       "title": "YEEZY BOOST 350 V2 YEEZREEL",
       "category" : "Yeezy",
+      "sex" : "Women",
+      "quantity" : 5,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/fw5191i.jpg",
@@ -375,6 +425,8 @@
       "price": 36.00,
       "title": "YEEZY BOOST 380 PEPPER",
       "category" : "Yeezy",
+      "sex" : "Women",
+      "quantity" : 10,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/fz12691.jpg",
@@ -389,6 +441,8 @@
       "price": 859.00,
       "title": "YEEZY BOOST 350 V2 CREAM WHITE",
       "category" : "Yeezy",
+      "sex" : "Women",
+      "quantity" : 10,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/giay-adidas-yeezy-boost-350-v2-cream-white-chnh-hng-tphcm-cp9366-king-shoes-sneaker-real-tan-binh.jpg",
@@ -403,6 +457,8 @@
       "price": 87.00,
       "title": "PUMA RS-X HARD DRIVE GREY NEON",
       "category" : "Puma",
+      "sex" : "Women",
+      "quantity" : 10,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/369818-011.jpg",
@@ -419,6 +475,8 @@
       "price": 974.00,
       "title": "PUMA RS-X3 SONIC",
       "category" : "Puma",
+      "sex" : "Women",
+      "quantity" : 10,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/373427-011-1611751664--hsppbaci.jpg",
@@ -432,6 +490,8 @@
       "price": 843.00,
       "title": "PUMA RS-X3 PUZZLE GREY",
       "category" : "Puma",
+      "sex" : "Women",
+      "quantity" : 10,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
       "image" : [
         "https://kingshoes.vn/data/upload/371570-011.jpg",

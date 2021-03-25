@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Link ,NavLink, useHistory } from 'react-router-dom';
-import imglogo from '../../logo.svg';
+import imglogo from '../../img_local/logo_shoes.png';
 import Search from '../Search';
 import './header.scss';
 import { useAuth } from "../../contexts/AuthContext";
