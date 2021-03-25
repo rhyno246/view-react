@@ -18,6 +18,7 @@
             flex-wrap: nowrap;
         }
         .img{
+            cursor: pointer;
             @media screen and (min-width: 320px){
                 width: 100%;
                 margin-bottom: 30px;
@@ -54,6 +55,7 @@
             }
             .thumb{
                 width: 100%;
+                cursor: pointer;
                 position: relative;
                 @media screen and (min-width: 320px){
                     height: 85px;
@@ -109,6 +111,22 @@
                 color: black;
                 font-size: 20px;
             }
+        }
+    }
+}
+.slick-slide.slick-active.slick-current{
+    .thumb{
+        &::after{
+            cursor: pointer;
+            content: "";
+            display: block;
+            width: 85%;
+            height: 85%;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.3);
+            top: 7px;
+            right: 50%;
+            transform: translate(50%,0%);
         }
     }
 }
