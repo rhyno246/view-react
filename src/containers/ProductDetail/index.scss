@@ -72,7 +72,6 @@
                     height: 100%;
                     width: 100%;
                     object-fit: cover;
-                    padding: 8px;
                 }
             }
         }
@@ -90,6 +89,7 @@
             }
             .name {
                 font-size: 30px;
+                color: #80CBC4;
             }
             .green{
                 background: repeating-linear-gradient(-45deg, #41D87D, #41D87D 5px, #2BC769 5px, #2BC769 10px);
@@ -102,14 +102,43 @@
                 strong {
                     font-size: 18px;
                 }
+                .sale{
+                    color: #fff;
+                    background: #80CBC4;
+                    padding: 3px 10px;
+                    border-radius: 3px;
+                }
+                .old-price{
+                    color: #222;
+                    position: relative;
+                    font-size: 17px;
+                    &::before{
+                        content: " ";
+                        display: block;
+                        width: 100%;
+                        border-top: 8px double yellow;
+                        height: 4px;
+                        position: absolute;
+                        bottom: 5px;
+                        left: 0;
+                        transform: rotate(-11deg);
+                    }
+                }
             }
-            .category,.read-more-less--more,.read-more-less--less{
-                color: blueviolet;
+
+            .category,.read-more-less--more,.read-more-less--less,.new-price{
+                color: #80CBC4;
                 font-size: 17px;
             }
+
             .description{
                 color: black;
                 font-size: 20px;
+            }
+            .ant-btn-primary{
+                color: #fff;
+                border-color : #80CBC4;
+                background: #80CBC4;
             }
         }
     }
@@ -120,11 +149,11 @@
             cursor: pointer;
             content: "";
             display: block;
-            width: 85%;
-            height: 85%;
+            width: 100%;
+            height: 100%;
             position: absolute;
-            background: rgba(0, 0, 0, 0.3);
-            top: 7px;
+            background: rgba($color: #80CBC4, $alpha: .7);
+            top: 0px;
             right: 50%;
             transform: translate(50%,0%);
         }

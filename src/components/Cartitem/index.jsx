@@ -55,7 +55,7 @@ const CartItem = (props) => {
                         <div className="pb-10 quantity"><strong>quantity : </strong><span className="color-cart">{ quantity }</span></div>
                         <div className="margin">
                             <strong>Choose size :</strong>
-                            <Select size="large" defaultValue={ sizeChose || size[0] } style={{ width: 150 , marginBottom : "20px" , marginLeft : "10px" }}>
+                            <Select size="large" defaultValue={ sizeChose } style={{ width: 150 , marginBottom : "20px" , marginLeft : "10px" }}>
                                 { size && size.map(( item,index ) => (
                                     <Option value={ item } key={ index }>{ item }</Option>
                                 )) }

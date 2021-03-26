@@ -6,9 +6,10 @@ import Loading from '../../components/Loading';
 import { AddToCart } from '../../Slice/cartSlice';
 import { getAllProductDetail } from '../../Slice/productSlice';
 import ReactReadMoreReadLess from "react-read-more-read-less";
+import ArrowSlide from '../../components/ArrowSlide';
 import Slider from 'react-slick';
 import './index.scss';
-import ArrowSlide from '../../components/ArrowSlide';
+
 
 const ProductDetail = () => {
     const param = useParams()
@@ -18,31 +19,50 @@ const ProductDetail = () => {
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
     const [countQuantity , setCountQuantity] = useState(0)
+    const [ salePrice , setSalePrice ] = useState("")
     const [sizeChange , setSizeChange] = useState(null)
-    useEffect(() => {
-        dispatch(getAllProductDetail(id))
-    } , [ dispatch , id ])
     const listDetailProduct = useSelector(state => state.product.detailproduct)
     const loading = useSelector(state => state.product.loading)
     const imageArr = listDetailProduct.image
     const quantity = listDetailProduct.quantity
     const size = listDetailProduct.size
+    const price = listDetailProduct.price
+    const sale = listDetailProduct.sale
     let desc = listDetailProduct && listDetailProduct.description
+    useEffect(() => {
+        dispatch(getAllProductDetail(id))
+    } , [ dispatch , id ])
+
+    useEffect(() => {
+        setSalePrice(price - sale * price)
+    },[price , sale])
+
     const handleChange = (val) => {
         setSizeChange(val)
     }
     const handleAddToCart = () => {
         if(countQuantity >= quantity){
             return
-        }else{
-            setCountQuantity(countQuantity + 1)
+        }
+        setCountQuantity(countQuantity + 1)
+        if(sale){
+            dispatch(AddToCart({
+                id : listDetailProduct.id,
+                title : listDetailProduct.title,
+                price : salePrice,
+                image : listDetailProduct.image,
+                size : size,
+                sizeChose : sizeChange || size[0]
+            }))
+        }
+        else{
             dispatch(AddToCart({
                 id : listDetailProduct.id,
                 title : listDetailProduct.title,
                 price : listDetailProduct.price,
                 image : listDetailProduct.image,
                 size : size,
-                sizeChose : sizeChange || listDetailProduct.size[0]
+                sizeChose : sizeChange || size[0]
             }))
         }
     }
@@ -83,7 +103,20 @@ const ProductDetail = () => {
                         <div className="right-txt">
                             <h3 className="margin name">{ listDetailProduct.title }</h3>
                             <div className="margin"><strong>Category :</strong> <span className="category">{ listDetailProduct.category }</span></div>
-                            <div className="margin"><strong>Price :</strong> <span className="category">{ listDetailProduct.price } $</span></div>
+                            { sale ? <div className="margin">
+                                <strong>Sale : </strong><span className="category sale">{ sale * 100 }%</span>
+                                </div> : null
+                            }
+                            <div className="margin">
+                                <strong>Price : </strong> 
+                                { sale ? 
+                                    <span style={{ marginRight : "10px" }} className="category new-price">
+                                        { salePrice } $
+                                    </span> : null 
+                                    }
+                                <span className={sale ? "old-price" : "new-price" }>{ price } $</span>
+                            </div> 
+                            
                             {   quantity === 0 ? <div className="margin"> 
                                     <span className="category">Out Stock</span> 
                                 </div> :
@@ -103,8 +136,11 @@ const ProductDetail = () => {
                                 </ReactReadMoreReadLess>
                             </span></div>
                             <div className="margin">
-                                <strong>Choose size :</strong>
-                                <Select size="large" onChange={handleChange} defaultValue={ size && size[0] } style={{ width: 200 , marginLeft : "5px" }}>
+                                <Select size="large" 
+                                    onChange={handleChange} 
+                                    defaultValue="Choose Size"
+                                    style={{ width: 200 , marginLeft : "5px" }}
+                                >
                                     { size && size.map(( item,index ) => (
                                         <Option value={ item } key={ index }>{ item }</Option>
                                     )) }

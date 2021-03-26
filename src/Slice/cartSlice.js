@@ -10,9 +10,11 @@ const cartSlice = createSlice({
         AddToCart : (state , action ) => {
             //redux toolkit push arr not need create new arr
             const prodData = action.payload;
+            const quantityProd = action.payload.quantityProd
             const productIndex = state.cart.findIndex(arr => arr.id === prodData.id)
             if(productIndex >= 0){
                 state.cart[productIndex].quantity++;
+                state.cart[productIndex].sizeChose = prodData.sizeChose;
             }else{
                 const newarr = {
                     id : prodData.id,
@@ -70,6 +72,11 @@ const cartSlice = createSlice({
                 
            }
         },
+
+        SelectPrice : (state , action) => {
+            state.changePrice = action.payload
+        },
+
         removeAllCart : (state) => {
             state.cart = []
             state.quantity = 0
@@ -78,5 +85,13 @@ const cartSlice = createSlice({
 })
 
 const { reducer , actions } = cartSlice
-export const { AddToCart , RemoveProductToCart , plusCart , dashItemCart , BlurInputCart , removeAllCart } = actions
+export const { 
+    AddToCart ,
+    RemoveProductToCart , 
+    plusCart , 
+    dashItemCart , 
+    BlurInputCart ,
+    removeAllCart , 
+    SelectPrice 
+} = actions
 export default reducer

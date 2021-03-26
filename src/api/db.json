@@ -6,7 +6,7 @@
       "price": 935.00,
       "title": "PEGASUS TURBO 2",
       "category" : "Nike",
-      "sale" : 5,
+      "sale" : 0.5,
       "sex" : "Men",
       "quantity" : 10,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
@@ -314,7 +314,7 @@
       "sex" : "Men",
       "quantity" : 25,
       "size" : ["40","41", "42" ,"42.5" , "43" ,"44" , "45"],
-      "sale" : 10,
+      "sale" : 0.2,
       "image" : [
         "https://kingshoes.vn/data/upload/fv9922.jpg",
         "https://kingshoes.vn/data/upload/fv99222.jpg",

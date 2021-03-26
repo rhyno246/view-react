@@ -5,38 +5,56 @@ import { Link } from 'react-router-dom';
 import { AddToCart } from '../../Slice/cartSlice';
 import { HeartOutlined } from '@ant-design/icons';
 import './index.scss';
+import { useEffect } from 'react/cjs/react.development';
 const ProductItem = (props) => {
     const { title , image , price , id , size , quantity , sale} = props
+    const [ salePrice , setSalePrice ] = useState("")
     const [countQuantity , setCountQuantity] = useState(0)
     const dispatch = useDispatch()
+    useEffect(() => {
+        setSalePrice(price - sale * price)
+    }, [price,sale])
     const handleAddToCart = () => {
         if(countQuantity >= quantity){
             return
+        }
+        setCountQuantity(countQuantity + 1)
+        if(sale){
+            dispatch(AddToCart({
+                id : id,
+                title : title,
+                price : salePrice,
+                image : image,
+                size : size,
+                quantityProd : quantity,
+                sizeChose : size[0]
+            }))
         }else{
-            setCountQuantity(countQuantity + 1)
             dispatch(AddToCart({
                 id : id,
                 title : title,
                 price : price,
                 image : image,
                 size : size,
+                quantityProd : quantity,
+                sizeChose : size[0]
             }))
         }
+        
     }
 
     return ( 
         <>
             <div className="product-item" type="flex">
                 <Card hoverable cover={ <img alt={ title } src={ image[0] }/>} style={{ height : "100%" }}>
-                    <p><Link to={`product/${id}`}>{title}</Link></p>
+                    <p><Link to={`product/${id}`} className="title-product">{title}</Link></p>
                     { quantity === 0 ? <span className="outstock">Out Stock</span> : null }
-                    {/* { quantity } */}
-                    <div className="price">
+                    <div className="flex-price">
                         <div>
-                            <span className="old-price">{ price } $</span>
+                            <span className={ sale ? "old-price" : "price" }>{ price } $</span>
                         </div>
-                        { sale ? <span className="sale">sale : { sale }%</span> : null }
-                        { sale ? <span className="new-price">22 $</span> : null }
+                        { sale ? <span className="sale">{ sale * 100 }%</span> : null }
+                        { sale ? <span className="new-price"> { salePrice } $ </span> : null }
                     </div>
                     
                     <div className="flex-btn">

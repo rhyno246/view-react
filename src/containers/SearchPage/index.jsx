@@ -19,6 +19,8 @@ const SearchPage = () => {
                                         price ={ item.price }
                                         image={ item.image }
                                         quantity = {item.quantity}
+                                        sale = { item.sale }
+                                        size = { item.size }
                                     />
                                 </Col>
                                 )) }
