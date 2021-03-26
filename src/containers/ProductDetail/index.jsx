@@ -17,6 +17,7 @@ const ProductDetail = () => {
     const dispatch = useDispatch()
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
+    const [countQuantity , setCountQuantity] = useState(0)
     const [sizeChange , setSizeChange] = useState(null)
     useEffect(() => {
         dispatch(getAllProductDetail(id))
@@ -24,19 +25,26 @@ const ProductDetail = () => {
     const listDetailProduct = useSelector(state => state.product.detailproduct)
     const loading = useSelector(state => state.product.loading)
     const imageArr = listDetailProduct.image
+    const quantity = listDetailProduct.quantity
     const size = listDetailProduct.size
     let desc = listDetailProduct && listDetailProduct.description
     const handleChange = (val) => {
         setSizeChange(val)
     }
     const handleAddToCart = () => {
-        dispatch(AddToCart({
-            id : listDetailProduct.id,
-            title : listDetailProduct.title,
-            price : listDetailProduct.price,
-            image : listDetailProduct.image,
-            size : sizeChange || listDetailProduct.size[0]
-        }))
+        if(countQuantity >= quantity){
+            return
+        }else{
+            setCountQuantity(countQuantity + 1)
+            dispatch(AddToCart({
+                id : listDetailProduct.id,
+                title : listDetailProduct.title,
+                price : listDetailProduct.price,
+                image : listDetailProduct.image,
+                size : size,
+                sizeChose : sizeChange || listDetailProduct.size[0]
+            }))
+        }
     }
     return (
         <>
@@ -76,6 +84,13 @@ const ProductDetail = () => {
                             <h3 className="margin name">{ listDetailProduct.title }</h3>
                             <div className="margin"><strong>Category :</strong> <span className="category">{ listDetailProduct.category }</span></div>
                             <div className="margin"><strong>Price :</strong> <span className="category">{ listDetailProduct.price } $</span></div>
+                            {   quantity === 0 ? <div className="margin"> 
+                                    <span className="category">Out Stock</span> 
+                                </div> :
+                                <div className="margin"><strong>Quantity : </strong> 
+                                    <span className="category">{ quantity } </span> 
+                                </div>
+                            }
                             <div className="margin"><strong>Description :</strong> <span className="description">
                                 <ReactReadMoreReadLess
                                     charLimit={250}
@@ -95,7 +110,7 @@ const ProductDetail = () => {
                                     )) }
                                 </Select>
                             </div>
-                            <Button type="primary" onClick ={ handleAddToCart }>
+                            <Button type="primary" onClick ={ handleAddToCart } disabled = { quantity === 0 || countQuantity >= quantity }>
                                 Add To Cart
                             </Button>
                         </div>

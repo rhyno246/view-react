@@ -1,5 +1,18 @@
 .product-item{
     height: 100%;
+    position: relative;
+    .outstock,.sale{
+        color: #fff;   
+        padding: 3px 10px;
+        border-radius: 5px;
+        background: red;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .sale{
+        background: orchid;
+    }
     .title{
         line-height: 1rem;
         font-size: 15px;
@@ -10,10 +23,11 @@
     }
     .price{
         color: red;
-    }
-    .flex-btn{
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+    .flex-btn{
+        margin-top: 10px;
     }
 }

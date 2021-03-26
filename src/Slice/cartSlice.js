@@ -19,6 +19,8 @@ const cartSlice = createSlice({
                     title : prodData.title,
                     image : prodData.image,
                     price : prodData.price,
+                    size : prodData.size,
+                    sizeChose : prodData.sizeChose,
                     quantity : 1
                 }
                 state.cart.push(newarr) 
@@ -62,14 +64,19 @@ const cartSlice = createSlice({
            const productIndex = state.cart.findIndex(arr => arr.id === id);
            const cartData = state.cart[productIndex]
            if(!number){
-                console.log(11111111111111);
+                return
            }else{
                 cartData.quantity = number;
+                
            }
-        }
+        },
+        removeAllCart : (state) => {
+            state.cart = []
+            state.quantity = 0
+        },
     }
 })
 
 const { reducer , actions } = cartSlice
-export const { AddToCart , RemoveProductToCart , plusCart , dashItemCart , BlurInputCart } = actions
+export const { AddToCart , RemoveProductToCart , plusCart , dashItemCart , BlurInputCart , removeAllCart } = actions
 export default reducer

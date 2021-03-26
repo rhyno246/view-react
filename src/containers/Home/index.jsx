@@ -32,6 +32,9 @@ const Home = () => {
                                     title ={ item.title }
                                     price ={ item.price }
                                     image={ item.image }
+                                    size = { item.size }
+                                    quantity = { item.quantity }
+                                    sale = { item.sale }
                                 />
                             </Col>
                             )) }
