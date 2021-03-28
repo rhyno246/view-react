@@ -2,13 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 import Storage from '../untils/storage';
 
 const cartStore = "cart_store"
+const quantityStore = "quantity_store"
+const totalStore = "total_store"
+
 const cartSlice = createSlice({
     name : "cart",
     initialState : {
         cart : Storage.get(cartStore , "[]"),
-        quantity : 0,
+        quantity : Storage.get(quantityStore , 0),
         alertQuantity : "",
-        total : 0
+        total : Storage.get(totalStore , 0)
     },
     reducers : {
         //redux toolkit push arr not need create new arr
@@ -38,7 +41,13 @@ const cartSlice = createSlice({
             state.quantity++;
             state.total += prodData.price;
             Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
+            Storage.set(totalStore, parseInt(state.total), 60 * 24);
+            Storage.set(quantityStore, parseInt(state.quantity), 60 * 24);
         },
+
+
+
+
         RemoveProductToCart : (state , action ) => {
             const prodData = action.payload;
             const productIndex = state.cart.findIndex(arr => arr.id === prodData.id);
@@ -56,6 +65,8 @@ const cartSlice = createSlice({
             state.quantity++;
             state.total += cartData.price
             Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
+            Storage.set(totalStore, parseInt(state.total), 60 * 24);
+            Storage.set(quantityStore, parseInt(state.quantity), 60 * 24);
         },
 
 
@@ -70,6 +81,8 @@ const cartSlice = createSlice({
             state.quantity--;
             state.total -= cartData.price
             Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
+            Storage.set(totalStore, parseInt(state.total), 60 * 24);
+            Storage.set(quantityStore, parseInt(state.quantity), 60 * 24);
         },
         BlurInputCart : (state, action) => {
             /**
@@ -102,6 +115,8 @@ const cartSlice = createSlice({
             state.cart = []
             state.quantity = 0
             Storage.remove(cartStore, JSON.stringify(state.cart), 60 * 24);
+            Storage.remove(totalStore, parseInt(state.total), 60 * 24);
+            Storage.remove(quantityStore, parseInt(state.quantity), 60 * 24);
         },
     }
 })

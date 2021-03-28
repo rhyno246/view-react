@@ -19,7 +19,7 @@ const Storage = {
             data = parseData(parseType);
         }
     
-        return data || "";
+        return data || 0;
       },
     set(key, value, expire) {
         expire = expire || "3*24*60";

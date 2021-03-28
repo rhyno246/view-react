@@ -1,6 +1,5 @@
 import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
 import productApi from "../api/productApi";
-
 export const getAllProduct = createAsyncThunk('product/getAllProduct',
     async () => {
         const allproduct = await productApi.getAll();
@@ -14,6 +13,7 @@ export const getAllProductDetail = createAsyncThunk('product/getAllProductDetail
         return detailproduct
     }
 )
+
 
 const productSlice = createSlice({
     name : 'product',
