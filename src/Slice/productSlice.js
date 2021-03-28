@@ -24,7 +24,7 @@ const productSlice = createSlice({
         loading : false,
         reRenderloading : true,
         searchTerm : "",
-        error : ""
+        error : "",
     },
     reducers : {
         SearchItem : (state , action ) => {
@@ -66,5 +66,8 @@ const productSlice = createSlice({
 })
 
 const { reducer : productReducer , actions  } = productSlice
-export const { SearchItem } = actions
+export const { 
+    SearchItem ,
+    hasCart
+} = actions
 export default productReducer

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import './index.scss'
 import ProductItem from '../../components/ProductItem';
 import { Col, Row } from 'antd';
+
 const SearchPage = () => {
     const search = useSelector(state => state.product.search)
     return (

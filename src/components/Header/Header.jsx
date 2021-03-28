@@ -33,37 +33,40 @@ const Header = () => {
         history.push("/")
     }
     return (
-        <div className="header">
-            <div className="container">
-                <div className="menu">
-                    <Link to="/product"  className="logo"><img src={ imglogo } alt=""/></Link>
-                    <ul className="group">
-                        <li className="item-menu"><NavLink to="/product" exact>Product</NavLink></li> 
-                        <li className="item-menu"><NavLink to="/contact">Contact</NavLink></li> 
-                        { isAuth ? 
-                            <li className="item-menu user">
-                                <Avatar> { subUserName || subname } </Avatar>
-                                <span className="name"> <NavLink to="/profile"> { nameUser || name } </NavLink> </span>
-                                <LoginOutlined onClick={ Logout }/>
-                            </li> : <div><li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
-                            <li className="item-menu"><NavLink to="/login">Login</NavLink></li> </div> 
-                        }
-                        <li className="search-item">
-                            <Search/>
-                        </li> 
-                    </ul>
-                    <div className="position-cart">
-                        <Link to="/cart">
-                            <Badge count={ quantityCart }>
-                                <ShoppingCartOutlined />
-                            </Badge> 
-                        </Link>
-                    </div> 
-                    <MenuOutlined className="icon-menu" onClick={ handleToggleNav }/>
+        <div>
+            <div className="header">
+                <div className="container">
+                    <div className="menu">
+                        <Link to="/product"  className="logo"><img src={ imglogo } alt=""/></Link>
+                        <ul className="group">
+                            <li className="item-menu"><NavLink to="/product" exact>Product</NavLink></li> 
+                            <li className="item-menu"><NavLink to="/contact">Contact</NavLink></li> 
+                            { isAuth ? 
+                                <li className="item-menu user">
+                                    <Avatar> { subUserName || subname } </Avatar>
+                                    <span className="name"> <NavLink to="/profile"> { nameUser || name } </NavLink> </span>
+                                    <LoginOutlined onClick={ Logout }/>
+                                </li> : <div><li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
+                                <li className="item-menu"><NavLink to="/login">Login</NavLink></li> </div> 
+                            }
+                            <li className="search-item">
+                                <Search/>
+                            </li> 
+                        </ul>
+                        <div className="position-cart">
+                            <Link to="/cart">
+                                <Badge count={ quantityCart }>
+                                    <ShoppingCartOutlined />
+                                </Badge> 
+                            </Link>
+                        </div> 
+                        <MenuOutlined className="icon-menu" onClick={ handleToggleNav }/>
+                    </div>
                 </div>
+                        
             </div>
-                    
         </div>
+        
     )
 }
 

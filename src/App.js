@@ -12,7 +12,8 @@ import NotFound from './containers/NotFound/index'
 import Footer from './components/Footer'
 import Profile from './containers/Profile/index'
 import ForGotPass from './containers/ResetPass/index'
-import { AuthProvider } from './contexts/AuthContext';
+import CheckOut from './containers/CheckOut/index'
+import { AuthProvider } from './contexts/AuthContext'
 import { useSelector } from 'react-redux';
 function App() {
     const isAuth = useSelector(state => state.auth.setUser)
@@ -38,6 +39,9 @@ function App() {
                                 { isAuth ? <Redirect to="/"/> : <Login/> }
                             </Route>
                             <Route path="/reset-password" component = { ForGotPass }/>
+                            <Route path='/check-out'>
+                                { !isAuth ? <Redirect to="/login"/> : <CheckOut/>}
+                            </Route>
                             <Route path="*" component = { NotFound } />
                         </Switch>
                     <Footer/>

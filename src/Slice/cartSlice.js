@@ -1,18 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Storage from '../untils/storage';
+
+const cartStore = "cart_store"
 const cartSlice = createSlice({
     name : "cart",
     initialState : {
-        cart : [],
+        cart : Storage.get(cartStore , "[]"),
         quantity : 0,
+        alertQuantity : "",
         total : 0
     },
     reducers : {
+        //redux toolkit push arr not need create new arr
         AddToCart : (state , action ) => {
-            //redux toolkit push arr not need create new arr
-            const prodData = action.payload;
-            const quantityProd = action.payload.quantityProd
+            const prodData = action.payload
             const productIndex = state.cart.findIndex(arr => arr.id === prodData.id)
             if(productIndex >= 0){
+                if(state.cart[productIndex].quantity === prodData.stock){
+                    state.alertQuantity = "Opps !! Max quantity"
+                    return
+                }
                 state.cart[productIndex].quantity++;
                 state.cart[productIndex].sizeChose = prodData.sizeChose;
             }else{
@@ -23,12 +30,14 @@ const cartSlice = createSlice({
                     price : prodData.price,
                     size : prodData.size,
                     sizeChose : prodData.sizeChose,
+                    stock : prodData.stock,
                     quantity : 1
                 }
                 state.cart.push(newarr) 
             }
             state.quantity++;
             state.total += prodData.price;
+            Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
         },
         RemoveProductToCart : (state , action ) => {
             const prodData = action.payload;
@@ -37,6 +46,7 @@ const cartSlice = createSlice({
             state.cart.splice(productIndex , 1);
             state.quantity -= cartData.quantity;
             state.total -= cartData.price * cartData.quantity;
+            Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
         },
         plusCart : ( state , action ) => {
             const prodData = action.payload;
@@ -45,6 +55,7 @@ const cartSlice = createSlice({
             cartData.quantity++;
             state.quantity++;
             state.total += cartData.price
+            Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
         },
 
 
@@ -58,28 +69,39 @@ const cartSlice = createSlice({
             cartData.quantity--;
             state.quantity--;
             state.total -= cartData.price
-            
+            Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
         },
-        BlurInputCart : (state,action) => {
+        BlurInputCart : (state, action) => {
+            /**
+             * loop cart 
+             * xu ly logic 
+             * them thi cart tang len 
+             * luc do list cart cung tang theo
+             * thi bien tam se thay doi o day
+             */
+
            const number = action.payload.number
            const id = action.payload.id
            const productIndex = state.cart.findIndex(arr => arr.id === id);
            const cartData = state.cart[productIndex]
            if(!number){
                 return
+
            }else{
+               /**
+                * tim duoc product
+                * sau do co duoc price cua san pham 
+                * price * number = totalPrice cua item do
+                * totalCart = totalCart + totalProduct 
+                */
                 cartData.quantity = number;
                 
            }
         },
-
-        SelectPrice : (state , action) => {
-            state.changePrice = action.payload
-        },
-
         removeAllCart : (state) => {
             state.cart = []
             state.quantity = 0
+            Storage.remove(cartStore, JSON.stringify(state.cart), 60 * 24);
         },
     }
 })
@@ -92,6 +114,5 @@ export const {
     dashItemCart , 
     BlurInputCart ,
     removeAllCart , 
-    SelectPrice 
 } = actions
 export default reducer

@@ -18,11 +18,12 @@ const ProductDetail = () => {
     const dispatch = useDispatch()
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
-    const [countQuantity , setCountQuantity] = useState(0)
     const [ salePrice , setSalePrice ] = useState("")
     const [sizeChange , setSizeChange] = useState(null)
     const listDetailProduct = useSelector(state => state.product.detailproduct)
     const loading = useSelector(state => state.product.loading)
+    const prodId = listDetailProduct.id
+    const title = listDetailProduct.title
     const imageArr = listDetailProduct.image
     const quantity = listDetailProduct.quantity
     const size = listDetailProduct.size
@@ -41,26 +42,24 @@ const ProductDetail = () => {
         setSizeChange(val)
     }
     const handleAddToCart = () => {
-        if(countQuantity >= quantity){
-            return
-        }
-        setCountQuantity(countQuantity + 1)
         if(sale){
             dispatch(AddToCart({
-                id : listDetailProduct.id,
-                title : listDetailProduct.title,
+                id : prodId,
+                title : title,
                 price : salePrice,
-                image : listDetailProduct.image,
+                image : imageArr,
+                stock : quantity,
                 size : size,
                 sizeChose : sizeChange || size[0]
             }))
         }
         else{
             dispatch(AddToCart({
-                id : listDetailProduct.id,
-                title : listDetailProduct.title,
-                price : listDetailProduct.price,
-                image : listDetailProduct.image,
+                id : prodId,
+                title : title,
+                price : price,
+                image : imageArr,
+                stock : quantity,
                 size : size,
                 sizeChose : sizeChange || size[0]
             }))
@@ -92,6 +91,7 @@ const ProductDetail = () => {
                                 focusOnSelect={true}
                                 arrows={false}
                                 slidesToScroll = { 1 }
+                
                             >
                                 { imageArr && imageArr.map((item , index) =>(
                                     <div className="thumb" key={ index }>
@@ -146,7 +146,7 @@ const ProductDetail = () => {
                                     )) }
                                 </Select>
                             </div>
-                            <Button type="primary" onClick ={ handleAddToCart } disabled = { quantity === 0 || countQuantity >= quantity }>
+                            <Button type="primary" onClick ={ handleAddToCart } disabled = { quantity === 0 }>
                                 Add To Cart
                             </Button>
                         </div>

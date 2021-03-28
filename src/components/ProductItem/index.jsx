@@ -9,16 +9,11 @@ import { useEffect } from 'react/cjs/react.development';
 const ProductItem = (props) => {
     const { title , image , price , id , size , quantity , sale} = props
     const [ salePrice , setSalePrice ] = useState("")
-    const [countQuantity , setCountQuantity] = useState(0)
     const dispatch = useDispatch()
     useEffect(() => {
         setSalePrice(price - sale * price)
     }, [price,sale])
     const handleAddToCart = () => {
-        if(countQuantity >= quantity){
-            return
-        }
-        setCountQuantity(countQuantity + 1)
         if(sale){
             dispatch(AddToCart({
                 id : id,
@@ -26,8 +21,8 @@ const ProductItem = (props) => {
                 price : salePrice,
                 image : image,
                 size : size,
-                quantityProd : quantity,
-                sizeChose : size[0]
+                stock : quantity,
+                sizeChose : size[0],
             }))
         }else{
             dispatch(AddToCart({
@@ -36,8 +31,8 @@ const ProductItem = (props) => {
                 price : price,
                 image : image,
                 size : size,
-                quantityProd : quantity,
-                sizeChose : size[0]
+                stock : quantity,
+                sizeChose : size[0],
             }))
         }
         
@@ -48,6 +43,7 @@ const ProductItem = (props) => {
             <div className="product-item" type="flex">
                 <Card hoverable cover={ <img alt={ title } src={ image[0] }/>} style={{ height : "100%" }}>
                     <p><Link to={`product/${id}`} className="title-product">{title}</Link></p>
+                    { quantity }
                     { quantity === 0 ? <span className="outstock">Out Stock</span> : null }
                     <div className="flex-price">
                         <div>
@@ -58,7 +54,7 @@ const ProductItem = (props) => {
                     </div>
                     
                     <div className="flex-btn">
-                        <Button onClick ={ handleAddToCart } type="warning" disabled= { quantity === 0 || countQuantity >= quantity}>Add to cart</Button>
+                        <Button onClick ={ handleAddToCart } type="warning" disabled= { quantity === 0 }>Add to cart</Button>
                         <Button style={{ marginLeft : "10px" }}>
                             <HeartOutlined />
                         </Button>

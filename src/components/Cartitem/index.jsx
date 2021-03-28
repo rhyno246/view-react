@@ -9,7 +9,7 @@ import { debounce } from '../../untils/helper';
 
 
 const CartItem = (props) => {
-    const { id , title , image , price , quantity , size , sizeChose } = props
+    const { id , title , image , price , quantity , size , sizeChose , stock } = props
     const { Option } = Select;
     const dispatch = useDispatch()
     // const [ input , setInput ] = useState(quantity)
@@ -25,7 +25,7 @@ const CartItem = (props) => {
     
     const changeNumberCart = (val , info) => {
         if(info.type === "up"){
-            dispatch(plusCart({id : id }))
+            dispatch(plusCart({id : id, stock : stock }))
         }
         if(info.type === "down"){
             dispatch(dashItemCart({id : id}))
@@ -63,7 +63,7 @@ const CartItem = (props) => {
                         </div>
                         <div className="input-count" style={{ marginBottom: "40px" }}>
                             <strong>More product : </strong>
-                            <InputNumber defaultValue={ quantity } min={ 1 } onStep={ changeNumberCart } onChange = { handleBlurInput }/>
+                            <InputNumber defaultValue={ quantity } min={ 1 } max= { stock } onStep={ changeNumberCart } onChange = { handleBlurInput }/>
                     
                             {/* <button className="input-number-decrement" onClick={  handleDashCart } disabled={ quantity <= 1 }>–</button>
                             <input type="number" className="input-number" 

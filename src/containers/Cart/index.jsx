@@ -12,6 +12,7 @@ const Cart = () => {
     const cartList = useSelector(state => state.cart.cart)
     const totalCart = useSelector(state => state.cart.total)
     const dispatch = useDispatch()
+    const isAuth = useSelector(state => state.auth.setUser)
     const ClearAllCart = () => {
         dispatch(removeAllCart())
     }
@@ -21,22 +22,27 @@ const Cart = () => {
             <div className="main-cart"> 
                 <div className="container">
                     { cartList.map(item => (
-                    <Card hoverable cover key={ item.id } style={{ marginBottom : "20px" }}>
-                        <CartItem 
-                            id={ item.id } 
-                            title={ item.title } 
-                            image={ item.image }
-                            price={ item.price }
-                            quantity = { item.quantity }
-                            size = { item.size }
-                            sizeChose = { item.sizeChose }
-                        /> 
-                    </Card>
+                        <Card hoverable cover key={ item.id } style={{ marginBottom : "20px" }}>
+                            <CartItem 
+                                id={ item.id } 
+                                title={ item.title } 
+                                image={ item.image }
+                                price={ item.price }
+                                quantity = { item.quantity }
+                                size = { item.size }
+                                sizeChose = { item.sizeChose }
+                                stock = { item.stock }
+                            /> 
+                        </Card>
                     )) }
                     <div className="group-checkout">
                         <div className="total">Total Price : { totalCart } $</div>
                         <Button type="danger" style={{ marginRight : "10px" }} onClick ={ ClearAllCart }>Clear All</Button>
-                        <Button type="primary">Check Out</Button>
+                        <Button type="primary">
+                            <Link to={ isAuth ? `/check-out` : `/login` }>
+                                Check Out
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </div>:

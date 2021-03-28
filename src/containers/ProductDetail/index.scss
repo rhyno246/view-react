@@ -66,6 +66,9 @@
                 @media screen and (min-width: 1024px){
                     height: 100px;
                 }
+                .img{
+                    
+                }
                 img{
                     position: absolute;
                     top: 0;
@@ -139,6 +142,10 @@
                 color: #fff;
                 border-color : #80CBC4;
                 background: #80CBC4;
+                &:disabled{
+                    background: #ddd;
+                    border: #ddd;
+                }
             }
         }
     }

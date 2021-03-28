@@ -25,7 +25,8 @@ const MyInnerForm = (props) => {
         <form onSubmit={handleSubmit}>
             <div style={{ marginBottom : "15px" }}>
                 <Input 
-                    value = { values.name } 
+                    defaultValue = { values.name }
+                    // value = { values.name } 
                     onChange={handleChange}
                     onBlur={handleBlur} 
                     id="name"
@@ -36,7 +37,8 @@ const MyInnerForm = (props) => {
             </div>
             <div>
                 <Input 
-                    value = { values.email }
+                    defaultValue = { values.email }
+                    // value = { values.email }
                     onChange = { handleChange }
                     onBlur = { handleBlur }
                     id="email"
