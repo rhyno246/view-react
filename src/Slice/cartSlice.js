@@ -8,10 +8,10 @@ const totalStore = "total_store"
 const cartSlice = createSlice({
     name : "cart",
     initialState : {
-        cart : Storage.get(cartStore , "[]"),
-        quantity : Storage.get(quantityStore , 0),
+        cart : Storage.get(cartStore, "[]"),
+        quantity : parseInt(Storage.get(quantityStore, 0)),
         alertQuantity : "",
-        total : Storage.get(totalStore , 0)
+        total : parseInt(Storage.get(totalStore, 0))
     },
     reducers : {
         //redux toolkit push arr not need create new arr
@@ -26,28 +26,18 @@ const cartSlice = createSlice({
                 state.cart[productIndex].quantity++;
                 state.cart[productIndex].sizeChose = prodData.sizeChose;
             }else{
-                const newarr = {
-                    id : prodData.id,
-                    title : prodData.title,
-                    image : prodData.image,
-                    price : prodData.price,
-                    size : prodData.size,
-                    sizeChose : prodData.sizeChose,
+                state.cart.push({
+                    ...prodData,
                     stock : prodData.stock,
-                    quantity : 1
-                }
-                state.cart.push(newarr) 
+                    quantity : 1,
+                }) 
             }
             state.quantity++;
             state.total += prodData.price;
-            Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
-            Storage.set(totalStore, parseInt(state.total), 60 * 24);
-            Storage.set(quantityStore, parseInt(state.quantity), 60 * 24);
+            Storage.set(cartStore , JSON.stringify(state.cart) , 60 * 24)
+            Storage.set(quantityStore , JSON.stringify(state.quantity) , 60 * 24)
+            Storage.set(totalStore , JSON.stringify(state.total) , 60 * 24)
         },
-
-
-
-
         RemoveProductToCart : (state , action ) => {
             const prodData = action.payload;
             const productIndex = state.cart.findIndex(arr => arr.id === prodData.id);
@@ -55,7 +45,9 @@ const cartSlice = createSlice({
             state.cart.splice(productIndex , 1);
             state.quantity -= cartData.quantity;
             state.total -= cartData.price * cartData.quantity;
-            Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
+            Storage.set(cartStore , JSON.stringify(state.cart) , 60 * 24)
+            Storage.set(quantityStore , JSON.stringify(state.quantity) , 60 * 24)
+            Storage.set(totalStore , JSON.stringify(state.total) , 60 * 24)
         },
         plusCart : ( state , action ) => {
             const prodData = action.payload;
@@ -64,12 +56,10 @@ const cartSlice = createSlice({
             cartData.quantity++;
             state.quantity++;
             state.total += cartData.price
-            Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
-            Storage.set(totalStore, parseInt(state.total), 60 * 24);
-            Storage.set(quantityStore, parseInt(state.quantity), 60 * 24);
+            Storage.set(cartStore , JSON.stringify(state.cart) , 60 * 24)
+            Storage.set(quantityStore , JSON.stringify(state.quantity) , 60 * 24)
+            Storage.set(totalStore , JSON.stringify(state.total) , 60 * 24)
         },
-
-
         dashItemCart : ( state , action ) => {
             const prodData = action.payload;
             const productIndex = state.cart.findIndex(arr => arr.id === prodData.id);
@@ -80,43 +70,26 @@ const cartSlice = createSlice({
             cartData.quantity--;
             state.quantity--;
             state.total -= cartData.price
-            Storage.set(cartStore, JSON.stringify(state.cart), 60 * 24);
-            Storage.set(totalStore, parseInt(state.total), 60 * 24);
-            Storage.set(quantityStore, parseInt(state.quantity), 60 * 24);
+            Storage.set(cartStore , JSON.stringify(state.cart) , 60 * 24)
+            Storage.set(quantityStore , JSON.stringify(state.quantity) , 60 * 24)
+            Storage.set(totalStore , JSON.stringify(state.total) , 60 * 24)
         },
         BlurInputCart : (state, action) => {
-            /**
-             * loop cart 
-             * xu ly logic 
-             * them thi cart tang len 
-             * luc do list cart cung tang theo
-             * thi bien tam se thay doi o day
-             */
-
-           const number = action.payload.number
-           const id = action.payload.id
-           const productIndex = state.cart.findIndex(arr => arr.id === id);
-           const cartData = state.cart[productIndex]
-           if(!number){
+            const number = action.payload.number
+            const id = action.payload.id
+            const productIndex = state.cart.findIndex(arr => arr.id === id);
+            const cartData = state.cart[productIndex]
+            if(number > cartData.stock){
                 return
-
-           }else{
-               /**
-                * tim duoc product
-                * sau do co duoc price cua san pham 
-                * price * number = totalPrice cua item do
-                * totalCart = totalCart + totalProduct 
-                */
-                cartData.quantity = number;
-                
-           }
+            }
         },
         removeAllCart : (state) => {
             state.cart = []
             state.quantity = 0
-            Storage.remove(cartStore, JSON.stringify(state.cart), 60 * 24);
-            Storage.remove(totalStore, parseInt(state.total), 60 * 24);
-            Storage.remove(quantityStore, parseInt(state.quantity), 60 * 24);
+            state.total = 0
+            Storage.set(cartStore , JSON.stringify(state.cart) , 60 * 24)
+            Storage.set(quantityStore , JSON.stringify(state.quantity) , 60 * 24)
+            Storage.set(totalStore , JSON.stringify(state.total) , 60 * 24)
         },
     }
 })

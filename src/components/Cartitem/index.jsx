@@ -14,7 +14,11 @@ const CartItem = (props) => {
     const dispatch = useDispatch()
     // const [ input , setInput ] = useState(quantity)
     const handleDeleteCartItem = () => {
-        dispatch(RemoveProductToCart({id : id}))
+        dispatch(RemoveProductToCart({
+            id : id,
+            price : price,
+            quantity : quantity
+        }))
     }
     // const handleDashCart = () => {
     //     dispatch(dashItemCart({id : id}))
@@ -25,7 +29,10 @@ const CartItem = (props) => {
     
     const changeNumberCart = (val , info) => {
         if(info.type === "up"){
-            dispatch(plusCart({id : id, stock : stock }))
+            dispatch(plusCart({
+                id : id, 
+                stock : stock,
+            }))
         }
         if(info.type === "down"){
             dispatch(dashItemCart({id : id}))
@@ -35,7 +42,8 @@ const CartItem = (props) => {
     const handleBlurInput = debounce((val) => {
         dispatch(BlurInputCart({
             number : val,
-            id : id
+            id : id,
+            stock : stock
         }))
     }, 700)
 
