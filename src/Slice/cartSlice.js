@@ -11,7 +11,8 @@ const cartSlice = createSlice({
         cart : Storage.get(cartStore, "[]"),
         quantity : parseInt(Storage.get(quantityStore, 0)),
         alertQuantity : "",
-        total : parseInt(Storage.get(totalStore, 0))
+        total : parseInt(Storage.get(totalStore, 0)),
+        checkout : []
     },
     reducers : {
         //redux toolkit push arr not need create new arr
@@ -91,6 +92,11 @@ const cartSlice = createSlice({
             Storage.set(quantityStore , JSON.stringify(state.quantity) , 60 * 24)
             Storage.set(totalStore , JSON.stringify(state.total) , 60 * 24)
         },
+
+        checkOut : (state , action ) => {
+            state.checkout = [...action.payload]
+            console.log(state.checkout)
+        }
     }
 })
 
@@ -102,5 +108,6 @@ export const {
     dashItemCart , 
     BlurInputCart ,
     removeAllCart , 
+    checkOut
 } = actions
 export default reducer

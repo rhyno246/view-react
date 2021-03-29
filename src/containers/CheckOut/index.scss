@@ -1,3 +1,35 @@
 .check-out{
     margin-top: auto;
+    .Heading{
+        font-size: 30px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #80CBC4;
+        margin: 0;
+    }
+    .title{
+        text-align: center;
+    }
+    .box-checkout{
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        @media screen and (min-width: 320px){
+            margin-bottom: 15px;
+        }
+        @media screen and (min-width: 768px){
+            margin-bottom: 15px;
+        }
+        @media screen and (min-width: 1024px){
+            margin-bottom: 15px;
+        }
+        img{
+             max-width: 80px;
+             width: 100%;
+             margin-right: 10px;
+        }
+    }
 }

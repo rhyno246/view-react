@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import cartEmtry from '../../img_local/cart.png';
 import CartItem from "../../components/Cartitem";
-import { removeAllCart } from '../../Slice/cartSlice';
+import { checkOut, removeAllCart } from '../../Slice/cartSlice';
 import './index.scss';
 
 
@@ -16,9 +16,14 @@ const Cart = () => {
     const ClearAllCart = () => {
         dispatch(removeAllCart())
     }
+
+    const handleCheckOut = () => {
+        dispatch(checkOut(cartList))
+    }
+
     return (
         <div className="cart">
-            { cartList.length > 0 ?  
+            { cartList && cartList.length > 0 ?  
             <div className="main-cart"> 
                 <div className="container">
                     { cartList.map(item => (
@@ -38,7 +43,7 @@ const Cart = () => {
                     <div className="group-checkout">
                         <div className="total">Total Price : { totalCart } $</div>
                         <Button type="danger" style={{ marginRight : "10px" }} onClick ={ ClearAllCart }>Clear All</Button>
-                        <Button type="primary">
+                        <Button type="primary" onClick={ handleCheckOut }>
                             <Link to={ isAuth ? `/check-out` : `/login` }>
                                 Check Out
                             </Link>
