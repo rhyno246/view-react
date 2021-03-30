@@ -17,7 +17,6 @@ import { AuthProvider } from './contexts/AuthContext'
 import { useSelector } from 'react-redux';
 function App() {
     const isAuth = useSelector(state => state.auth.setUser)
-    
     return (
             <div className="App" style={{ display : "flex" , flexDirection : "column" , height : "100vh" }}>
                 <AuthProvider>

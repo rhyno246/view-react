@@ -9,6 +9,7 @@ import Avatar from 'antd/lib/avatar/avatar';
 import { LoginOutlined , MenuOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
 import { setRemoveAuth } from '../../Slice/authSlice';
+import { removeAllCart } from '../../Slice/cartSlice';
 
 
 const Header = () => {
@@ -30,6 +31,7 @@ const Header = () => {
     const Logout = () => {
         logout()
         dispatch(setRemoveAuth(false))
+        dispatch(removeAllCart())
         history.push("/")
     }
     return (

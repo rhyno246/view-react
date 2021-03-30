@@ -1,5 +1,14 @@
 .check-out{
     margin-top: auto;
+    .information{
+        padding-left: 0;
+        list-style: none;
+        padding-bottom: 10px;
+        border-bottom:  1px solid #ddd;
+        li{
+            margin-bottom: 5px;
+        }
+    }
     .Heading{
         font-size: 30px;
         text-align: center;

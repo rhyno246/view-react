@@ -4,6 +4,8 @@ import Storage from '../untils/storage';
 const cartStore = "cart_store"
 const quantityStore = "quantity_store"
 const totalStore = "total_store"
+const checkoutStore = "checkout_store"
+
 
 const cartSlice = createSlice({
     name : "cart",
@@ -12,7 +14,7 @@ const cartSlice = createSlice({
         quantity : parseInt(Storage.get(quantityStore, 0)),
         alertQuantity : "",
         total : parseInt(Storage.get(totalStore, 0)),
-        checkout : []
+        checkout : Storage.get(checkoutStore, "[]"),
     },
     reducers : {
         //redux toolkit push arr not need create new arr
@@ -88,13 +90,16 @@ const cartSlice = createSlice({
             state.cart = []
             state.quantity = 0
             state.total = 0
+            state.checkout = []
             Storage.set(cartStore , JSON.stringify(state.cart) , 60 * 24)
             Storage.set(quantityStore , JSON.stringify(state.quantity) , 60 * 24)
             Storage.set(totalStore , JSON.stringify(state.total) , 60 * 24)
+            Storage.set(checkoutStore , JSON.stringify(state.checkout) , 60 * 24)
         },
 
         checkOut : (state , action ) => {
             state.checkout = [...action.payload]
+            Storage.set(checkoutStore , JSON.stringify(state.checkout) , 60 * 24)
         }
     }
 })

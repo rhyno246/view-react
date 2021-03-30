@@ -19,6 +19,7 @@ const Cart = () => {
 
     const handleCheckOut = () => {
         dispatch(checkOut(cartList))
+        
     }
 
     return (
