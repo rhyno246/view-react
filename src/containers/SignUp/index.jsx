@@ -16,11 +16,12 @@ import { Alert, Button } from 'antd';
 const initialValues ={ 
     name: '',
     password: '',
+    phone : '',
     email: '',
     cfmpassword : '',
     acceptTerms : false
 }
-
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
         .min(3, 'Name must be at most 3 characters long')
@@ -30,6 +31,9 @@ const SignupSchema = Yup.object().shape({
         .min(6, 'Password must be at most 6 characters long')
         .max(50, 'Name must be less than 50 characters')
         .required('Passwords Required'),
+    phone: Yup.string()
+        .matches(phoneRegExp, "Phone number is not valid")
+        .required("Phone Required"),
     cfmpassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords do not match').required('Comfirm Passwords Required'),
     email: Yup.string().email('Invalid Email').required('Email Required'),
     acceptTerms: Yup.boolean().oneOf([true], 'Accept Terms & Conditions is required')
@@ -54,6 +58,7 @@ const SignUp = () => {
                 dispatch(setNameAuth(values.name))
                 user.updateProfile({
                     displayName : values.name,
+                    photoURL : values.phone
                 })
             }
         }).catch(error =>{
@@ -87,6 +92,7 @@ const SignUp = () => {
                         <Form>
                             <FastField name="name" component={ InputField } type="text" label="Name"/>
                             <FastField name="email" component={ InputField } type="text" label="Email"/>
+                            <FastField name="phone" component={ InputField } type="number" label="Phone"/>
                             <FastField name="password" component={ InputField } type="password" label="Password"/>
                             <FastField name="cfmpassword" component={ InputField } type="password" label="Confirm Password"/>
                             <FastField name="acceptTerms" component ={ checkBoxField } type="checkbox" label="You must agree to continue!"/>

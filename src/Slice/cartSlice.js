@@ -95,7 +95,6 @@ const cartSlice = createSlice({
 
         checkOut : (state , action ) => {
             state.checkout = [...action.payload]
-            console.log(state.checkout)
         }
     }
 })

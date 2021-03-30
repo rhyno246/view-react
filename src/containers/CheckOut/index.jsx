@@ -2,17 +2,19 @@ import { Card, Col, Radio, Row } from 'antd';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import icon from '../../img_local/icon-payment-method-cod.svg';
+import { useAuth } from "../../contexts/AuthContext";
 import './index.scss'
 
 function CheckOut() {
 
     const checkoutList = useSelector(state => state.cart.checkout)
-    const [ plain , setPlain ] = useState("Apple")
-    const plainOptions = ['Apple', 'Pear', 'Orange']; 
+    const { currentUser } = useAuth()
+    const [ plain , setPlain ] = useState("Standard delivery")
+    const plainOptions = ['Standard delivery', 'Delivered in 2 hours']; 
 
     const hanleDelivery = (e) => {
         setPlain(e.target.value)
-        console.log(plain)
+        console.log(e.target.value)
     }
 
     return (
@@ -23,7 +25,7 @@ function CheckOut() {
                 <Row gutter={ 24 }>
                     <Col className="gutter-row" xs={ 24 } sm={ 24 } xl={16} style={{ marginBottom : "10px" }}>
                             <Card>
-                                <Radio.Group options={plainOptions} onChange={ hanleDelivery } value={plain} />
+                                <Radio.Group options={plainOptions} onChange={ hanleDelivery } value={plain} style={{ marginBottom : "10px" }}/>
                                 <Row gutter={ 24 }>
                                 { checkoutList && checkoutList.map((item,index) => (
                                     <Col className="gutter-row" xs={ 24 } sm={ 24 } xl={12} key={ index }>
