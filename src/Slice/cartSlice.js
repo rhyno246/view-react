@@ -1,10 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Storage from '../untils/storage';
+import axios from 'axios'
 
 const cartStore = "cart_store"
 const quantityStore = "quantity_store"
 const totalStore = "total_store"
 const checkoutStore = "checkout_store"
+
+
+
+export const getAllCity = createAsyncThunk('product/getAllCity',
+    async () => {
+        const city = await axios.get('https://thongtindoanhnghiep.co/api/city');
+        console.log(city);
+    }
+)
 
 
 const cartSlice = createSlice({
@@ -104,7 +114,7 @@ const cartSlice = createSlice({
     }
 })
 
-const { reducer , actions } = cartSlice
+const { reducer : cartReducer , actions } = cartSlice
 export const { 
     AddToCart ,
     RemoveProductToCart , 
@@ -114,4 +124,4 @@ export const {
     removeAllCart , 
     checkOut
 } = actions
-export default reducer
+export default cartReducer

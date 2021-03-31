@@ -1,5 +1,6 @@
 .check-out{
     margin-top: auto;
+    padding-top: 100px;
     .information{
         padding-left: 0;
         list-style: none;
@@ -41,4 +42,7 @@
              margin-right: 10px;
         }
     }
+}
+span.anticon.anticon-close.ant-modal-close-icon {
+    display: none;
 }
