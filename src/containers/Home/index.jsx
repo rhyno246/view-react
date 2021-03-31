@@ -36,7 +36,6 @@ const Home = () => {
                                     quantity = { item.quantity }
                                     sale = { item.sale }
                                     sizeChose = { item.size[0] }
-                                    isActive = { item.isActive }
                                 />
                             </Col>
                             )) }

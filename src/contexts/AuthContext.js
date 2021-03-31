@@ -16,7 +16,6 @@ export function AuthProvider( { children }) {
         dispatch(setNameAuth(null))
         return auth.signOut()
     }
-
     function updateMail (email) {
         return currentUser.updateEmail(email)
     }

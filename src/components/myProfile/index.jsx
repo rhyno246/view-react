@@ -26,7 +26,6 @@ const MyInnerForm = (props) => {
             <div style={{ marginBottom : "15px" }}>
                 <Input 
                     defaultValue = { values.name }
-                    // value = { values.name } 
                     onChange={handleChange}
                     onBlur={handleBlur} 
                     id="name"
@@ -35,10 +34,9 @@ const MyInnerForm = (props) => {
                     <div className="error">{errors.name}</div>
                 )}
             </div>
-            <div>
+            <div style={{ marginBottom : "15px" }}>
                 <Input 
                     defaultValue = { values.email }
-                    // value = { values.email }
                     onChange = { handleChange }
                     onBlur = { handleBlur }
                     id="email"
@@ -47,8 +45,19 @@ const MyInnerForm = (props) => {
                     <div className="error">{errors.email}</div>
                 )}
             </div>
+            <div>
+                <Input 
+                    defaultValue = { values.phone }
+                    onChange = { handleChange }
+                    onBlur = { handleBlur }
+                    id="phone"
+                />
+                {errors.phone && touched.phone && (
+                    <div className="error">{errors.phone}</div>
+                )}
+            </div>
             <div style={{ marginTop : "20px" }}>
-                <Button type="primary" htmlType="submit" disabled = { errors.email || errors.name }>
+                <Button type="primary" htmlType="submit" disabled = { errors.email || errors.name || errors.phone }>
                     Update profile
                 </Button>
             </div>
@@ -61,6 +70,7 @@ function MyProfile(props) {
     const { currentUser , updateMail } = useAuth()
     const name = currentUser && currentUser.displayName;
     const email = currentUser && currentUser.email;
+    const phone = currentUser && currentUser.photoURL;
     const dispatch = useDispatch()
     const [err ,setError] = useState()
     const handleUpload = () => {
@@ -68,10 +78,12 @@ function MyProfile(props) {
             console.log("Files Selected", { name, size, source, file });
         })
     }
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
     const EnhancedForm = withFormik({
         mapPropsToValues: () => ({ 
             name : name,
-            email : email
+            email : email,
+            phone : phone
         }),
         validationSchema: Yup.object().shape({
             name: Yup.string()
@@ -79,12 +91,16 @@ function MyProfile(props) {
                 .max(10, 'Name must be less than 10 characters')
                 .required("Name is required!"), 
             email: Yup.string().email('Invalid Email').required('Email Required'),
+            phone: Yup.string()
+                .matches(phoneRegExp, "Phone number is not valid")
+                .required("Phone Required"),
         }),
         handleSubmit: (values, { setSubmitting }) => {
-            if(values.name !== currentUser.displayName || values.email !== currentUser.email){
+            if(values.name !== currentUser.displayName || values.email !== currentUser.email || values.phone !== currentUser.photoURL){
                 dispatch(setNameAuth(values.name))
                 currentUser.updateProfile({
-                    displayName : values.name
+                    displayName : values.name,
+                    photoURL : values.phone
                 })
                 updateMail(values.email).then(() =>{
                     toast.success('🦄 your profile success  ', {

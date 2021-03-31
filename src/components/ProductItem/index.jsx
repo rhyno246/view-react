@@ -1,15 +1,21 @@
 import { Button, Card } from 'antd';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import { AddToCart } from '../../Slice/cartSlice';
 import { HeartOutlined } from '@ant-design/icons';
+import { db } from '../../firebase/firebase'
+import { useAuth } from "../../contexts/AuthContext";
 import './index.scss';
 import { useEffect } from 'react/cjs/react.development';
 const ProductItem = (props) => {
     const { title , image , price , id , size , quantity , sale} = props
+    const { currentUser } = useAuth()
+    const isAuth = useSelector(state => state.auth.setUser)
     const [ salePrice , setSalePrice ] = useState("")
+    const [loading , setLoading] = useState(false)
     const dispatch = useDispatch()
+    const history = useHistory()
     useEffect(() => {
         setSalePrice(price - sale * price)
     }, [price,sale])
@@ -38,6 +44,32 @@ const ProductItem = (props) => {
         
     }
 
+
+    const handleWishList = () => {
+        const email = currentUser && currentUser.email
+        setLoading(true)
+        if(!isAuth){
+            history.push('/login')
+        }else{
+            const newData = {
+                id : id,
+                title : title,
+                image : image,
+                price : price || salePrice,
+                size : size,
+                quantity : quantity,
+                sale : sale || null,
+                isProduct : true
+            }
+            db.collection(email).doc('userID' + newData.id).set(newData).then(() => {
+                setLoading(false)
+            }).catch(error => {
+                setLoading(false)
+                console.log(error)
+            })
+        }
+    }
+
     return ( 
         <>
             <div className="product-item" type="flex">
@@ -55,7 +87,7 @@ const ProductItem = (props) => {
                     
                     <div className="flex-btn">
                         <Button onClick ={ handleAddToCart } type="warning" disabled= { quantity === 0 }>Add to cart</Button>
-                        <Button style={{ marginLeft : "10px" }}>
+                        <Button style={{ marginLeft : "10px" }} onClick = { handleWishList } loading ={ loading } disabled= { loading }>
                             <HeartOutlined />
                         </Button>
                         
