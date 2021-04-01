@@ -7,7 +7,8 @@ const authSlice = createSlice({
     initialState :  {
         nameAuth : "",
         setUser : Storage.get(auth, false),
-        FormChangePass : null
+        FormChangePass : null,
+        wishList : []
     },
     reducers : {
         setNameAuth : (state , action) => {
@@ -19,15 +20,25 @@ const authSlice = createSlice({
         },
         setRemoveAuth : (state , action) => {
             state.setUser = action.payload
+            state.wishList = null
             Storage.remove(auth, JSON.stringify(action.payload), 60 * 24 * 3)
         },
         setFormChangePass : ( state , action ) => {
             state.FormChangePass = action.payload
-            console.log(state.FormChangePass);
+            //console.log(state.FormChangePass);
+        },
+        setWishlist : (state, action ) => {
+            const newdata = action.payload
+            const index  = state.wishList.findIndex(arr => arr.id === newdata.id)
+            if(index >= 0){
+                return 
+            }else{
+                state.wishList.unshift(newdata) 
+            }
         }
     }
 })
 
 const { reducer : authReducer , actions } = authSlice
-export const { setNameAuth, setIsAuth , setRemoveAuth , setFormChangePass } = actions
+export const { setNameAuth, setIsAuth , setRemoveAuth , setFormChangePass , setWishlist } = actions
 export default authReducer

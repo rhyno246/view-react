@@ -8,7 +8,7 @@ const { TabPane } = Tabs;
 const Profile = () => {
     const [tabPosition] = useState("top")
     const changeTab = (index) => {
-        console.log(index);
+        //console.log(index);
     }
 
 
