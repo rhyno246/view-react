@@ -1,23 +1,22 @@
-import { Col, Row } from 'antd';
+import { Col, Empty, Row } from 'antd';
 import { db } from '../../firebase/firebase';
 import { useAuth } from "../../contexts/AuthContext";
 import React, { useEffect } from 'react';
 import ProductItem from '../../components/ProductItem';
-import { useDispatch, useSelector } from 'react-redux';
-import { setWishlist } from '../../Slice/authSlice';
+import { useSelector } from 'react-redux';
 function WishList() {
     const { currentUser } = useAuth()
     const email = currentUser && currentUser.email
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const wishlist = useSelector(state => state.auth.wishList)
     useEffect(() => {
         db.collection(email).get().then(data => {
             data.forEach(user => {
-                const userdata = user.data()
-                dispatch(setWishlist(userdata))
+                console.log(user.data())
             })
         })
-    } , [email , dispatch])
+    } , [email])
+
     return (
         <div className="wish-list">
             { wishlist ? <Row gutter={ 24 }>
@@ -36,7 +35,7 @@ function WishList() {
                     </Col>
                 )) }
                 
-            </Row> : null }
+            </Row> : <Empty/> }
         </div>
     )
 }

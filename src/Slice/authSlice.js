@@ -29,10 +29,11 @@ const authSlice = createSlice({
         },
         setWishlist : (state, action ) => {
             const newdata = action.payload
-            const index  = state.wishList.findIndex(arr => arr.id === newdata.id)
-            if(index >= 0){
-                return 
-            }else{
+            if(newdata !== null){
+                const index  = state.wishList.findIndex(arr => arr.id === newdata.id)
+                if(index >= 0){
+                    return 
+                }
                 state.wishList.unshift(newdata) 
             }
         }

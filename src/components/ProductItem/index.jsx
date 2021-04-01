@@ -58,7 +58,7 @@ const ProductItem = (props) => {
                 price : price || salePrice,
                 size : size,
                 quantity : quantity,
-                sale : sale || null,
+                sale : sale,
                 isProduct : true
             }
             db.collection(email).doc('userID' + newData.id).set(newData).then(() => {
@@ -80,7 +80,7 @@ const ProductItem = (props) => {
             price : price || salePrice,
             size : size,
             quantity : quantity,
-            sale : sale || null,
+            sale : sale,
             isProduct : true
         }
         db.collection(email).doc('userID' + newData.id).delete().then(() => {
@@ -94,14 +94,13 @@ const ProductItem = (props) => {
             <div className="product-item" type="flex">
                 <Card hoverable cover={ <img alt={ title } src={ image[0] }/>} style={{ height : "100%" }}>
                     <p><Link to={`product/${id}`} className="title-product">{title}</Link></p>
-                    { quantity }
-                    { quantity === 0 ? <span className="outstock">Out Stock</span> : null }
+                    { quantity === 0 ? <span className="outstock">Out Stock</span> : <span></span> }
                     <div className="flex-price">
                         <div>
                             <span className={ sale ? "old-price" : "price" }>{ price } $</span>
                         </div>
-                        { sale ? <span className="sale">{ sale * 100 }%</span> : null }
-                        { sale ? <span className="new-price"> { salePrice } $ </span> : null }
+                        { sale ? <span className="sale">{ sale * 100 }%</span> : <span></span>}
+                        { sale ? <span className="new-price"> { salePrice } $ </span> : <span></span> }
                     </div>
                     
                     <div className="flex-btn">
