@@ -5,8 +5,9 @@ import React, { useState } from 'react'
 import { useFileUpload } from "use-file-upload"
 import { useAuth } from '../../contexts/AuthContext';
 import { useDispatch } from 'react-redux';
-import { setNameAuth } from '../../Slice/authSlice';
+import { setAvatar, setNameAuth } from '../../Slice/authSlice';
 import { ToastContainer, toast } from 'react-toastify';
+import { storage } from '../../firebase/firebase';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss'
 
@@ -71,11 +72,28 @@ function MyProfile(props) {
     const name = currentUser && currentUser.displayName;
     const email = currentUser && currentUser.email;
     const phone = currentUser && currentUser.photoURL;
+    const uuid = currentUser && currentUser.uid;
     const dispatch = useDispatch()
     const [err ,setError] = useState()
+
+   
+
     const handleUpload = () => {
         selectFiles({ accept: "image/*" }, ({ name, size, source, file }) => {
-            console.log("Files Selected", { name, size, source, file });
+            var uploadTask = storage.ref('users/' + uuid + '/profile.jpg').put(file);
+            uploadTask.on('state_changed', 
+                (snapshot) => {
+                    console.log(snapshot , "Update success")
+                }, 
+                (error) => {
+                    console.log(error);
+                }, () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        console.log(downloadURL)
+                        dispatch(setAvatar(downloadURL))
+                    });
+                }
+            );
         })
     }
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/

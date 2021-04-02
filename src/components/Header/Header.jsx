@@ -20,6 +20,7 @@ const Header = () => {
     const subname = name && name.substring(1, 0).toUpperCase()
     const quantityCart = useSelector(state => state.cart.quantity)
     const isAuth = useSelector(state => state.auth.setUser)
+    const avatar = useSelector(state => state.auth.avatar)
     const history  = useHistory()
     const dispatch = useDispatch()
     const handleToggleNav = () => {
@@ -45,7 +46,7 @@ const Header = () => {
                             <li className="item-menu"><NavLink to="/contact">Contact</NavLink></li> 
                             { isAuth ? 
                                 <li className="item-menu user">
-                                    <Avatar> { subUserName || subname } </Avatar>
+                                    <Avatar src={ avatar }> { subUserName || subname } </Avatar>
                                     <span className="name"> <NavLink to="/profile"> { nameUser || name } </NavLink> </span>
                                     <LoginOutlined onClick={ Logout }/>
                                 </li> : <div><li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 

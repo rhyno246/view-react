@@ -24,7 +24,10 @@ const ProductItem = (props) => {
     }, [price,sale])
     const handleAddToCart = () => {
         if(isProduct){
-            console.log(1111111111111111);
+            db.collection(email).doc(id).delete().then(() => {
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+            });
         }
         if(sale){
             dispatch(AddToCart({
@@ -77,17 +80,7 @@ const ProductItem = (props) => {
 
 
     const handleDeleteWishlist = () => {
-        const newData = {
-            id : id,
-            title : title,
-            image : image,
-            price : price || salePrice,
-            size : size,
-            quantity : quantity,
-            sale : sale,
-            isProduct : true
-        }
-        db.collection(email).doc(newData.id).delete().then(() => {
+        db.collection(email).doc(id).delete().then(() => {
         }).catch((error) => {
             console.error("Error removing document: ", error);
         });
