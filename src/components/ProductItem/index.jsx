@@ -16,10 +16,16 @@ const ProductItem = (props) => {
     const [loading , setLoading] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
+    const email = currentUser && currentUser.email
+
+
     useEffect(() => {
         setSalePrice(price - sale * price)
     }, [price,sale])
     const handleAddToCart = () => {
+        if(isProduct){
+            console.log(1111111111111111);
+        }
         if(sale){
             dispatch(AddToCart({
                 id : id,
@@ -46,7 +52,6 @@ const ProductItem = (props) => {
 
 
     const handleWishList = () => {
-        const email = currentUser && currentUser.email
         setLoading(true)
         if(!isAuth){
             history.push('/login')
@@ -61,13 +66,17 @@ const ProductItem = (props) => {
                 sale : sale,
                 isProduct : true
             }
-            console.log(newData , email);
+            db.collection(email).doc(newData.id).set(newData).then(() => {
+                setLoading(false)
+            }).catch((error) => {
+                setLoading(false)
+                console.error("Error removing document: ", error);
+            });
         }
     }
 
 
     const handleDeleteWishlist = () => {
-        const email = currentUser && currentUser.email
         const newData = {
             id : id,
             title : title,
@@ -78,8 +87,7 @@ const ProductItem = (props) => {
             sale : sale,
             isProduct : true
         }
-        db.collection(email).doc('userID' + newData.id).delete(newData.id).then(() => {
-            console.log(newData.id);
+        db.collection(email).doc(newData.id).delete().then(() => {
         }).catch((error) => {
             console.error("Error removing document: ", error);
         });
@@ -105,10 +113,10 @@ const ProductItem = (props) => {
                         { isProduct ? 
                             <Button style={{ marginLeft : "10px" }} onClick ={ handleDeleteWishlist }>
                                 <DeleteOutlined />
-                            </Button> :  
+                            </Button> : 
                             <Button style={{ marginLeft : "10px" }} onClick = { handleWishList } loading ={ loading } disabled= { loading }>
                                 { loading ? "Loading" : <HeartOutlined /> }
-                            </Button>
+                            </Button>   
                         }
                     </div>
                 </Card>
