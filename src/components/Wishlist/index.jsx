@@ -1,26 +1,32 @@
 import { Col, Empty, Row } from 'antd';
 import { db } from '../../firebase/firebase';
 import { useAuth } from "../../contexts/AuthContext";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductItem from '../../components/ProductItem';
-import { useSelector } from 'react-redux';
 function WishList() {
     const { currentUser } = useAuth()
+    const [selectedOrgList, setSelectedOrgList] = useState();
     const email = currentUser && currentUser.email
-    // const dispatch = useDispatch()
-    const wishlist = useSelector(state => state.auth.wishList)
     useEffect(() => {
-        db.collection(email).get().then(data => {
-            data.forEach(user => {
-                console.log(user.data())
-            })
+        const wishlist = db.collection(email).onSnapshot(record => {
+            const listData = record.docs.map(item => ({
+                id : item.id,
+                title : item.data().title,
+                image : item.data().image,
+                price : item.data().price,
+                size : item.data().size,
+                quantity : item.data().quantity,
+                sale : item.data().sale,
+                isProduct : item.data().isProduct
+            }))
+            setSelectedOrgList(listData)
         })
+        return() => wishlist();
     } , [email])
-
     return (
         <div className="wish-list">
-            { wishlist ? <Row gutter={ 24 }>
-                { wishlist.map((item , index) => (
+            { selectedOrgList && selectedOrgList.length > 0 ? <Row gutter={ 24 }>
+                { selectedOrgList.map((item , index) => (
                     <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={8} key={ index } style={{ marginBottom : "25px" }}>
                         <ProductItem 
                             id={ item.id } 

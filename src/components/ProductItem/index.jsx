@@ -61,12 +61,7 @@ const ProductItem = (props) => {
                 sale : sale,
                 isProduct : true
             }
-            db.collection(email).doc('userID' + newData.id).set(newData).then(() => {
-                setLoading(false)
-            }).catch(error => {
-                setLoading(false)
-                console.log(error)
-            })
+            console.log(newData , email);
         }
     }
 
@@ -83,7 +78,8 @@ const ProductItem = (props) => {
             sale : sale,
             isProduct : true
         }
-        db.collection(email).doc('userID' + newData.id).delete().then(() => {
+        db.collection(email).doc('userID' + newData.id).delete(newData.id).then(() => {
+            console.log(newData.id);
         }).catch((error) => {
             console.error("Error removing document: ", error);
         });
