@@ -65,7 +65,7 @@ const MyInnerForm = (props) => {
         </form>
     );
 };
-function MyProfile(props) {
+function MyProfile() {
     const defaultSrc = "https://www.pngkit.com/png/full/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png";
     const [files, selectFiles] = useFileUpload();
     const { currentUser , updateMail } = useAuth()
@@ -75,8 +75,6 @@ function MyProfile(props) {
     const uuid = currentUser && currentUser.uid;
     const dispatch = useDispatch()
     const [err ,setError] = useState()
-
-   
 
     const handleUpload = () => {
         selectFiles({ accept: "image/*" }, ({ name, size, source, file }) => {
@@ -152,7 +150,7 @@ function MyProfile(props) {
         <div className="main">
             <div className="default">
                 <div style={{ marginTop : "20px" , textAlign : "center" }}>
-                    <img src={files?.source || defaultSrc} alt="preview"/>
+                    <img src={files?.source || defaultSrc } alt="preview"/>
                     <Button
                         type="primary"
                         onClick={handleUpload}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Link ,NavLink, useHistory } from 'react-router-dom';
 import imglogo from '../../img_local/logo_shoes.png';
@@ -10,6 +10,7 @@ import { LoginOutlined , MenuOutlined, ShoppingCartOutlined } from '@ant-design/
 import { Badge } from 'antd';
 import { setRemoveAuth } from '../../Slice/authSlice';
 import { removeAllCart } from '../../Slice/cartSlice';
+import { storage } from '../../firebase/firebase';
 
 
 const Header = () => {
@@ -18,9 +19,11 @@ const Header = () => {
     const nameUser = useSelector(state => state.auth.nameAuth)
     const subUserName = nameUser && nameUser.substring(1, 0).toUpperCase()
     const subname = name && name.substring(1, 0).toUpperCase()
+    const id = currentUser && currentUser.uid
+    const [avatar ,setAvatar] = useState(null)
     const quantityCart = useSelector(state => state.cart.quantity)
     const isAuth = useSelector(state => state.auth.setUser)
-    const avatar = useSelector(state => state.auth.avatar)
+    const avatarNull = useSelector(state => state.auth.avatar)
     const history  = useHistory()
     const dispatch = useDispatch()
     const handleToggleNav = () => {
@@ -34,7 +37,17 @@ const Header = () => {
         dispatch(setRemoveAuth(false))
         dispatch(removeAllCart())
         history.push("/")
+        setAvatar("")
     }
+    useEffect(() => {
+        if(id){
+            storage.ref('users/' + id + '/profile.jpg').getDownloadURL().then(url => {
+                setAvatar(url)
+            })
+        }
+    } , [id])
+
+   // console.log(storage.ref('users/'))
     return (
         <div>
             <div className="header">
@@ -46,7 +59,7 @@ const Header = () => {
                             <li className="item-menu"><NavLink to="/contact">Contact</NavLink></li> 
                             { isAuth ? 
                                 <li className="item-menu user">
-                                    <Avatar src={ avatar }> { subUserName || subname } </Avatar>
+                                    <Avatar src={ avatarNull || avatar }> { subUserName || subname } </Avatar>
                                     <span className="name"> <NavLink to="/profile"> { nameUser || name } </NavLink> </span>
                                     <LoginOutlined onClick={ Logout }/>
                                 </li> : <div><li className="item-menu"><NavLink to="/sign-up">Sign in</NavLink></li> 
