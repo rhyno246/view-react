@@ -1,6 +1,6 @@
 import { Input, Space } from 'antd';
 import React, { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { getAllSearch } from '../../Slice/productSlice';
 import './index.scss';
@@ -9,6 +9,7 @@ const Search = () => {
     const { Search } = Input;
     const inputref = useRef()
     const dispatch = useDispatch()
+    const reRenderSearchloading = useSelector(state => state.product.reRenderSearchloading)
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     }
@@ -23,12 +24,11 @@ const Search = () => {
         inputref.current.handleReset(value)
     }
     useEffect(() => {
-        const name =  query.get("q")
-        dispatch(getAllSearch(name))
-        return () => {
-            getAllSearch(name)
+        if(reRenderSearchloading){
+            const name =  query.get("q")
+            dispatch(getAllSearch(name))
         }
-    }, [dispatch , query])
+    }, [dispatch , query , reRenderSearchloading])
 
     return (
         <div className="search">

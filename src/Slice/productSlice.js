@@ -30,6 +30,7 @@ const productSlice = createSlice({
         search : [],
         loading : false,
         reRenderloading : true,
+        reRenderSearchloading : true,
         searchTerm : "",
         error : "",
     },
@@ -73,13 +74,16 @@ const productSlice = createSlice({
 
 
         [ getAllSearch.pending ] : (state) => {
+            state.reRenderSearchloading = false
             state.loading = true
         },
         [ getAllSearch.rejected ] : (state , action) =>{
+            state.reRenderSearchloading = false
             state.loading = false
             state.error = action.error
         },
         [ getAllSearch.fulfilled ] : (state , action) => {
+            state.reRenderSearchloading = false
             state.loading = false
             state.search = action.payload
         }

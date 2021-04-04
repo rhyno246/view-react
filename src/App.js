@@ -6,12 +6,13 @@ import Cart from './containers/Cart/index'
 import ProductDetail from './containers/ProductDetail/index'
 import SignUp from './containers/SignUp/index'
 import Login from './containers/Login/index'
-import Contact from './containers/Contact/index'
+import OtherBrands from './containers/OrtherBrands/index'
 import Search from './containers/SearchPage/index'
 import NotFound from './containers/NotFound/index'
 import Footer from './components/Footer'
 import Profile from './containers/Profile/index'
 import ForGotPass from './containers/ResetPass/index'
+import ShoeLace from './containers/Shoelace/index'
 import CheckOut from './containers/CheckOut/index'
 import { AuthProvider } from './contexts/AuthContext'
 import { useSelector } from 'react-redux';
@@ -24,13 +25,14 @@ function App() {
                         <Switch>
                             <Redirect from="/" to="/product" exact/>
                             <Route path="/product" component = { Home } exact/>
+                            <Route path="/shoes-lace" component ={ ShoeLace }/>
                             <Route path="/product/:id" component ={ ProductDetail }/>
                             <Route path="/cart" component = { Cart } />
                             <Route path="/sign-up">
                                 { isAuth ? <Redirect to="/"/> : <SignUp/>  }
                             </Route>
                             <Route path="/search" component = { Search }/>
-                            <Route path="/contact" component ={ Contact }/>
+                            <Route path="/other-brands" component ={ OtherBrands }/>
                             <Route path="/profile">
                                 { !isAuth ? <Redirect to="/"/> : <Profile/> }
                             </Route>
