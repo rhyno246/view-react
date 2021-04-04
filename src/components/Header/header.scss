@@ -12,7 +12,12 @@
         .logo{
             margin-right: auto;
             img{
-                width: 120px;
+                @media screen and (min-width: 320px){
+                    width: 85px;
+                }
+                @media screen and (min-width: 1024px){
+                    width: 120px;
+                }
             }
         }
         .group{
@@ -32,7 +37,8 @@
                 z-index: 9999;
                 height: 100%;
                 padding-top: 150px;
-                margin-left: -100%;
+                transition: all .2s ease-in-out;
+                transform: translateX(-100%);
                 opacity: 0;
             }
             @media screen and (min-width: 768px){
@@ -43,7 +49,8 @@
                 z-index: 9999;
                 height: 100%;
                 padding-top: 150px;
-                margin-left: -100%;
+                transition: all .2s ease-in-out;
+                transform: translateX(-100%);
                 opacity: 0;
             }
             @media screen and (min-width: 1024px){
@@ -56,6 +63,8 @@
                 margin-left: 0;
                 display: flex;
                 align-items: center;
+                transition: all .2s ease-in-out;
+                transform: translateX(0);
                 opacity: 1;
             }
             li{
@@ -147,16 +156,21 @@
         }
         .active{
             @media screen and (min-width: 320px){
-                margin-left: 0;
+                transition: all .2s ease-in-out;
+                transform: translateX(0);
                 opacity: 1;
             }
             @media screen and (min-width: 768px){
-                margin-left: 0;
+                transition: all .2s ease-in-out;
+                transform: translateX(0);
                 opacity: 1;
+
             }
             @media screen and (min-width: 1024px){
-                margin-left: 0;
+                transition: all .2s ease-in-out;
+                transform: translateX(0);
                 opacity: 1;
+
             }
         }
         .position-cart{
@@ -165,12 +179,12 @@
             }
             @media screen and (min-width: 320px){
                 position: fixed;
-                top: 20px;
+                top: 13px;
                 right: 65px;
             }
             @media screen and (min-width: 768px){
                 position: fixed;
-                top: 20px;
+                top: 13px;
                 right: 65px;
             }
             @media screen and (min-width: 1024px){

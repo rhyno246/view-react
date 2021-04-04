@@ -45,9 +45,11 @@ const Header = () => {
                 setAvatar(url)
             })
         }
+        var itemmenu = document.querySelector('.group')
+        itemmenu.addEventListener('click' , function () {
+            itemmenu.classList.remove('active')
+        })
     } , [id])
-
-   // console.log(storage.ref('users/'))
     return (
         <div>
             <div className="header">

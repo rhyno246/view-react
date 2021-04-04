@@ -87,7 +87,15 @@ function MyProfile() {
                     console.log(error);
                 }, () => {
                     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                        console.log(downloadURL)
+                        toast.success('🦄 update avatar success  ', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                         dispatch(setAvatar(downloadURL))
                     });
                 }

@@ -14,6 +14,13 @@ export const getAllProductDetail = createAsyncThunk('product/getAllProductDetail
     }
 )
 
+export const getAllSearch = createAsyncThunk('product/getAllSearch' , 
+    async (val) => {
+        const search = await productApi.getSearch(val);
+        return search
+    }
+)
+
 
 const productSlice = createSlice({
     name : 'product',
@@ -27,12 +34,12 @@ const productSlice = createSlice({
         error : "",
     },
     reducers : {
-        SearchItem : (state , action ) => {
-            state.searchTerm = action.payload
-            state.search = state.product.filter(search => {
-                return search.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-            })
-        }
+        // SearchItem : (state , action ) => {
+        //     state.searchTerm = action.payload
+        //     state.search = state.product.filter(search => {
+        //         return search.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+        //     })
+        // }
     },
     extraReducers  : {
         [getAllProduct.pending] : (state) => {
@@ -61,13 +68,27 @@ const productSlice = createSlice({
         [ getAllProductDetail.fulfilled ] : (state , action) => {
             state.loading = false
             state.detailproduct = action.payload
+        },
+
+
+
+        [ getAllSearch.pending ] : (state) => {
+            state.loading = true
+        },
+        [ getAllSearch.rejected ] : (state , action) =>{
+            state.loading = false
+            state.error = action.error
+        },
+        [ getAllSearch.fulfilled ] : (state , action) => {
+            state.loading = false
+            state.search = action.payload
         }
+
     }
 })
 
 const { reducer : productReducer , actions  } = productSlice
 export const { 
-    SearchItem ,
     hasCart
 } = actions
 export default productReducer

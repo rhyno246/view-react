@@ -9,6 +9,10 @@ const productApi =  {
     getDetailProduct : (id) => {
         const url = `/product/${id}`;
         return axiosClient.get(url)
+    },
+    getSearch : (val) => {
+        const url = `/product?q=${ val }`;
+        return axiosClient.get(url)
     }
 }
 
