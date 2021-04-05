@@ -9,7 +9,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import './index.scss';
 import { useEffect } from 'react/cjs/react.development';
 const ProductItem = (props) => {
-    const { title , image , price , id , size , quantity , sale , isProduct} = props
+    const { title , image , price , id , size , quantity , sale , isProduct , otherbrand , shoeslace , product} = props
     const { currentUser } = useAuth()
     const isAuth = useSelector(state => state.auth.setUser)
     const [ salePrice , setSalePrice ] = useState("")
@@ -17,10 +17,10 @@ const ProductItem = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const email = currentUser && currentUser.email
-
-
+    console.log(props);
     useEffect(() => {
         setSalePrice(price - sale * price)
+        
     }, [price,sale])
     const handleAddToCart = () => {
         if(isProduct){
@@ -37,7 +37,7 @@ const ProductItem = (props) => {
                 image : image,
                 size : size,
                 stock : quantity,
-                sizeChose : size[0],
+                sizeChose : size
             }))
         }else{
             dispatch(AddToCart({
@@ -47,7 +47,7 @@ const ProductItem = (props) => {
                 image : image,
                 size : size,
                 stock : quantity,
-                sizeChose : size[0],
+                sizeChose : size
             }))
         }
         
@@ -85,12 +85,20 @@ const ProductItem = (props) => {
             console.error("Error removing document: ", error);
         });
     }
-
     return ( 
         <>
             <div className="product-item" type="flex">
                 <Card hoverable cover={ <img alt={ title } src={ image[0] }/>} style={{ height : "100%" }}>
-                    <p><Link to={`product/${id}`} className="title-product">{title}</Link></p>
+                    <p>
+                        <Link 
+                            to={ product ? `product/${id}` : null || 
+                            otherbrand ? `other-brands/${id}` : null || 
+                            shoeslace ? `shoes-lace/${id}` : null } 
+                            className="title-product"
+                        >
+                            {title}
+                        </Link>
+                    </p>
                     { quantity === 0 ? <span className="outstock">Out Stock</span> : <span></span> }
                     <div className="flex-price">
                         <div>

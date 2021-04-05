@@ -47,7 +47,7 @@ const CartItem = (props) => {
         }))
     }, 700)
 
-
+    console.log(props);
 
 
     return (
@@ -58,7 +58,15 @@ const CartItem = (props) => {
                         <img src= { image[0] } alt={ title } />
                     </div>
                     <div className="text">
-                        <div className="pb-10 cart-title"><h4><Link to={`product/${id}`}>{ title }</Link></h4></div>
+                        <div className="pb-10 cart-title">
+                            <h4>
+                                <Link 
+                                     to={`product/${id}`} 
+                                >
+                                    { title }
+                                </Link>
+                            </h4>
+                        </div>
                         <div className="pb-10 price"><strong>price :</strong> <span className="color-cart">{ price } $</span></div>
                         <div className="pb-10 quantity"><strong>quantity : </strong><span className="color-cart">{ quantity }</span></div>
                         <div className="margin">

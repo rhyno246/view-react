@@ -4,6 +4,8 @@ import Header from './components/Header/Header'
 import Home from "./containers/Home/index"
 import Cart from './containers/Cart/index'
 import ProductDetail from './containers/ProductDetail/index'
+import DetailOtherBrand from './containers/DetailOtherBrand/index'
+import DetailShoeLace from './containers/DetailShoeLace/index'
 import SignUp from './containers/SignUp/index'
 import Login from './containers/Login/index'
 import OtherBrands from './containers/OrtherBrands/index'
@@ -25,14 +27,18 @@ function App() {
                         <Switch>
                             <Redirect from="/" to="/product" exact/>
                             <Route path="/product" component = { Home } exact/>
-                            <Route path="/shoes-lace" component ={ ShoeLace }/>
                             <Route path="/product/:id" component ={ ProductDetail }/>
                             <Route path="/cart" component = { Cart } />
                             <Route path="/sign-up">
                                 { isAuth ? <Redirect to="/"/> : <SignUp/>  }
                             </Route>
                             <Route path="/search" component = { Search }/>
-                            <Route path="/other-brands" component ={ OtherBrands }/>
+                            <Route path="/other-brands" component ={ OtherBrands } exact/>
+                            <Route path="/other-brands/:id" component = { DetailOtherBrand }/>
+
+                            <Route path="/shoes-lace" component ={ ShoeLace } exact/>
+                            <Route path="/shoes-lace/:id" component ={ DetailShoeLace }/>
+
                             <Route path="/profile">
                                 { !isAuth ? <Redirect to="/"/> : <Profile/> }
                             </Route>

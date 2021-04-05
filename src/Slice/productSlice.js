@@ -2,7 +2,7 @@ import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
 import productApi from "../api/productApi";
 export const getAllProduct = createAsyncThunk('product/getAllProduct',
     async () => {
-        const allproduct = await productApi.getAll();
+        const allproduct = await productApi.getAll()
         return allproduct
     }
 )
@@ -16,8 +16,36 @@ export const getAllProductDetail = createAsyncThunk('product/getAllProductDetail
 
 export const getAllSearch = createAsyncThunk('product/getAllSearch' , 
     async (val) => {
-        const search = await productApi.getSearch(val);
+        const search = await productApi.getSearch(val)
         return search
+    }
+)
+
+export const getAllOtherBrand = createAsyncThunk('product/getAllOtherBrand' , 
+    async () => {
+        const allotherbrand = await productApi.getAllOtherBrand()
+        return allotherbrand
+    }
+)
+
+export const getDetailOtherBrand = createAsyncThunk('product/getDetailOtherBrand',
+    async (id) => {
+        const detailotherbrand = await productApi.getDetailOtherBrand(id)
+        return detailotherbrand
+    }
+)
+
+export const getAllShoelace = createAsyncThunk('product/getAllShoelace' , 
+    async () => {
+        const shoelace = await productApi.getAllShoelace()
+        return shoelace
+    }
+)
+
+export const getDetailShoelace = createAsyncThunk('product/getDetailShoelace' ,
+    async (id) => {
+        const detailshoelace = await productApi.getDetailShoelace(id)
+        return detailshoelace
     }
 )
 
@@ -26,11 +54,17 @@ const productSlice = createSlice({
     name : 'product',
     initialState : {
         product : [],
+        otherbrand : [],
+        shoeslace : [],
         detailproduct : [],
+        detailotherbrand : [],
+        detailshoeslace : [],
         search : [],
         loading : false,
         reRenderloading : true,
         reRenderSearchloading : true,
+        reRenderOtherBrandloading : true,
+        reRenderShoelaceloading : true,
         searchTerm : "",
         error : "",
     },
@@ -86,8 +120,72 @@ const productSlice = createSlice({
             state.reRenderSearchloading = false
             state.loading = false
             state.search = action.payload
-        }
+        },
 
+
+
+        [ getAllOtherBrand.pending ] : (state) => {
+            state.reRenderOtherBrandloading = false
+            state.loading = true
+        },
+        [getAllOtherBrand.rejected] : (state, action) => {
+            state.reRenderOtherBrandloading = false
+            state.loading = false
+            state.error = action.error
+        },
+        [getAllOtherBrand.fulfilled] : (state,action) => {
+            state.reRenderOtherBrandloading = false
+            state.loading = false
+            state.otherbrand = action.payload
+        },
+
+
+        [getDetailOtherBrand.pending] : (state) => {
+            state.loading = true
+        },
+        [getDetailOtherBrand.rejected] : (state, action) => {
+            state.loading = false
+            state.error = action.error
+        },
+        [getDetailOtherBrand.fulfilled] : (state, action) => {
+            state.loading = false
+            state.detailotherbrand = action.payload
+        },
+
+
+
+
+        [getAllShoelace.pending] : (state) => {
+            state.loading = true
+            state.reRenderShoelaceloading = false
+        },
+        [getAllShoelace.rejected] : (state, action) => {
+            state.reRenderShoelaceloading = false
+            state.loading = false
+            state.error = action.error
+        },
+        [getAllShoelace.fulfilled] : (state,action) => {
+            state.reRenderShoelaceloading = false
+            state.loading = false
+            state.shoeslace = action.payload
+        },
+
+
+
+
+        [getDetailShoelace.pending] : (state) => {
+            state.loading = true
+        },
+        [getDetailShoelace.rejected] : (state, action) => {
+            state.loading = false
+            state.error = action.error
+        },
+        [getDetailShoelace.fulfilled] : (state, action) => {
+            state.loading = false
+            state.detailshoeslace = action.payload
+        },
+
+        
     }
 })
 
