@@ -29,6 +29,7 @@ const ProductDetail = () => {
     const size = listDetailProduct.size
     const price = listDetailProduct.price
     const sale = listDetailProduct.sale
+    const status = listDetailProduct.status
     let desc = listDetailProduct && listDetailProduct.description
     useEffect(() => {
         dispatch(getAllProductDetail(id))
@@ -51,7 +52,7 @@ const ProductDetail = () => {
                 stock : quantity,
                 size : size,
                 sizeChose : sizeChange || size[0],
-                product : true
+                status : status
             }))
         }
         else{
@@ -63,7 +64,7 @@ const ProductDetail = () => {
                 stock : quantity,
                 size : size,
                 sizeChose : sizeChange || size[0],
-                product : true
+                status : status
             }))
         }
     }

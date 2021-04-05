@@ -33,7 +33,7 @@ function Shoeslace() {
                                 quantity = { item.quantity }
                                 sale = { item.sale }
                                 size = { item.size }
-                                shoeslace = { true }
+                                status = { item.status }
                             />
                         </Col>
                         )) }

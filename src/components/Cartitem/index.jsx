@@ -9,7 +9,7 @@ import { debounce } from '../../untils/helper';
 
 
 const CartItem = (props) => {
-    const { id , title , image , price , quantity , size , sizeChose , stock } = props
+    const { id , title , image , price , quantity , size , sizeChose , stock , status } = props
     const { Option } = Select;
     const dispatch = useDispatch()
     // const [ input , setInput ] = useState(quantity)
@@ -46,10 +46,6 @@ const CartItem = (props) => {
             stock : stock
         }))
     }, 700)
-
-    console.log(props);
-
-
     return (
        <div className="cart-item">
            <div className="container">
@@ -61,7 +57,9 @@ const CartItem = (props) => {
                         <div className="pb-10 cart-title">
                             <h4>
                                 <Link 
-                                     to={`product/${id}`} 
+                                     to={ status === "product" ? `product/${id}` : null ||
+                                     status === "otherbrand" ? `other-brands/${id}` :  null ||
+                                     status === "Shoelace" ? `shoes-lace/${id}` : null} 
                                 >
                                     { title }
                                 </Link>

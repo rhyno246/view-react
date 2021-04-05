@@ -17,7 +17,8 @@ function WishList() {
                 size : item.data().size,
                 quantity : item.data().quantity,
                 sale : item.data().sale,
-                isProduct : item.data().isProduct
+                isProduct : item.data().isProduct,
+                status : item.data().status
             }))
             setSelectedOrgList(listData)
         })
@@ -37,6 +38,7 @@ function WishList() {
                             quantity = { item.quantity }
                             sale = { item.sale }
                             isProduct = { item.isProduct }
+                            status = { item.status }
                         />
                     </Col>
                 )) }

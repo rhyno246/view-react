@@ -24,6 +24,7 @@ function DetailOtherBrand() {
     const sale = listOtherBrand.sale
     const price = listOtherBrand.price
     const quantity = listOtherBrand.quantity
+    const status = listOtherBrand.status
     let desc = listOtherBrand && listOtherBrand.description
     useEffect(() => {
         dispatch(getDetailOtherBrand(id))
@@ -39,7 +40,8 @@ function DetailOtherBrand() {
                 price : salePrice,
                 image : imageArr,
                 stock : quantity,
-                otherbrand : true
+                otherbrand : true,
+                status : status
             }))
         }
         else{
@@ -49,7 +51,8 @@ function DetailOtherBrand() {
                 price : price,
                 image : imageArr,
                 stock : quantity,
-                otherbrand : true
+                otherbrand : true,
+                status : status
             }))
         }
     }

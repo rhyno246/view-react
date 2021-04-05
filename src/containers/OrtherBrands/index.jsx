@@ -34,7 +34,7 @@ const OtherBrands = () => {
                                     quantity = { item.quantity }
                                     sale = { item.sale }
                                     size = { null }
-                                    otherbrand = { true }
+                                    status = { item.status }
                                 />
                             </Col>
                             )) }

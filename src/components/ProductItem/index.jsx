@@ -9,7 +9,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import './index.scss';
 import { useEffect } from 'react/cjs/react.development';
 const ProductItem = (props) => {
-    const { title , image , price , id , size , quantity , sale , isProduct , otherbrand , shoeslace , product} = props
+    const { title , image , price , id , size , quantity , sale , isProduct , status} = props
     const { currentUser } = useAuth()
     const isAuth = useSelector(state => state.auth.setUser)
     const [ salePrice , setSalePrice ] = useState("")
@@ -17,7 +17,6 @@ const ProductItem = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const email = currentUser && currentUser.email
-    console.log(props);
     useEffect(() => {
         setSalePrice(price - sale * price)
         
@@ -37,7 +36,8 @@ const ProductItem = (props) => {
                 image : image,
                 size : size,
                 stock : quantity,
-                sizeChose : size
+                sizeChose : size,
+                status : status
             }))
         }else{
             dispatch(AddToCart({
@@ -47,13 +47,12 @@ const ProductItem = (props) => {
                 image : image,
                 size : size,
                 stock : quantity,
-                sizeChose : size
+                sizeChose : size,
+                status : status
             }))
         }
         
     }
-
-
     const handleWishList = () => {
         setLoading(true)
         if(!isAuth){
@@ -67,7 +66,8 @@ const ProductItem = (props) => {
                 size : size,
                 quantity : quantity,
                 sale : sale,
-                isProduct : true
+                isProduct : true,
+                status : status
             }
             db.collection(email).doc(newData.id).set(newData).then(() => {
                 setLoading(false)
@@ -91,9 +91,10 @@ const ProductItem = (props) => {
                 <Card hoverable cover={ <img alt={ title } src={ image[0] }/>} style={{ height : "100%" }}>
                     <p>
                         <Link 
-                            to={ product ? `product/${id}` : null || 
-                            otherbrand ? `other-brands/${id}` : null || 
-                            shoeslace ? `shoes-lace/${id}` : null } 
+                            to={ status === "product" ? `product/${id}` : null ||
+                                status === "otherbrand" ? `other-brands/${id}` :  null ||
+                                status === "Shoelace" ? `shoes-lace/${id}` : null
+                        } 
                             className="title-product"
                         >
                             {title}

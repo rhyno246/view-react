@@ -5,7 +5,7 @@ import ArrowSlide from '../../components/ArrowSlide';
 import Loading from '../../components/Loading';
 import ReactReadMoreReadLess from "react-read-more-read-less";
 import { AddToCart } from '../../Slice/cartSlice';
-import { Button } from 'antd';
+import { Button, Select } from 'antd';
 import Slider from 'react-slick';
 import './index.scss'
 import { getDetailShoelace } from '../../Slice/productSlice';
@@ -13,6 +13,7 @@ function DetailShoeLace(props) {
     const param = useParams()
     const id = param.id;
     const dispatch = useDispatch()
+    const { Option } = Select;
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
     const [ salePrice , setSalePrice ] = useState("")
@@ -26,6 +27,7 @@ function DetailShoeLace(props) {
     const size = listShoeslace.size
     const price = listShoeslace.price
     const sale = listShoeslace.sale
+    const status = listShoeslace.status
     let desc = listShoeslace && listShoeslace.description
     useEffect(() => {
         dispatch(getDetailShoelace(id))
@@ -33,6 +35,9 @@ function DetailShoeLace(props) {
     useEffect(() => {
         setSalePrice(price - sale * price)
     },[price , sale])
+    const handleChange = (val) => {
+        setSizeChange(val)
+    }
     const handleAddToCart = () => {
         if(sale){
             dispatch(AddToCart({
@@ -41,7 +46,8 @@ function DetailShoeLace(props) {
                 price : salePrice,
                 image : imageArr,
                 stock : quantity,
-                shoeslace : true
+                shoeslace : true,
+                status : status
             }))
         }
         else{
@@ -51,7 +57,8 @@ function DetailShoeLace(props) {
                 price : price,
                 image : imageArr,
                 stock : quantity,
-                shoeslace : true
+                shoeslace : true,
+                status : status
             }))
         }
     }
@@ -91,7 +98,55 @@ function DetailShoeLace(props) {
                         </Slider>
                     </div>
                     <div className="right-txt">
-                        
+                        <h3 className="margin name">{ title }</h3>
+                        { sale ? <div className="margin">
+                            <strong>Sale : </strong><span className="category sale">{ sale * 100 }%</span>
+                            </div> : null
+                        }
+                        <div className="margin">
+                            <strong>Price : </strong> 
+                            { sale ? 
+                                <span style={{ marginRight : "10px" }} className="category new-price">
+                                    { salePrice } $
+                                </span> : null 
+                                }
+                            <span className={sale ? "old-price" : "new-price" }>{ price } $</span>
+                        </div> 
+                        {   quantity === 0 ? <div className="margin"> 
+                                <span className="category">Out Stock</span> 
+                                </div> :
+                            <div className="margin"><strong>Quantity : </strong> 
+                                <span className="category">{ quantity } </span> 
+                            </div>
+                        }
+                        <div className="margin">
+                            <strong>Description :</strong> 
+                            <span className="description">
+                                <ReactReadMoreReadLess
+                                    charLimit={250}
+                                    readMoreText={"Read more"}
+                                    readLessText={"Read less"}
+                                    readMoreClassName="read-more-less--more"
+                                    readLessClassName="read-more-less--less"
+                                >
+                                    { desc ? desc : "" }
+                                </ReactReadMoreReadLess>
+                            </span>
+                        </div>
+                        <div className="margin">
+                            <Select size="large" 
+                                onChange={handleChange} 
+                                defaultValue="Choose Size"
+                                style={{ width: 200 , marginLeft : "5px" }}
+                            >
+                                { size && size.map(( item,index ) => (
+                                    <Option value={ item } key={ index }>{ item }</Option>
+                                )) }
+                            </Select>
+                        </div>
+                        <Button type="primary" onClick ={ handleAddToCart } disabled = { quantity === 0 }>
+                            Add To Cart
+                        </Button>
                     </div>
                 </div>
             </div>

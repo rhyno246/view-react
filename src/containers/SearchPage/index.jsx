@@ -24,6 +24,7 @@ const SearchPage = () => {
                                         quantity = {item.quantity}
                                         sale = { item.sale }
                                         size = { item.size }
+                                        status = { item.status }
                                     />
                                 </Col>
                                 )) }

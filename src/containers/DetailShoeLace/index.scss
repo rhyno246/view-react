@@ -146,6 +146,9 @@
         }
     }
 }
+.title-product {
+    text-transform: uppercase;
+}
 .slick-slide.slick-active.slick-current{
     .thumb{
         &::after{

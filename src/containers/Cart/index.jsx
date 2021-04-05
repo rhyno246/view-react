@@ -38,6 +38,7 @@ const Cart = () => {
                                 size = { item.size }
                                 sizeChose = { item.sizeChose }
                                 stock = { item.stock }
+                                status = { item.status }
                             /> 
                         </Card>
                     )) }
