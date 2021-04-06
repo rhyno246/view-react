@@ -65,8 +65,8 @@ function CheckOut() {
                                             <div className="txt">
                                                 <p className="title-prod" style={{ marginBottom : "0px" }}>{ item.title }</p>
                                                 <p className="title-prod" style={{ marginBottom : "0px" }}><strong>quantity : </strong>X{ item.quantity }</p>
-                                                <p className="title-prod" style={{ marginBottom : "0px" }}><strong>Price : </strong>{ item.price }$</p>
-                                                <p className="title-prod" style={{ marginBottom : "0px" }}><strong>size</strong> { item.sizeChose } </p>
+                                                <p className="title-prod" style={{ marginBottom : "0px" }}><strong>Price : </strong>{ parseFloat(item.price).toFixed(2) }$</p>
+                                                { item.sizeChose  ? <p className="title-prod" style={{ marginBottom : "0px" }}><strong>size</strong> { item.sizeChose } </p> : null }
                                             </div>
                                         </div>
                                         

@@ -43,7 +43,7 @@ const Cart = () => {
                         </Card>
                     )) }
                     <div className="group-checkout">
-                        <div className="total">Total Price : { totalCart } $</div>
+                        <div className="total">Total Price : { parseFloat(totalCart).toFixed(2) } $</div>
                         <Button type="danger" style={{ marginRight : "10px" }} onClick ={ ClearAllCart }>Clear All</Button>
                         <Button type="primary" onClick={ handleCheckOut }>
                             <Link to={ isAuth ? `/check-out` : `/login` }>

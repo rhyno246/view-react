@@ -75,6 +75,12 @@ const productSlice = createSlice({
         //         return search.title.toLowerCase().includes(state.searchTerm.toLowerCase())
         //     })
         // }
+
+        AllPageProduct : (state) => {
+            let AllProduct = state.product.concat(state.otherbrand, state.shoeslace)
+            console.log(AllProduct);
+        }
+
     },
     extraReducers  : {
         [getAllProduct.pending] : (state) => {
@@ -191,6 +197,7 @@ const productSlice = createSlice({
 
 const { reducer : productReducer , actions  } = productSlice
 export const { 
-    hasCart
+    hasCart,
+    AllPageProduct
 } = actions
 export default productReducer

@@ -8,6 +8,7 @@ import { db } from '../../firebase/firebase'
 import { useAuth } from "../../contexts/AuthContext";
 import './index.scss';
 import { useEffect } from 'react/cjs/react.development';
+import { AllPageProduct } from '../../Slice/productSlice';
 const ProductItem = (props) => {
     const { title , image , price , id , size , quantity , sale , isProduct , status} = props
     const { currentUser } = useAuth()
@@ -36,7 +37,7 @@ const ProductItem = (props) => {
                 image : image,
                 size : size,
                 stock : quantity,
-                sizeChose : size,
+                sizeChose : size && size[0],
                 status : status
             }))
         }else{
@@ -47,7 +48,7 @@ const ProductItem = (props) => {
                 image : image,
                 size : size,
                 stock : quantity,
-                sizeChose : size,
+                sizeChose : size && size[0],
                 status : status
             }))
         }
@@ -85,6 +86,11 @@ const ProductItem = (props) => {
             console.error("Error removing document: ", error);
         });
     }
+
+    const hanlecc = () => {
+        dispatch(AllPageProduct())
+    }
+
     return ( 
         <>
             <div className="product-item" type="flex">
@@ -106,12 +112,14 @@ const ProductItem = (props) => {
                             <span className={ sale ? "old-price" : "price" }>{ price } $</span>
                         </div>
                         { sale ? <span className="sale">{ sale * 100 }%</span> : <span></span>}
-                        { sale ? <span className="new-price"> { salePrice } $ </span> : <span></span> }
+                        { sale ? <span className="new-price"> { parseFloat(salePrice).toFixed(2) } $ </span> : <span></span> }
                     </div>
                     
                     <div className="flex-btn">
-                        <Button onClick ={ handleAddToCart } type="warning" disabled= { quantity === 0 }>Add to cart</Button>
+                        <button onClick={  hanlecc}> hihihi </button>
 
+                        <Button onClick ={ handleAddToCart } type="warning" disabled= { quantity === 0 }>Add to cart</Button>
+                        
                         { isProduct ? 
                             <Button style={{ marginLeft : "10px" }} onClick ={ handleDeleteWishlist }>
                                 <DeleteOutlined />

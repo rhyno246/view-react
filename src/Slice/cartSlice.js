@@ -107,6 +107,14 @@ const cartSlice = createSlice({
             Storage.set(checkoutStore , JSON.stringify(state.checkout) , 60 * 24)
         },
 
+
+        changeSizeCart : (state , action) => {
+            const data = action.payload
+            const productIndex = state.cart.findIndex(arr => arr.id === data.id)
+            state.cart[productIndex].sizeChose = data.val
+            Storage.set(cartStore , JSON.stringify(state.cart) , 60 * 24)
+        },
+
         checkOut : (state , action ) => {
             state.checkout = [...action.payload]
             Storage.set(checkoutStore , JSON.stringify(state.checkout) , 60 * 24)
@@ -122,6 +130,7 @@ export const {
     dashItemCart , 
     BlurInputCart ,
     removeAllCart , 
-    checkOut
+    checkOut,
+    changeSizeCart
 } = actions
 export default cartReducer

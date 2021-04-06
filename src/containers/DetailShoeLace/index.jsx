@@ -47,7 +47,9 @@ function DetailShoeLace(props) {
                 image : imageArr,
                 stock : quantity,
                 shoeslace : true,
-                status : status
+                size : size,
+                status : status,
+                sizeChose : sizeChange || size[0],
             }))
         }
         else{
@@ -58,7 +60,9 @@ function DetailShoeLace(props) {
                 image : imageArr,
                 stock : quantity,
                 shoeslace : true,
-                status : status
+                status : status,
+                size : size,
+                sizeChose : sizeChange || size[0],
             }))
         }
     }

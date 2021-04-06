@@ -101,7 +101,7 @@ function DetailOtherBrand() {
                                 <strong>Price : </strong> 
                                 { sale ? 
                                     <span style={{ marginRight : "10px" }} className="category new-price">
-                                        { salePrice } $
+                                        { parseFloat(salePrice).toFixed(2) } $
                                     </span> : null 
                                     }
                                 <span className={sale ? "old-price" : "new-price" }>{ price } $</span>

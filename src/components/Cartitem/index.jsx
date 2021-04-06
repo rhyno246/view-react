@@ -2,7 +2,7 @@ import React from 'react'
 import "./index.scss"
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { plusCart, RemoveProductToCart , dashItemCart, BlurInputCart } from '../../Slice/cartSlice';
+import { plusCart, RemoveProductToCart , dashItemCart, BlurInputCart, changeSizeCart } from '../../Slice/cartSlice';
 import { Button, InputNumber, Select } from 'antd';
 import { debounce } from '../../untils/helper';
 
@@ -13,6 +13,7 @@ const CartItem = (props) => {
     const { Option } = Select;
     const dispatch = useDispatch()
     // const [ input , setInput ] = useState(quantity)
+
     const handleDeleteCartItem = () => {
         dispatch(RemoveProductToCart({
             id : id,
@@ -46,6 +47,15 @@ const CartItem = (props) => {
             stock : stock
         }))
     }, 700)
+
+    const changeItemSelectCart = (val) => {
+        dispatch(changeSizeCart({
+            val : val,
+            id : id
+        }))
+    }
+
+
     return (
        <div className="cart-item">
            <div className="container">
@@ -65,16 +75,20 @@ const CartItem = (props) => {
                                 </Link>
                             </h4>
                         </div>
-                        <div className="pb-10 price"><strong>price :</strong> <span className="color-cart">{ price } $</span></div>
+                        <div className="pb-10 price"><strong>price :</strong> <span className="color-cart">{ parseFloat(price).toFixed(2) } $</span></div>
                         <div className="pb-10 quantity"><strong>quantity : </strong><span className="color-cart">{ quantity }</span></div>
-                        <div className="margin">
+                        { size ? <div className="margin">
                             <strong>Choose size :</strong>
-                            <Select size="large" defaultValue={ sizeChose } style={{ width: 150 , marginBottom : "20px" , marginLeft : "10px" }}>
+                            <Select 
+                                size="large" defaultValue={ sizeChose } 
+                                onChange={ changeItemSelectCart } 
+                                style={{ width: 150 , marginBottom : "20px" , marginLeft : "10px" }}
+                            >
                                 { size && size.map(( item,index ) => (
                                     <Option value={ item } key={ index }>{ item }</Option>
                                 )) }
                             </Select>
-                        </div>
+                        </div> : null }
                         <div className="input-count" style={{ marginBottom: "40px" }}>
                             <strong>More product : </strong>
                             <InputNumber defaultValue={ quantity } min={ 1 } max= { stock } onStep={ changeNumberCart } onChange = { handleBlurInput }/>
