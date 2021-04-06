@@ -50,6 +50,13 @@ export const getDetailShoelace = createAsyncThunk('product/getDetailShoelace' ,
 )
 
 
+export const getProductMen = createAsyncThunk('product/getProductMen',
+    async ( val) => {
+        const allmen = await productApi.getProductMen(val)
+        return allmen
+    }
+)
+
 const productSlice = createSlice({
     name : 'product',
     initialState : {
@@ -60,6 +67,7 @@ const productSlice = createSlice({
         detailotherbrand : [],
         detailshoeslace : [],
         search : [],
+        men : [],
         loading : false,
         reRenderloading : true,
         reRenderSearchloading : true,
@@ -96,6 +104,20 @@ const productSlice = createSlice({
             state.loading = false
             state.reRenderloading = false
             state.product = action.payload
+        },
+
+
+
+        [getProductMen.pending] : (state) => {
+            state.loading = true
+        },
+        [getProductMen.rejected] : (state , action) => {
+            state.loading = false
+            state.error = action.error
+        },
+        [getProductMen.fulfilled] : (state, action) => {
+            state.loading = false
+            state.men = action.payload
         },
 
         
