@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Banner from '../../components/Banner';
 import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
+import ShoesSex from '../../components/ShoesSex';
 import { getAllProduct } from '../../Slice/productSlice';
 import './index.scss';
 const Home = () => {
@@ -21,6 +22,7 @@ const Home = () => {
     return (
         <>
             <Banner/>
+            <ShoesSex/>
             { isLoading ? <Loading/> : null }
             <div className="home">
                <div className="container">
@@ -37,6 +39,7 @@ const Home = () => {
                                     sale = { item.sale }
                                     sizeChose = { item.size[0] }
                                     status = { item.status }
+                                    sex = { item.sex }
                                 />
                             </Col>
                             )) }

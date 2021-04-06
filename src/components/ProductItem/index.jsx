@@ -8,9 +8,8 @@ import { db } from '../../firebase/firebase'
 import { useAuth } from "../../contexts/AuthContext";
 import './index.scss';
 import { useEffect } from 'react/cjs/react.development';
-import { AllPageProduct } from '../../Slice/productSlice';
 const ProductItem = (props) => {
-    const { title , image , price , id , size , quantity , sale , isProduct , status} = props
+    const { title , image , price , id , size , quantity , sale , isProduct , status , sex} = props
     const { currentUser } = useAuth()
     const isAuth = useSelector(state => state.auth.setUser)
     const [ salePrice , setSalePrice ] = useState("")
@@ -87,10 +86,6 @@ const ProductItem = (props) => {
         });
     }
 
-    const hanlecc = () => {
-        dispatch(AllPageProduct())
-    }
-
     return ( 
         <>
             <div className="product-item" type="flex">
@@ -107,6 +102,9 @@ const ProductItem = (props) => {
                         </Link>
                     </p>
                     { quantity === 0 ? <span className="outstock">Out Stock</span> : <span></span> }
+
+                    { sex }
+
                     <div className="flex-price">
                         <div>
                             <span className={ sale ? "old-price" : "price" }>{ price } $</span>
@@ -116,8 +114,6 @@ const ProductItem = (props) => {
                     </div>
                     
                     <div className="flex-btn">
-                        <button onClick={  hanlecc}> hihihi </button>
-
                         <Button onClick ={ handleAddToCart } type="warning" disabled= { quantity === 0 }>Add to cart</Button>
                         
                         { isProduct ? 
