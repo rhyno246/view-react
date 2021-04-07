@@ -95,9 +95,8 @@ const productSlice = createSlice({
         //     })
         // }
 
-        AllPageProduct : (state) => {
-            let AllProduct = state.product.concat(state.otherbrand, state.shoeslace)
-            console.log(AllProduct);
+        AllPageProduct : (state , action) => {
+            console.log(action.payload);
         }
 
     },

@@ -1,16 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { AllPageProduct, getAllOtherBrand, getAllShoelace } from '../../Slice/productSlice'
+import React from 'react'
 import Title from '../Title'
 import './index.scss'
 function SaleProduct() {
-    
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(AllPageProduct("hihi"))
-        dispatch(getAllOtherBrand())
-        dispatch(getAllShoelace())
-    }, [dispatch])
     return (
         <div className="sale-product">
             <div className="container">
