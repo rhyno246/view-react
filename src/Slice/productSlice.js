@@ -57,6 +57,14 @@ export const getProductMen = createAsyncThunk('product/getProductMen',
     }
 )
 
+
+export const getProductWomen = createAsyncThunk('product/getProductWomen' , 
+    async (val) => {
+        const allwomen = await productApi.getProductWomen(val)
+        return allwomen
+    }
+)
+
 const productSlice = createSlice({
     name : 'product',
     initialState : {
@@ -68,11 +76,14 @@ const productSlice = createSlice({
         detailshoeslace : [],
         search : [],
         men : [],
+        women : [],
         loading : false,
         reRenderloading : true,
         reRenderSearchloading : true,
         reRenderOtherBrandloading : true,
         reRenderShoelaceloading : true,
+        reRenderMenloading : true,
+        reRenderWomenloading : true,
         searchTerm : "",
         error : "",
     },
@@ -110,15 +121,36 @@ const productSlice = createSlice({
 
         [getProductMen.pending] : (state) => {
             state.loading = true
+            state.reRenderMenloading = false
         },
         [getProductMen.rejected] : (state , action) => {
             state.loading = false
+            state.reRenderMenloading = false
             state.error = action.error
         },
         [getProductMen.fulfilled] : (state, action) => {
             state.loading = false
+            state.reRenderMenloading = false
             state.men = action.payload
         },
+
+
+        [getProductWomen.pending] : (state) => {
+            state.loading = true
+            state.reRenderWomenloading = false
+        },
+        [getProductWomen.rejected] : (state , action) => {
+            state.loading = false
+            state.reRenderWomenloading = false
+            state.error = action.error
+        },
+        [getProductWomen.fulfilled] : (state, action) => {
+            state.loading = false
+            state.reRenderWomenloading = false
+            state.women = action.payload
+        },
+        
+        
 
         
         [ getAllProductDetail.pending ] : (state) => {

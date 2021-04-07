@@ -41,6 +41,13 @@ const productApi =  {
         return axiosClient.get(url)
     },
 
+
+    getProductWomen : (val) => {
+        const url = `product?sex=${ val }`  
+        return axiosClient.get(url)
+    },
+
+
     getSearch : (val) => {
         const url = `/product?q=${ val }`
         return axiosClient.get(url)

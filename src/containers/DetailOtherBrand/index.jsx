@@ -58,8 +58,8 @@ function DetailOtherBrand() {
     }
     return (
         <>
-            { loading ? <Loading/> : <div className="detail-otherbrand">
-                <div className="container">
+            <div className="detail-otherbrand">
+                {  loading ? <Loading/> : <div className="container">
                     <div className="main" style={{ maxWidth : "100%" }}>
                         <div className="img">
                             <Slider 
@@ -131,8 +131,8 @@ function DetailOtherBrand() {
                             </Button>
                         </div>
                     </div>
-                </div>
-            </div> }
+                </div> }
+            </div>
         </>
     );
 }

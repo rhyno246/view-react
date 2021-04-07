@@ -6,7 +6,9 @@ import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
 import ShoesSex from '../../components/ShoesSex';
 import { getAllProduct } from '../../Slice/productSlice';
+import Title from '../../components/Title/index'
 import './index.scss';
+import SaleProduct from '../../components/SaleProduct';
 const Home = () => {
     const dispatch = useDispatch();
     const productList = useSelector(state => state.product.product)
@@ -23,6 +25,8 @@ const Home = () => {
         <>
             <Banner/>
             <ShoesSex/>
+            <SaleProduct/>
+            <Title title ="All Shoes"/>
             { isLoading ? <Loading/> : null }
             <div className="home">
                <div className="container">
@@ -39,7 +43,6 @@ const Home = () => {
                                     sale = { item.sale }
                                     sizeChose = { item.size[0] }
                                     status = { item.status }
-                                    sex = { item.sex }
                                 />
                             </Col>
                             )) }

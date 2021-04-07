@@ -3,20 +3,29 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductItem from '../../components/ProductItem'
 import { getProductMen } from '../../Slice/productSlice'
+import banner from "../../img_local/banner-men.jpg"
+import Title from '../../components/Title/index'
 import './index.scss'
+import Loading from '../../components/Loading'
 
 function Men() {
     const dispatch = useDispatch()
     const listMen = useSelector(state => state.product.men)
+    const isLoading = useSelector(state => state.product.loading)
+    const reRenderMenloading = useSelector(state => state.product.reRenderMenloading)
     useEffect(() => {
-        dispatch(getProductMen("Men"))
-    }, [dispatch])
+        if(reRenderMenloading){
+            dispatch(getProductMen("Men"))
+        }
+    }, [dispatch, reRenderMenloading])
 
     return (
-        <>
+        <>  
             <div className="men">
                 <div className="container">
-                    <Row gutter={ 24 }>
+                    <img src={ banner } alt="" className="banner-img img-res"/>
+                    <Title title="Men Shoes"/>
+                    { isLoading ? <Loading /> : <Row gutter={ 24 }>
                         { listMen.map(item => (
                             <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
                                 <ProductItem 
@@ -33,7 +42,7 @@ function Men() {
                                 />
                             </Col>
                             )) }
-                    </Row>
+                    </Row> }
                 </div>
             </div>
         </>

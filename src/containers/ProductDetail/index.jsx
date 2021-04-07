@@ -70,8 +70,8 @@ const ProductDetail = () => {
     }
     return (
         <>
-            { loading ? <Loading/> : <div className="product-detail">
-                <div className="container">
+            <div className="product-detail">
+                {loading ? <Loading/> : <div className="container">
                     <div className="main" style={{ maxWidth : "100%" }}>
                         <div className="img">
                             <Slider 
@@ -154,8 +154,8 @@ const ProductDetail = () => {
                             </Button>
                         </div>
                     </div>
-                </div>
-            </div> }
+                </div>}
+            </div> 
         </>
     );
 }

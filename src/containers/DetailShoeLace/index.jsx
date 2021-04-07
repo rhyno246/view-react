@@ -68,8 +68,8 @@ function DetailShoeLace(props) {
     }
     return (
         <>
-        { loading ? <Loading/> : <div className="product-detail">
-            <div className="container">
+            <div className="product-detail">
+                { loading ? <Loading/> : <div className="container">
                 <div className="main" style={{ maxWidth : "100%" }}>
                     <div className="img">
                         <Slider 
@@ -153,8 +153,8 @@ function DetailShoeLace(props) {
                         </Button>
                     </div>
                 </div>
-            </div>
-        </div> }
+            </div> }
+        </div>
     </>
     );
 }

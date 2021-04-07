@@ -5,6 +5,7 @@ import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
 import banner from "../../img_local/banner4.jpg"
 import { getAllOtherBrand } from '../../Slice/productSlice';
+import Title from '../../components/Title/index'
 import './index.scss'
 
 const OtherBrands = () => {
@@ -23,6 +24,7 @@ const OtherBrands = () => {
             <div className="other-brand">
                 <div className="container">
                     <img src={ banner } alt="" className="banner-img img-res"/>
+                    <Title title="other brand"/>
                     { isLoading ? <Loading/> : <Row gutter={ 24 }>
                         { otherbrandList.map(item => (
                             <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>

@@ -17,6 +17,7 @@ import ForGotPass from './containers/ResetPass/index'
 import ShoeLace from './containers/Shoelace/index'
 import CheckOut from './containers/CheckOut/index'
 import Men from './containers/Men/index'
+import Women from './containers/Women/index'
 import { AuthProvider } from './contexts/AuthContext'
 import { useSelector } from 'react-redux';
 function App() {
@@ -31,6 +32,7 @@ function App() {
                             
                             <Route path="/product/:id" component ={ ProductDetail }/>
                             <Route path="/men" component = { Men }/>
+                            <Route path="/women" component = { Women }/>
 
                             <Route path="/cart" component = { Cart } />
                             <Route path="/sign-up">

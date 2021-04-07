@@ -12,11 +12,13 @@ function ShoesSex() {
             <div className="container">
                 <Row gutter={ 24 }>
                     <Col className="gutter-row" xs={ 24 } sm={ 8 } xl={8}>
-                        <div className="icon-flex"> 
-                            <img src={ Women } alt="" className="img-res"/>
-                            <span className="overlay"></span>
-                            <span className="sex">Women</span>
-                        </div>
+                        <Link to="/women">
+                            <div className="icon-flex"> 
+                                <img src={ Women } alt="" className="img-res"/>
+                                <span className="overlay"></span>
+                                <span className="sex">Women</span>
+                            </div>
+                        </Link>
                     </Col>
                     <Col className="gutter-row" xs={ 24 } sm={ 8 } xl={8}>
                         <div className="icon-flex" style={{ marginBottom : "20px" }}> 

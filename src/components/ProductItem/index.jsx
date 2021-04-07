@@ -9,7 +9,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import './index.scss';
 import { useEffect } from 'react/cjs/react.development';
 const ProductItem = (props) => {
-    const { title , image , price , id , size , quantity , sale , isProduct , status , sex} = props
+    const { title , image , price , id , size , quantity , sale , isProduct , status} = props
     const { currentUser } = useAuth()
     const isAuth = useSelector(state => state.auth.setUser)
     const [ salePrice , setSalePrice ] = useState("")
@@ -102,9 +102,6 @@ const ProductItem = (props) => {
                         </Link>
                     </p>
                     { quantity === 0 ? <span className="outstock">Out Stock</span> : <span></span> }
-
-                    { sex }
-
                     <div className="flex-price">
                         <div>
                             <span className={ sale ? "old-price" : "price" }>{ price } $</span>
