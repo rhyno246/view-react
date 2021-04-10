@@ -57,7 +57,8 @@ const Header = () => {
                     <div className="menu">
                         <Link to="/product"  className="logo"><img src={ imglogo } alt=""/></Link>
                         <ul className="group">
-                            <li className="item-menu"><NavLink to="/product" exact>Product</NavLink></li> 
+                            <li className="item-menu"><NavLink to="/" exact>Home</NavLink></li> 
+                            <li className="item-menu"><NavLink to="/shoes">Shoes</NavLink></li> 
                             <li className="item-menu"><NavLink to="/other-brands">Other Brands</NavLink></li> 
                             <li className="item-menu"><NavLink to="/shoes-lace">Shoes Lace</NavLink></li> 
                             { isAuth ? 

@@ -65,6 +65,22 @@ export const getProductWomen = createAsyncThunk('product/getProductWomen' ,
     }
 )
 
+
+export const sortProduct = createAsyncThunk('product/sortProduct',
+    async (val) => {
+        const sort = await productApi.sortProduct(val)
+        return sort
+    }
+)
+
+
+export const filterProduct = createAsyncThunk('product/filterProduct' , 
+    async (val) => {
+        const filter = await productApi.filterProduct(val)
+        return filter
+    }
+)
+
 const productSlice = createSlice({
     name : 'product',
     initialState : {
@@ -240,6 +256,20 @@ const productSlice = createSlice({
             state.detailshoeslace = action.payload
         },
 
+
+        [sortProduct.rejected] : (state, action) => {
+            state.error = action.error
+        },
+        [sortProduct.fulfilled] : (state,action) => {
+            state.product = action.payload
+        },
+
+        [filterProduct.rejected] : (state, action) => {
+            state.error = action.error
+        },
+        [filterProduct.fulfilled] : (state,action) => {
+            state.product = action.payload
+        },
         
     }
 })

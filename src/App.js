@@ -18,6 +18,7 @@ import ShoeLace from './containers/Shoelace/index'
 import CheckOut from './containers/CheckOut/index'
 import Men from './containers/Men/index'
 import Women from './containers/Women/index'
+import Shoes from './containers/Shoes/index'
 import { AuthProvider } from './contexts/AuthContext'
 import { useSelector } from 'react-redux';
 import ScrollToTop from './components/ScrollTopRouter/ScrollTopRouter';
@@ -30,9 +31,12 @@ function App() {
                         <ScrollToTop/>
                         <Header/>
                         <Switch>
-                            <Redirect from="/" to="/product" exact/>
-                            <Route path="/product" component = { Home } exact/>
+                            <Redirect from="/home" to="/" exact/>
+                            <Route path="/" component = { Home } exact/>
                             
+
+                            <Route path="/shoes" component ={ Shoes }/>
+
                             <Route path="/product/:id" component ={ ProductDetail }/>
                             <Route path="/men" component = { Men }/>
                             <Route path="/women" component = { Women }/>

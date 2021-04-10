@@ -22,37 +22,80 @@ const Home = () => {
             dispatch(getAllOtherBrand())
             dispatch(getAllShoelace())
         }
-    },[dispatch , reRenderloading])   
+    },[dispatch , reRenderloading])  
     const allproduct = productList.concat(otherbrand, shoeslace)
     return (
         <>
-            <Banner/>
-            <ShoesSex/>
-            <SaleProduct allproduct = { allproduct }/>
-            <Title title ="All Shoes"/>
-            { isLoading ? <Loading/> : null }
-            <div className="home">
-               <div className="container">
-                    <Row gutter={ 24 }>
-                        { productList.map(item => (
-                            <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
-                                <ProductItem 
-                                    id={ item.id } 
-                                    title ={ item.title }
-                                    price ={ item.price }
-                                    image={ item.image }
-                                    size = { item.size }
-                                    quantity = { item.quantity }
-                                    sale = { item.sale }
-                                    sizeChose = { item.size[0] }
-                                    status = { item.status }
-                                />
-                            </Col>
-                        )) }
-                        
-                    </Row>
-               </div>
-            </div>
+            { isLoading ? <Loading/> : <div className="main-home">
+                <Banner/>
+                <ShoesSex/>
+                <SaleProduct allproduct = { allproduct }/>
+                <div className="shoes">
+                    <Title title ="Shoes"/>
+                    <div className="container">
+                        <Row gutter={ 24 }>
+                            { productList.map(item => (
+                                <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
+                                    <ProductItem 
+                                        id={ item.id } 
+                                        title ={ item.title }
+                                        price ={ item.price }
+                                        image={ item.image }
+                                        size = { item.size }
+                                        quantity = { item.quantity }
+                                        sale = { item.sale }
+                                        sizeChose = { item.size[0] }
+                                        status = { item.status }
+                                    />
+                                </Col>
+                            )) }
+                        </Row>
+                    </div>
+                </div>
+                <div className="otherbrand">
+                    <Title title ="Other Brands"/>
+                    <div className="container">
+                        <Row gutter={ 24 }>
+                            { otherbrand.map(item => (
+                                <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
+                                    <ProductItem 
+                                        id={ item.id } 
+                                        title ={ item.title }
+                                        price ={ item.price }
+                                        image={ item.image }
+                                        quantity = { item.quantity }
+                                        sale = { item.sale }
+                                        size = { null }
+                                        status = { item.status }
+                                    />
+                                </Col>
+                                )) }
+                        </Row>
+                    </div>
+                </div>
+                <div className="shoeslace">
+                    <Title title ="Shoes Lace"/>
+                    <div className="container">
+                        <Row gutter={ 24 }>
+                            { shoeslace.map(item => (
+                                <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
+                                    <ProductItem 
+                                        id={ item.id } 
+                                        title ={ item.title }
+                                        price ={ item.price }
+                                        image={ item.image }
+                                        quantity = { item.quantity }
+                                        sale = { item.sale }
+                                        size = { item.size }
+                                        status = { item.status }
+                                    />
+                                </Col>
+                            )) }
+                        </Row>
+                    </div>
+                </div>
+            </div> }
+            
         </>
     )
 }

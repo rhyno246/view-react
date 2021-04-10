@@ -51,6 +51,19 @@ const productApi =  {
     getSearch : (val) => {
         const url = `/product?q=${ val }`
         return axiosClient.get(url)
+    },
+
+
+    sortProduct : (data) => {
+        let order = data.order
+        let name = data.name
+        const url = `/product?_sort=${ name }&_order=${ order }`
+        return axiosClient.get(url)
+    },
+
+    filterProduct : (val) => {
+        const url = `product?category=${ val }`
+        return axiosClient.get(url)
     }
 }
 
