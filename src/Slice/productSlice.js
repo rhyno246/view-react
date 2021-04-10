@@ -95,10 +95,6 @@ const productSlice = createSlice({
         //     })
         // }
 
-        AllPageProduct : (state , action) => {
-            console.log(action.payload);
-        }
-
     },
     extraReducers  : {
         [getAllProduct.pending] : (state) => {
@@ -250,7 +246,6 @@ const productSlice = createSlice({
 
 const { reducer : productReducer , actions  } = productSlice
 export const { 
-    hasCart,
-    AllPageProduct
+    hasCart
 } = actions
 export default productReducer

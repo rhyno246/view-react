@@ -5,7 +5,7 @@ import Banner from '../../components/Banner';
 import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
 import ShoesSex from '../../components/ShoesSex';
-import { getAllProduct } from '../../Slice/productSlice';
+import { getAllOtherBrand, getAllProduct, getAllShoelace } from '../../Slice/productSlice';
 import Title from '../../components/Title/index'
 import './index.scss';
 import SaleProduct from '../../components/SaleProduct';
@@ -14,18 +14,21 @@ const Home = () => {
     const productList = useSelector(state => state.product.product)
     const isLoading = useSelector(state => state.product.loading)
     const reRenderloading = useSelector(state => state.product.reRenderloading)
+    const otherbrand = useSelector(state => state.product.otherbrand)
+    const shoeslace = useSelector(state => state.product.shoeslace)
     useEffect(() => {
         if(reRenderloading){
             dispatch(getAllProduct())
+            dispatch(getAllOtherBrand())
+            dispatch(getAllShoelace())
         }
     },[dispatch , reRenderloading])   
-
-
+    const allproduct = productList.concat(otherbrand, shoeslace)
     return (
         <>
             <Banner/>
             <ShoesSex/>
-            <SaleProduct/>
+            <SaleProduct allproduct = { allproduct }/>
             <Title title ="All Shoes"/>
             { isLoading ? <Loading/> : null }
             <div className="home">
@@ -45,7 +48,7 @@ const Home = () => {
                                     status = { item.status }
                                 />
                             </Col>
-                            )) }
+                        )) }
                         
                     </Row>
                </div>

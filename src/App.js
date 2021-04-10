@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch , Route, Redirect } from 'react-router-dom'
+import { Switch , Route, Redirect, BrowserRouter as Router } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Home from "./containers/Home/index"
 import Cart from './containers/Cart/index'
@@ -20,12 +20,15 @@ import Men from './containers/Men/index'
 import Women from './containers/Women/index'
 import { AuthProvider } from './contexts/AuthContext'
 import { useSelector } from 'react-redux';
+import ScrollToTop from './components/ScrollTopRouter/ScrollTopRouter';
 function App() {
     const isAuth = useSelector(state => state.auth.setUser)
     return (
             <div className="App" style={{ display : "flex" , flexDirection : "column" , height : "100vh" }}>
                 <AuthProvider>
-                    <Header/>
+                    <Router>
+                        <ScrollToTop/>
+                        <Header/>
                         <Switch>
                             <Redirect from="/" to="/product" exact/>
                             <Route path="/product" component = { Home } exact/>
@@ -57,7 +60,8 @@ function App() {
                             </Route>
                             <Route path="*" component = { NotFound } />
                         </Switch>
-                    <Footer/>
+                        <Footer/>
+                    </Router>
                 </AuthProvider>
             </div> 
     );
