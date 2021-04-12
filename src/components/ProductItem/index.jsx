@@ -92,7 +92,7 @@ const ProductItem = (props) => {
                 <Card hoverable cover={ <img alt={ title } src={ image[0] }/>} style={{ height : "100%" }}>
                     <p>
                         <Link 
-                            to={ status === "product" ? `product/${id}` : null ||
+                            to={ status === "product" ? `shoes/${id}` : null ||
                                 status === "otherbrand" ? `other-brands/${id}` :  null ||
                                 status === "Shoelace" ? `shoes-lace/${id}` : null
                         } 

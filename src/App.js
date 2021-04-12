@@ -35,9 +35,10 @@ function App() {
                             <Route path="/" component = { Home } exact/>
                             
 
-                            <Route path="/shoes" component ={ Shoes }/>
+                            <Route path="/shoes" component ={ Shoes } exact/>
+                            <Route path="/shoes/:id" component ={ ProductDetail }/>
 
-                            <Route path="/product/:id" component ={ ProductDetail }/>
+
                             <Route path="/men" component = { Men }/>
                             <Route path="/women" component = { Women }/>
 

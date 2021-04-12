@@ -55,7 +55,7 @@ const Header = () => {
             <div className="header">
                 <div className="container">
                     <div className="menu">
-                        <Link to="/product"  className="logo"><img src={ imglogo } alt=""/></Link>
+                        <Link to="/"  className="logo"><img src={ imglogo } alt=""/></Link>
                         <ul className="group">
                             <li className="item-menu"><NavLink to="/" exact>Home</NavLink></li> 
                             <li className="item-menu"><NavLink to="/shoes">Shoes</NavLink></li> 
