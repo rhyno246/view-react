@@ -19,11 +19,12 @@ function Women() {
     }, [dispatch, reRenderWomenloading])
 
     return (
-        <div className="women">
+        <>
+            { isLoading ? <Loading /> : <div className="women">
             <div className="container">
                 <img src={ banner } alt="" className="banner-img img-res"/>
                 <Title title="Women Shoes"/>
-                { isLoading ? <Loading /> : <Row gutter={ 24 }>
+                 <Row gutter={ 24 }>
                     { listWomen.map(item => (
                         <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
                             <ProductItem 
@@ -40,9 +41,10 @@ function Women() {
                             />
                         </Col>
                         )) }
-                </Row> }
+                </Row>
             </div>
-        </div>
+        </div> }
+        </>
     );
 }
 

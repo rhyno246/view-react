@@ -21,11 +21,11 @@ function Men() {
 
     return (
         <>  
-            <div className="men">
+            { isLoading ? <Loading /> : <div className="men">
                 <div className="container">
                     <img src={ banner } alt="" className="banner-img img-res"/>
                     <Title title="Men Shoes"/>
-                    { isLoading ? <Loading /> : <Row gutter={ 24 }>
+                    <Row gutter={ 24 }>
                         { listMen.map(item => (
                             <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
                                 <ProductItem 
@@ -42,9 +42,9 @@ function Men() {
                                 />
                             </Col>
                             )) }
-                    </Row> }
+                    </Row>
                 </div>
-            </div>
+            </div>}
         </>
     )
 }

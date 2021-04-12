@@ -21,11 +21,11 @@ const OtherBrands = () => {
 
     return (
         <>
-            <div className="other-brand">
+            { isLoading ? <Loading/> : <div className="other-brand">
                 <div className="container">
                     <img src={ banner } alt="" className="banner-img img-res"/>
                     <Title title="other brand"/>
-                    { isLoading ? <Loading/> : <Row gutter={ 24 }>
+                    <Row gutter={ 24 }>
                         { otherbrandList.map(item => (
                             <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
                                 <ProductItem 
@@ -40,9 +40,9 @@ const OtherBrands = () => {
                                 />
                             </Col>
                             )) }
-                    </Row> }
+                    </Row>
                 </div> 
-            </div>
+            </div>}
         </>
     );
 }

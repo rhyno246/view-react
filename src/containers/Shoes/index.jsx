@@ -21,28 +21,28 @@ function Shoes() {
     return (
         <>
             { isLoading ? <Loading/> : <div className="shoes">
-            <div className="container">
-                 <img src={ banner } alt="" className="banner-img img-res"/>
-                 <Title title ="Shoes"/> 
-                <Row gutter={ 24 }>
-                    { productList.map(item => (
-                        <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
-                            <ProductItem 
-                                id={ item.id } 
-                                title ={ item.title }
-                                price ={ item.price }
-                                image={ item.image }
-                                size = { item.size }
-                                quantity = { item.quantity }
-                                sale = { item.sale }
-                                sizeChose = { item.size[0] }
-                                status = { item.status }
-                            />
-                        </Col>
-                    )) }
-                </Row>
-            </div>
-        </div> }
+                <div className="container">
+                    <img src={ banner } alt="" className="banner-img img-res"/>
+                    <Title title ="Shoes"/> 
+                    <Row gutter={ 24 }>
+                        { productList.map(item => (
+                            <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
+                                <ProductItem 
+                                    id={ item.id } 
+                                    title ={ item.title }
+                                    price ={ item.price }
+                                    image={ item.image }
+                                    size = { item.size }
+                                    quantity = { item.quantity }
+                                    sale = { item.sale }
+                                    sizeChose = { item.size[0] }
+                                    status = { item.status }
+                                />
+                            </Col>
+                        )) }
+                    </Row>
+                </div>
+            </div> }
         </>
     )
 }

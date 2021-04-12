@@ -20,11 +20,12 @@ function Shoeslace() {
     } , [reRenderShoelaceloading , dispatch])
 
     return (
-        <div className="shoes-lace"> 
+        <>
+             { isLoading ? <Loading/> : <div className="shoes-lace"> 
             <div className="container">
                 <img src={ banner }  alt="" className="banner-img img-res"/>
                 <Title title="Shoes Lace"/>
-                { isLoading ? <Loading/> : <Row gutter={ 24 }>
+                <Row gutter={ 24 }>
                     { shoeslaceList.map(item => (
                         <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
                             <ProductItem 
@@ -39,9 +40,10 @@ function Shoeslace() {
                             />
                         </Col>
                         )) }
-                </Row> }
+                </Row>
             </div>
-        </div>
+        </div> }
+        </>
     )
 }
 

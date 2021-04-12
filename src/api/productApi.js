@@ -37,19 +37,19 @@ const productApi =  {
 
 
     getProductMen : (val) => {
-        const url = `product?sex=${ val }`
+        const url = `shoes?sex=${ val }`
         return axiosClient.get(url)
     },
 
 
     getProductWomen : (val) => {
-        const url = `product?sex=${ val }`  
+        const url = `shoes?sex=${ val }`  
         return axiosClient.get(url)
     },
 
 
     getSearch : (val) => {
-        const url = `/product?q=${ val }`
+        const url = `/shoes?q=${ val }`
         return axiosClient.get(url)
     },
 
@@ -57,12 +57,12 @@ const productApi =  {
     sortProduct : (data) => {
         let order = data.order
         let name = data.name
-        const url = `/product?_sort=${ name }&_order=${ order }`
+        const url = `/shoes?_sort=${ name }&_order=${ order }`
         return axiosClient.get(url)
     },
 
     filterProduct : (val) => {
-        const url = `product?category=${ val }`
+        const url = `shoes?category=${ val }`
         return axiosClient.get(url)
     }
 }

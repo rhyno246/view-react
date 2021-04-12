@@ -31,7 +31,7 @@ const Home = () => {
                 <ShoesSex/>
                 <SaleProduct allproduct = { allproduct }/>
                 <div className="shoes">
-                    <Title title ="Shoes"/>
+                    <Title title ="Shoes" link="/shoes"/>
                     <div className="container">
                         <Row gutter={ 24 }>
                             { productList.map(item => (
@@ -53,7 +53,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="otherbrand">
-                    <Title title ="Other Brands"/>
+                    <Title title ="Other Brands" link="/other-brands"/>
                     <div className="container">
                         <Row gutter={ 24 }>
                             { otherbrand.map(item => (
@@ -74,7 +74,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="shoeslace">
-                    <Title title ="Shoes Lace"/>
+                    <Title title ="Shoes Lace" link="/shoes-lace"/>
                     <div className="container">
                         <Row gutter={ 24 }>
                             { shoeslace.map(item => (
