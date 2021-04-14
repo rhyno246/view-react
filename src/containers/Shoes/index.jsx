@@ -3,21 +3,42 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductItem from '../../components/ProductItem'
 import banner from '../../img_local/banner2.jpg'
-import { getAllProduct } from '../../Slice/productSlice'
+import { getShoesPage } from '../../Slice/productSlice'
 import Title from '../../components/Title/index'
 import './index.scss'
 import Loading from '../../components/Loading'
+import { debounce } from '../../untils/helper'
 
 function Shoes() {
-    const productList = useSelector(state => state.product.product)
+    const shoesScroll = useSelector(state => state.product.shoesScroll)
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.product.loading)
-    const reRenderloading = useSelector(state => state.product.reRenderloading)
+    const reRenderloadingShoes = useSelector(state => state.product.reRenderloadingShoes)
+    const page = 1
+    const limit = 8
     useEffect(() => {
-        if(reRenderloading){
-            dispatch(getAllProduct())
+        if(reRenderloadingShoes){
+            dispatch(getShoesPage({
+                page : page,
+                limit : limit
+            }))
         }
-    },[dispatch , reRenderloading])  
+        const handleScroll = debounce(() => {
+            if(window.innerHeight + window.scrollY){
+                console.log(111111111111);
+            }
+        },800);
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    },[dispatch, reRenderloadingShoes, page , limit])  
+
+
+
+
     return (
         <>
             { isLoading ? <Loading/> : <div className="shoes">
@@ -25,7 +46,7 @@ function Shoes() {
                     <img src={ banner } alt="" className="banner-img img-res"/>
                     <Title title ="Shoes"/> 
                     <Row gutter={ 24 }>
-                        { productList.map(item => (
+                        { shoesScroll.map(item => (
                             <Col className="gutter-row" xs={ 24 } sm={ 12 } xl={6} key={ item.id } style={{ marginBottom : "25px" }}>
                                 <ProductItem 
                                     id={ item.id } 

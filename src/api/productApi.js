@@ -23,7 +23,7 @@ const productApi =  {
         return axiosClient.get(url)
     },
 
-
+    
 
     getAllShoelace : () => {
         const url =`/Shoelace`;
@@ -64,7 +64,15 @@ const productApi =  {
     filterProduct : (val) => {
         const url = `shoes?category=${ val }`
         return axiosClient.get(url)
-    }
+    },
+
+
+    getShoesPage : (data) => {
+        const page = data.page
+        const limit = data.limit
+        const url = `shoes?_page=${ page }&_limit=${ limit }`
+        return axiosClient.get(url)
+    },
 }
 
 export default productApi;

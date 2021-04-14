@@ -58,6 +58,8 @@ const cartSlice = createSlice({
             state.cart.splice(productIndex , 1);
             state.quantity -= cartData.quantity;
             state.total -= cartData.price * cartData.quantity;
+
+
             Storage.set(cartStore , JSON.stringify(state.cart) , 60 * 24)
             Storage.set(quantityStore , JSON.stringify(state.quantity) , 60 * 24)
             Storage.set(totalStore , JSON.stringify(state.total) , 60 * 24)
@@ -92,8 +94,11 @@ const cartSlice = createSlice({
             const id = action.payload.id
             const productIndex = state.cart.findIndex(arr => arr.id === id);
             const cartData = state.cart[productIndex]
+            console.log(number);
             if(number > cartData.stock){
                 return
+            }else{
+                
             }
         },
         removeAllCart : (state) => {

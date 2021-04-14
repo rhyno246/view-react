@@ -81,6 +81,15 @@ export const filterProduct = createAsyncThunk('product/filterProduct' ,
     }
 )
 
+
+
+export const getShoesPage = createAsyncThunk('product/getShoesPage' , 
+    async (data) => {
+        const dataPage = await productApi.getShoesPage(data)
+        return dataPage
+    }
+)
+
 const productSlice = createSlice({
     name : 'product',
     initialState : {
@@ -93,8 +102,10 @@ const productSlice = createSlice({
         search : [],
         men : [],
         women : [],
+        shoesScroll : [],
         loading : false,
         reRenderloading : true,
+        reRenderloadingShoes : true,
         reRenderSearchloading : true,
         reRenderOtherBrandloading : true,
         reRenderShoelaceloading : true,
@@ -128,6 +139,23 @@ const productSlice = createSlice({
             state.product = action.payload
         },
 
+
+        [getShoesPage.pending] : (state) => {
+            state.loading = true
+            state.reRenderloadingShoes = false
+        },
+        [getShoesPage.rejected] : (state , action) => {
+            state.loading = false
+            state.error = action.error
+            state.reRenderloadingShoes = false
+        },
+        [getShoesPage.fulfilled] : (state, action) => {
+            state.loading = false
+            state.reRenderloadingShoes = false
+            state.shoesScroll = action.payload
+        },
+
+        
 
 
         [getProductMen.pending] : (state) => {

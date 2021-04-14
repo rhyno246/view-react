@@ -67,7 +67,7 @@ const CartItem = (props) => {
                         <div className="pb-10 cart-title">
                             <h4>
                                 <Link 
-                                     to={ status === "product" ? `product/${id}` : null ||
+                                     to={ status === "product" ? `shoes/${id}` : null ||
                                      status === "otherbrand" ? `other-brands/${id}` :  null ||
                                      status === "Shoelace" ? `shoes-lace/${id}` : null} 
                                 >
