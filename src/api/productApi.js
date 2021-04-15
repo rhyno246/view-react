@@ -73,6 +73,13 @@ const productApi =  {
         const url = `shoes?_page=${ page }&_limit=${ limit }`
         return axiosClient.get(url)
     },
+
+    loadMoreShoes : (data) => {
+        const page = data.page
+        const limit = data.limit
+        const url = `shoes?_page=${ page }&_limit=${ limit }`
+        return axiosClient.get(url)
+    }
 }
 
 export default productApi;

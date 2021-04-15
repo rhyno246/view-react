@@ -90,6 +90,14 @@ export const getShoesPage = createAsyncThunk('product/getShoesPage' ,
     }
 )
 
+
+export const loadMoreShoes = createAsyncThunk('product/loadMoreShoes' , 
+    async (data) => {
+        const dataPage = await productApi.loadMoreShoes(data)
+        return dataPage
+    }
+)
+
 const productSlice = createSlice({
     name : 'product',
     initialState : {
@@ -104,6 +112,7 @@ const productSlice = createSlice({
         women : [],
         shoesScroll : [],
         loading : false,
+        loadMore : false,
         reRenderloading : true,
         reRenderloadingShoes : true,
         reRenderSearchloading : true,
@@ -121,7 +130,6 @@ const productSlice = createSlice({
         //         return search.title.toLowerCase().includes(state.searchTerm.toLowerCase())
         //     })
         // }
-
     },
     extraReducers  : {
         [getAllProduct.pending] : (state) => {
@@ -155,6 +163,19 @@ const productSlice = createSlice({
             state.shoesScroll = action.payload
         },
 
+        
+        [loadMoreShoes.pending] : (state) => {
+            state.loadMore = true
+        },
+        [loadMoreShoes.rejected] : (state,action) => {
+            state.loadMore = false
+            state.error = action.error
+        },
+        [loadMoreShoes.fulfilled] : (state,action) => {
+            state.loadMore = false
+            const newarr = action.payload
+            state.shoesScroll = state.shoesScroll.concat(newarr)
+        },
         
 
 

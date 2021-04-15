@@ -1,9 +1,9 @@
 import { Col, Row } from 'antd'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductItem from '../../components/ProductItem'
 import banner from '../../img_local/banner2.jpg'
-import { getShoesPage } from '../../Slice/productSlice'
+import { getShoesPage, loadMoreShoes } from '../../Slice/productSlice'
 import Title from '../../components/Title/index'
 import './index.scss'
 import Loading from '../../components/Loading'
@@ -13,30 +13,38 @@ function Shoes() {
     const shoesScroll = useSelector(state => state.product.shoesScroll)
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.product.loading)
+    const loadMore = useSelector(state => state.product.loadMore)
     const reRenderloadingShoes = useSelector(state => state.product.reRenderloadingShoes)
-    const page = 1
+    let [pager , setPage] = useState(1)
     const limit = 8
     useEffect(() => {
         if(reRenderloadingShoes){
             dispatch(getShoesPage({
-                page : page,
+                page : pager,
                 limit : limit
             }))
         }
         const handleScroll = debounce(() => {
-            if(window.innerHeight + window.scrollY){
-                console.log(111111111111);
+            const scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+            const scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
+            if (scrollTop + window.innerHeight + 100 >= scrollHeight){
+                setPage(++pager)
+                console.log(pager);
+                dispatch(loadMoreShoes({
+                    page : pager,
+                    limit : limit
+                }))
             }
         },800);
-    
         window.addEventListener('scroll', handleScroll);
-    
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    },[dispatch, reRenderloadingShoes, page , limit])  
+    },[dispatch, reRenderloadingShoes, pager , limit])  
 
-
+    
+    
+   
 
 
     return (
@@ -62,8 +70,9 @@ function Shoes() {
                             </Col>
                         )) }
                     </Row>
+                    { loadMore ? <div className="loading">Loading...............</div> : null}
                 </div>
-            </div> }
+            </div> } 
         </>
     )
 }
