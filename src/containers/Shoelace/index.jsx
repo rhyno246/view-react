@@ -1,7 +1,6 @@
 import { Col, Row } from 'antd'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Loading from '../../components/Loading'
 import ProductItem from '../../components/ProductItem'
 import banner from "../../img_local/banner5.jpg"
 import { getAllShoelace } from '../../Slice/productSlice'
@@ -10,7 +9,6 @@ import './index.scss'
 function Shoeslace() {
 
     const reRenderShoelaceloading = useSelector(state => state.product.reRenderShoelaceloading)
-    const isLoading = useSelector(state => state.product.loading)
     const shoeslaceList = useSelector(state => state.product.shoeslace)
     const dispatch = useDispatch()
     useEffect(() => {
@@ -21,7 +19,7 @@ function Shoeslace() {
 
     return (
         <>
-             { isLoading ? <Loading/> : <div className="shoes-lace"> 
+            <div className="shoes-lace"> 
             <div className="container">
                 <img src={ banner }  alt="" className="banner-img img-res"/>
                 <Title title="Shoes Lace"/>
@@ -42,7 +40,7 @@ function Shoeslace() {
                         )) }
                 </Row>
             </div>
-        </div> }
+        </div>
         </>
     )
 }

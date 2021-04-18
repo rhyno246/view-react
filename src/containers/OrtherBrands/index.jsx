@@ -1,7 +1,6 @@
 import { Col, Row } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
 import banner from "../../img_local/banner4.jpg"
 import { getAllOtherBrand } from '../../Slice/productSlice';
@@ -9,7 +8,6 @@ import Title from '../../components/Title/index'
 import './index.scss'
 
 const OtherBrands = () => {
-    const isLoading = useSelector(state => state.product.loading)
     const  reRenderOtherBrandloading = useSelector(state => state.product.reRenderOtherBrandloading)
     const otherbrandList = useSelector(state => state.product.otherbrand)
     const dispatch = useDispatch()
@@ -21,7 +19,7 @@ const OtherBrands = () => {
 
     return (
         <>
-            { isLoading ? <Loading/> : <div className="other-brand">
+            <div className="other-brand">
                 <div className="container">
                     <img src={ banner } alt="" className="banner-img img-res"/>
                     <Title title="other brand"/>
@@ -42,7 +40,7 @@ const OtherBrands = () => {
                             )) }
                     </Row>
                 </div> 
-            </div>}
+            </div>
         </>
     );
 }

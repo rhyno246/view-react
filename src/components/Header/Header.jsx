@@ -39,6 +39,7 @@ const Header = () => {
         history.push("/")
         setAvatar("")
     }
+
     useEffect(() => {
         if(id){
             storage.ref('users/' + id + '/profile.jpg').getDownloadURL().then(url => {

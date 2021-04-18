@@ -122,6 +122,7 @@ const productSlice = createSlice({
         reRenderWomenloading : true,
         searchTerm : "",
         error : "",
+        lengthPager : null
     },
     reducers : {
         // SearchItem : (state , action ) => {
@@ -130,6 +131,9 @@ const productSlice = createSlice({
         //         return search.title.toLowerCase().includes(state.searchTerm.toLowerCase())
         //     })
         // }
+        resetlengthPager : (state , action) => {
+            state.lengthPager = action.payload
+        }
     },
     extraReducers  : {
         [getAllProduct.pending] : (state) => {
@@ -174,6 +178,7 @@ const productSlice = createSlice({
         [loadMoreShoes.fulfilled] : (state,action) => {
             state.loadMore = false
             const newarr = action.payload
+            state.lengthPager = newarr.length
             state.shoesScroll = state.shoesScroll.concat(newarr)
         },
         
@@ -325,6 +330,7 @@ const productSlice = createSlice({
 
 const { reducer : productReducer , actions  } = productSlice
 export const { 
-    hasCart
+    hasCart,
+    resetlengthPager
 } = actions
 export default productReducer

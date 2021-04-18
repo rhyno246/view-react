@@ -33,7 +33,7 @@ const cartSlice = createSlice({
             const productIndex = state.cart.findIndex(arr => arr.id === prodData.id)
             if(productIndex >= 0){
                 if(state.cart[productIndex].quantity === prodData.stock){
-                    state.alertQuantity = "Opps !! Max quantity"
+                    alert("Opps !! Max quantity")
                     return
                 }
                 state.cart[productIndex].quantity++;

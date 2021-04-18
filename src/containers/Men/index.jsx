@@ -6,12 +6,10 @@ import { getProductMen } from '../../Slice/productSlice'
 import banner from "../../img_local/banner-men.jpg"
 import Title from '../../components/Title/index'
 import './index.scss'
-import Loading from '../../components/Loading'
 
 function Men() {
     const dispatch = useDispatch()
     const listMen = useSelector(state => state.product.men)
-    const isLoading = useSelector(state => state.product.loading)
     const reRenderMenloading = useSelector(state => state.product.reRenderMenloading)
     useEffect(() => {
         if(reRenderMenloading){
@@ -21,7 +19,7 @@ function Men() {
 
     return (
         <>  
-            { isLoading ? <Loading /> : <div className="men">
+            <div className="men">
                 <div className="container">
                     <img src={ banner } alt="" className="banner-img img-res"/>
                     <Title title="Men Shoes"/>
@@ -44,7 +42,7 @@ function Men() {
                             )) }
                     </Row>
                 </div>
-            </div>}
+            </div>
         </>
     )
 }

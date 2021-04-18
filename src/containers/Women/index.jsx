@@ -4,13 +4,11 @@ import Title from '../../components/Title/index'
 import './index.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductWomen } from '../../Slice/productSlice';
-import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
 import { Col, Row } from 'antd';
 function Women() {
     const dispatch = useDispatch()
     const listWomen = useSelector(state => state.product.women)
-    const isLoading = useSelector(state => state.product.loading)
     const reRenderWomenloading = useSelector(state => state.product.reRenderWomenloading)
     useEffect(() => {
         if(reRenderWomenloading){
@@ -20,7 +18,7 @@ function Women() {
 
     return (
         <>
-            { isLoading ? <Loading /> : <div className="women">
+            <div className="women">
             <div className="container">
                 <img src={ banner } alt="" className="banner-img img-res"/>
                 <Title title="Women Shoes"/>
@@ -43,7 +41,7 @@ function Women() {
                         )) }
                 </Row>
             </div>
-        </div> }
+        </div>
         </>
     );
 }
