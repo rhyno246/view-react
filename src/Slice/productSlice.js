@@ -84,8 +84,8 @@ export const filterProduct = createAsyncThunk('product/filterProduct' ,
 
 
 export const getShoesPage = createAsyncThunk('product/getShoesPage' , 
-    async (data) => {
-        const dataPage = await productApi.getShoesPage(data)
+    async () => {
+        const dataPage = await productApi.getShoesPage()
         return dataPage
     }
 )

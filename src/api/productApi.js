@@ -67,10 +67,8 @@ const productApi =  {
     },
 
 
-    getShoesPage : (data) => {
-        const page = data.page
-        const limit = data.limit
-        const url = `shoes?_page=${ page }&_limit=${ limit }`
+    getShoesPage : () => {
+        const url = `shoes?_page=1&_limit=8`
         return axiosClient.get(url)
     },
 

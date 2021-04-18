@@ -105,10 +105,10 @@ function CheckOut() {
                             </ul>
                             <h2 className="heading">Order</h2>
                             <ul className="information">
-                                <li><strong>Price : </strong>{ totalCart }$</li>
+                                <li><strong>Price : </strong>{ totalCart.toFixed(2) }$</li>
                                 <li><strong>Ship : </strong>{ plain }$</li>
                             </ul>
-                            <p><strong>Total Amout : </strong><span style={{ color : "red" , fontWeight : "bold" }}>{ totalAmout }$</span></p>
+                            <p><strong>Total Amout : </strong><span style={{ color : "red" , fontWeight : "bold" }}>{ totalAmout.toFixed(2) }$</span></p>
                         </Card>
                         
                         <Button type="primary" style={{ marginTop : "15px" , width : "100%" }} onClick={ handleShowModal }>Buy Now</Button>

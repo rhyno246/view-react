@@ -9,6 +9,7 @@ import './index.scss'
 import Loading from '../../components/Loading'
 import { debounce } from '../../untils/helper'
 
+
 function Shoes() {
     const shoesScroll = useSelector(state => state.product.shoesScroll)
     const dispatch = useDispatch();
@@ -16,12 +17,15 @@ function Shoes() {
     const loadMore = useSelector(state => state.product.loadMore)
     const reRenderloadingShoes = useSelector(state => state.product.reRenderloadingShoes)
     let [pager , setPage] = useState(1)
-    const limit = 8
+
+
+
+
     useEffect(() => {
         if(reRenderloadingShoes){
             dispatch(getShoesPage({
-                page : pager,
-                limit : limit
+                page :pager,
+                limit : 8
             }))
         }
         const handleScroll = debounce(() => {
@@ -32,7 +36,7 @@ function Shoes() {
                 console.log(pager);
                 dispatch(loadMoreShoes({
                     page : pager,
-                    limit : limit
+                    limit : 8
                 }))
             }
         },800);
@@ -40,7 +44,7 @@ function Shoes() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    },[dispatch, reRenderloadingShoes, pager , limit])  
+    },[dispatch, reRenderloadingShoes, pager])  
 
     
     
