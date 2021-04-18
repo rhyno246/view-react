@@ -5,13 +5,14 @@ import icon from '../../img_local/icon-payment-method-cod.svg';
 import { useAuth } from "../../contexts/AuthContext";
 import './index.scss'
 import NotFound from '../NotFound';
-import { getAllCity, removeAllCart } from '../../Slice/cartSlice';
+import { getCountry, removeAllCart } from '../../Slice/cartSlice';
 import { useHistory } from 'react-router-dom';
 
 function CheckOut() {
     const { Option } = Select;
     const checkoutList = useSelector(state => state.cart.checkout)
     const totalCart = useSelector(state => state.cart.total)
+    const address = useSelector(state => state.cart.address)
     const dispatch = useDispatch()
     const history = useHistory()
     const { currentUser } = useAuth()
@@ -26,9 +27,11 @@ function CheckOut() {
     const name = currentUser && currentUser.displayName
     const totalAmout = totalCart + plain
     const shipper = Math.floor((Math.random() * 100) + 1)
+    const [add , setAddress] = useState("")
+
 
     useEffect(() => {
-        dispatch(getAllCity())
+        dispatch(getCountry())
     } , [dispatch])
 
     const hanleDelivery = (e) => {
@@ -44,7 +47,7 @@ function CheckOut() {
         setModal(false)
     }
     const handleChangeSelect = (val) => {
-        console.log(val);
+        setAddress(val)
     }
 
     return (
@@ -95,12 +98,9 @@ function CheckOut() {
                                         optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
                                     }
                                 >
-                                    <Option value="1">Not Identified</Option>
-                                    <Option value="2">Closed</Option>
-                                    <Option value="3">Communicated</Option>
-                                    <Option value="4">Identified</Option>
-                                    <Option value="5">Resolved</Option>
-                                    <Option value="6">Cancelled</Option>
+                                    { address.map(item => (
+                                        <Option value= { item.country } key={ item.id }>{ item.country }</Option>
+                                    )) }
                                 </Select>
                             </ul>
                             <h2 className="heading">Order</h2>
@@ -125,7 +125,9 @@ function CheckOut() {
                     <div className="buy-success">
                         <p>Total : { totalAmout }$ </p>
                         <p>
-                            You bought success !!! NVS-{ shipper } will delivery in { plain === 10 ? "2 days" : "2 hours" }
+                            You bought success !!! <span style={{ color : "red" }}>NVS-{ shipper }</span> will delivery to 
+                            <span style={{ color : "red" }}> { add } </span>
+                             in { plain === 10 ? "2 days" : "2 hours" }
                         </p>
                         <p>Please check your phone and email !!!</p>
                     </div>

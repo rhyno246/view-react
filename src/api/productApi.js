@@ -77,7 +77,13 @@ const productApi =  {
         const limit = data.limit
         const url = `shoes?_page=${ page }&_limit=${ limit }`
         return axiosClient.get(url)
+    },
+
+    getCountry : () => {
+        const url = `address`;
+        return axiosClient.get(url)
     }
+    
 }
 
 export default productApi;

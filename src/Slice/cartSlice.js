@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import productApi from "../api/productApi";
 import Storage from '../untils/storage';
-//import axios from 'axios'
+
 
 const cartStore = "cart_store"
 const quantityStore = "quantity_store"
@@ -9,10 +10,10 @@ const checkoutStore = "checkout_store"
 
 
 
-export const getAllCity = createAsyncThunk('product/getAllCity',
+export const getCountry = createAsyncThunk('product/getCountry',
     async () => {
-       // const city = await axios.get('https://thongtindoanhnghiep.co/api/city');
-        //console.log(city);
+        const dataAddress = await productApi.getCountry()
+        return dataAddress
     }
 )
 
@@ -25,6 +26,8 @@ const cartSlice = createSlice({
         alertQuantity : "",
         total : parseInt(Storage.get(totalStore, 0)),
         checkout : Storage.get(checkoutStore, "[]"),
+        address : [],
+        error : ''
     },
     reducers : {
         //redux toolkit push arr not need create new arr
@@ -94,7 +97,7 @@ const cartSlice = createSlice({
             const id = action.payload.id
             const productIndex = state.cart.findIndex(arr => arr.id === id);
             const cartData = state.cart[productIndex]
-            console.log(number);
+            //console.log(number);
             if(number > cartData.stock){
                 return
             }else{
@@ -124,6 +127,14 @@ const cartSlice = createSlice({
             state.checkout = [...action.payload]
             Storage.set(checkoutStore , JSON.stringify(state.checkout) , 60 * 24)
         }
+    },
+    extraReducers : {
+        [getCountry.rejected] : (state, action) => {
+            state.error = action.error
+        },
+        [getCountry.fulfilled] : (state,action) => {
+            state.address = action.payload
+        },
     }
 })
 
