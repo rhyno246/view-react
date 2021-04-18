@@ -19,7 +19,7 @@ function CheckOut() {
     const [modal, setModal] = useState(false)
     const plainOptions = [
         { label : 'Standard delivery ( 2 days )', value : 10 },
-        { label : 'Delivered in 2 hours' , value : 30 }
+        { label : 'Delivered in 2 hour' , value : 30 }
     ]; 
     const phoneNumber = currentUser && currentUser.photoURL
     const email = currentUser && currentUser.email
