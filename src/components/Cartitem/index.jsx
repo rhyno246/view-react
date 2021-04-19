@@ -2,9 +2,8 @@ import React from 'react'
 import "./index.scss"
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { plusCart, RemoveProductToCart , dashItemCart, BlurInputCart, changeSizeCart } from '../../Slice/cartSlice';
-import { Button, InputNumber, Select } from 'antd';
-import { debounce } from '../../untils/helper';
+import { plusCart, RemoveProductToCart , dashItemCart, changeSizeCart } from '../../Slice/cartSlice';
+import { Button, Select } from 'antd';
 
 
 
@@ -12,8 +11,6 @@ const CartItem = (props) => {
     const { id , title , image , price , quantity , size , sizeChose , stock , status } = props
     const { Option } = Select;
     const dispatch = useDispatch()
-    // const [ input , setInput ] = useState(quantity)
-
     const handleDeleteCartItem = () => {
         dispatch(RemoveProductToCart({
             id : id,
@@ -21,32 +18,32 @@ const CartItem = (props) => {
             quantity : quantity
         }))
     }
-    // const handleDashCart = () => {
-    //     dispatch(dashItemCart({id : id}))
-    // }
-    // const handlePlusCart = () => {
-    //     dispatch(plusCart({id : id }))
-    // }
-    
-    const changeNumberCart = (val , info) => {
-        if(info.type === "up"){
-            dispatch(plusCart({
-                id : id, 
-                stock : stock,
-            }))
-        }
-        if(info.type === "down"){
-            dispatch(dashItemCart({id : id}))
-        }
+    const handleDashCart = () => {
+        dispatch(dashItemCart({id : id}))
     }
+    const handlePlusCart = () => {
+        dispatch(plusCart({id : id }))
+    }
+    
+    // const changeNumberCart = (val , info) => {
+    //     if(info.type === "up"){
+    //         dispatch(plusCart({
+    //             id : id, 
+    //             stock : stock,
+    //         }))
+    //     }
+    //     if(info.type === "down"){
+    //         dispatch(dashItemCart({id : id}))
+    //     }
+    // }
  
-    const handleBlurInput = debounce((val) => {
-        dispatch(BlurInputCart({
-            number : val,
-            id : id,
-            stock : stock
-        }))
-    }, 700)
+    // const handleBlurInput = debounce((val) => {
+    //     dispatch(BlurInputCart({
+    //         number : val,
+    //         id : id,
+    //         stock : stock
+    //     }))
+    // }, 700)
 
     const changeItemSelectCart = (val) => {
         dispatch(changeSizeCart({
@@ -91,15 +88,11 @@ const CartItem = (props) => {
                         </div> : null }
                         <div className="input-count" style={{ marginBottom: "40px" }}>
                             <strong>More product : </strong>
-                            <InputNumber defaultValue={ quantity } min={ 1 } max= { stock } onStep={ changeNumberCart } onChange = { handleBlurInput }/>
+                            {/* <InputNumber defaultValue={ quantity } min={ 1 } max= { stock } onStep={ changeNumberCart } onChange = { handleBlurInput }/> */}
                     
-                            {/* <button className="input-number-decrement" onClick={  handleDashCart } disabled={ quantity <= 1 }>–</button>
-                            <input type="number" className="input-number" 
-                                value={ quantity } 
-                                onChange={ e => setInput(e.target.value) } 
-                                onBlur = { handleBlurInput }
-                            />
-                            <button className="input-number-increment" onClick={ handlePlusCart }>+</button> */}
+                            <button className="input-number-decrement" onClick={  handleDashCart } disabled={ quantity <= 1 }>–</button>
+                            <span className="quantity-number">{ quantity }</span>
+                            <button className="input-number-increment" onClick={ handlePlusCart } disabled={ quantity === stock }>+</button>
                         </div>
                     </div>
                     <div className="delete-cart">
