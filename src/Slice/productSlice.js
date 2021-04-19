@@ -184,6 +184,8 @@ const productSlice = createSlice({
         
 
 
+        
+
         [getProductMen.pending] : (state) => {
             state.loading = true
             state.reRenderMenloading = false

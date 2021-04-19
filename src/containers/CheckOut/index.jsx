@@ -1,4 +1,4 @@
-import { Card, Col, Radio, Row , Button , Modal , Select  } from 'antd';
+import { Card, Col, Radio, Row , Button , Modal  } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import icon from '../../img_local/icon-payment-method-cod.svg';
@@ -7,12 +7,15 @@ import './index.scss'
 import NotFound from '../NotFound';
 import { getCountry, removeAllCart } from '../../Slice/cartSlice';
 import { useHistory } from 'react-router-dom';
+import { Formik, Form , FastField } from 'formik';
+import * as Yup from 'yup';
+import SelectField from '../../components/InputField/SelectField';
 
 function CheckOut() {
-    const { Option } = Select;
     const checkoutList = useSelector(state => state.cart.checkout)
     const totalCart = useSelector(state => state.cart.total)
     const address = useSelector(state => state.cart.address)
+    const setAddress = useSelector(state => state.cart.setAddress)
     const dispatch = useDispatch()
     const history = useHistory()
     const { currentUser } = useAuth()
@@ -27,18 +30,11 @@ function CheckOut() {
     const name = currentUser && currentUser.displayName
     const totalAmout = totalCart + plain
     const shipper = Math.floor((Math.random() * 100) + 1)
-    const [add , setAddress] = useState("")
-
-
-    useEffect(() => {
-        dispatch(getCountry())
-    } , [dispatch])
-
     const hanleDelivery = (e) => {
         setPlain(e.target.value)
     }
 
-    const handleShowModal = () => {
+    const handleSubmitCheckout = () => {
         setModal(true)
     }
     const handleHideModal = () => {
@@ -46,9 +42,18 @@ function CheckOut() {
         history.push('/')
         setModal(false)
     }
-    const handleChangeSelect = (val) => {
-        setAddress(val)
+    
+    useEffect(() => {
+        dispatch(getCountry())
+    } , [dispatch])
+
+
+    const initialValues ={ 
+        select : '',
     }
+    const CheckoutSchema = Yup.object().shape({
+        select: Yup.string().required('Address is required!'),
+    });
 
     return (
         <div className="check-out">
@@ -85,23 +90,22 @@ function CheckOut() {
                                 <li><strong>Name : </strong>{ name }</li>
                                 <li><strong>Phone : </strong>0{ phoneNumber }</li>
                                 <li><strong>Email : </strong>{ email }</li>
-                                <Select
-                                    showSearch
-                                    style={{ width: "100%" , margin: "10px 0" }}
-                                    placeholder="Choose your city"
-                                    onChange={ handleChangeSelect }
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                    }
-                                    filterSort={(optionA, optionB) =>
-                                        optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                                    }
+                                <Formik
+                                    initialValues = { initialValues }
+                                    validationSchema = { CheckoutSchema }
+                                    onSubmit ={ (values) => handleSubmitCheckout(values) }
                                 >
-                                    { address.map(item => (
-                                        <Option value= { item.country } key={ item.id }>{ item.country }</Option>
-                                    )) }
-                                </Select>
+                                    <Form>
+                                        <FastField 
+                                            name="select" 
+                                            component = { SelectField } 
+                                            placeholder="Choose your city"
+                                            options={ address }
+                                        />
+                                        <Button type="primary" style={{ marginTop : "15px" , width : "100%" }} htmlType="submit">Buy Now</Button>
+                                    </Form>
+                                    
+                                </Formik>
                             </ul>
                             <h2 className="heading">Order</h2>
                             <ul className="information">
@@ -111,7 +115,7 @@ function CheckOut() {
                             <p><strong>Total Amout : </strong><span style={{ color : "red" , fontWeight : "bold" }}>{ totalAmout.toFixed(2) }$</span></p>
                         </Card>
                         
-                        <Button type="primary" style={{ marginTop : "15px" , width : "100%" }} onClick={ handleShowModal }>Buy Now</Button>
+                        
 
                     </Col>
                 </Row>
@@ -126,7 +130,7 @@ function CheckOut() {
                         <p>Total : { totalAmout }$ </p>
                         <p>
                             You bought success !!! <span style={{ color : "red" }}>NVS-{ shipper }</span> will delivery to 
-                            <span style={{ color : "red" }}> { add } </span>
+                            <span style={{ color : "red" }}> { setAddress } </span>
                              in { plain === 10 ? "2 days" : "2 hours" }
                         </p>
                         <p>Please check your phone and email !!!</p>

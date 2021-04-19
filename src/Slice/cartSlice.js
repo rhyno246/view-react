@@ -7,7 +7,7 @@ const cartStore = "cart_store"
 const quantityStore = "quantity_store"
 const totalStore = "total_store"
 const checkoutStore = "checkout_store"
-
+const checkoutAddress = "checkout_address"
 
 
 export const getCountry = createAsyncThunk('product/getCountry',
@@ -26,8 +26,9 @@ const cartSlice = createSlice({
         alertQuantity : "",
         total : parseInt(Storage.get(totalStore, 0)),
         checkout : Storage.get(checkoutStore, "[]"),
-        address : [],
-        error : ''
+        address : Storage.get(checkoutAddress, "[]"),
+        error : '',
+        setAddress : ''
     },
     reducers : {
         //redux toolkit push arr not need create new arr
@@ -126,6 +127,9 @@ const cartSlice = createSlice({
         checkOut : (state , action ) => {
             state.checkout = [...action.payload]
             Storage.set(checkoutStore , JSON.stringify(state.checkout) , 60 * 24)
+        },
+        setAddress : (state, action) => {
+            state.setAddress = action.payload
         }
     },
     extraReducers : {
@@ -134,6 +138,7 @@ const cartSlice = createSlice({
         },
         [getCountry.fulfilled] : (state,action) => {
             state.address = action.payload
+            Storage.set(checkoutAddress , JSON.stringify(state.address) , 60 * 24)
         },
     }
 })
@@ -147,6 +152,7 @@ export const {
     BlurInputCart ,
     removeAllCart , 
     checkOut,
-    changeSizeCart
+    changeSizeCart,
+    setAddress
 } = actions
 export default cartReducer

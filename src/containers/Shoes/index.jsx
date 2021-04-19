@@ -28,7 +28,7 @@ function Shoes() {
             const scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
             if (scrollTop + window.innerHeight + 100 >= scrollHeight){
                 setPage(++pager)
-                if(lengthPager !== 0){
+                if(lengthPager === 8){
                     dispatch(loadMoreShoes({
                         page : pager,
                         limit : 8
