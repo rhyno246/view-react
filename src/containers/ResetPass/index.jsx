@@ -23,7 +23,7 @@ function ResetPass() {
         setLoading(true)
         auth.sendPasswordResetEmail(values.email).then(() =>{
             setLoading(false)
-            setSuccess("Reset password success !!!")
+            setSuccess("Reset password sent to email success !!!")
             setTimeout(() => {
                 setSuccess("")
             }, 1100);

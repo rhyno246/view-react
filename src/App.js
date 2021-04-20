@@ -12,18 +12,22 @@ const Cart = React.lazy(() => import('./containers/Cart/index'))
 const ProductDetail = React.lazy(() => import('./containers/ProductDetail/index'))
 const DetailOtherBrand = React.lazy(() => import('./containers/DetailOtherBrand/index'))
 const DetailShoeLace = React.lazy(() => import('./containers/DetailShoeLace/index'))
+
+
 const SignUp = React.lazy(() => import('./containers/SignUp/index'))
 const Login = React.lazy(() => import('./containers/Login/index'))
+const ForGotPass = React.lazy(() => import('./containers/ResetPass/index'))
+
 const OtherBrands = React.lazy(() => import('./containers/OrtherBrands/index'))
 const Search = React.lazy(() => import('./containers/SearchPage/index'))
 const NotFound = React.lazy(() => import('./containers/NotFound/index'))
 const Profile = React.lazy(() => import('./containers/Profile/index'))
-const ForGotPass = React.lazy(() => ('./containers/ResetPass/index'))
 const ShoeLace = React.lazy(() => import('./containers/Shoelace/index'))
 const CheckOut = React.lazy(() => import('./containers/CheckOut/index'))
 const Men = React.lazy(() => import('./containers/Men/index'))
 const Women = React.lazy(() => import('./containers/Women/index'))
 const Shoes = React.lazy(() => import('./containers/Shoes/index'))
+
 
 function App() {
     const isAuth = useSelector(state => state.auth.setUser)
