@@ -15,7 +15,6 @@ function DetailOtherBrand() {
     const dispatch = useDispatch()
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
-    const [ salePrice , setSalePrice ] = useState("")
     const listOtherBrand = useSelector(state => state.product.detailotherbrand)
     const loading = useSelector(state => state.product.loading)
     const prodId = listOtherBrand.id
@@ -26,12 +25,10 @@ function DetailOtherBrand() {
     const quantity = listOtherBrand.quantity
     const status = listOtherBrand.status
     let desc = listOtherBrand && listOtherBrand.description
+    const salePrice = price - sale * price
     useEffect(() => {
         dispatch(getDetailOtherBrand(id))
     }, [ dispatch ,  id])
-    useEffect(() => {
-        setSalePrice(price - sale * price)
-    },[price , sale])
     const handleAddToCart = () => {
         if(sale){
             dispatch(AddToCart({

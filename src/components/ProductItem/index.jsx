@@ -7,20 +7,15 @@ import { HeartOutlined , DeleteOutlined } from '@ant-design/icons';
 import { db } from '../../firebase/firebase'
 import { useAuth } from "../../contexts/AuthContext";
 import './index.scss';
-import { useEffect } from 'react/cjs/react.development';
 const ProductItem = (props) => {
     const { title , image , price , id , size , quantity , sale , isProduct , status} = props
     const { currentUser } = useAuth()
     const isAuth = useSelector(state => state.auth.setUser)
-    const [ salePrice , setSalePrice ] = useState("")
     const [loading , setLoading] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
     const email = currentUser && currentUser.email
-    useEffect(() => {
-        setSalePrice(price - sale * price)
-        
-    }, [price,sale])
+    const salePrice = price - sale * price
     const handleAddToCart = () => {
         if(isProduct){
             db.collection(email).doc(id).delete().then(() => {

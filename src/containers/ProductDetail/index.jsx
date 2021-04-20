@@ -18,7 +18,6 @@ const ProductDetail = () => {
     const dispatch = useDispatch()
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
-    const [ salePrice , setSalePrice ] = useState("")
     const [sizeChange , setSizeChange] = useState(null)
     const listDetailProduct = useSelector(state => state.product.detailproduct)
     const loading = useSelector(state => state.product.loading)
@@ -31,13 +30,13 @@ const ProductDetail = () => {
     const sale = listDetailProduct.sale
     const status = listDetailProduct.status
     let desc = listDetailProduct && listDetailProduct.description
+
+    const salePrice = price - sale * price
+
     useEffect(() => {
         dispatch(getAllProductDetail(id))
     } , [ dispatch , id ])
 
-    useEffect(() => {
-        setSalePrice(price - sale * price)
-    },[price , sale])
 
     const handleChange = (val) => {
         setSizeChange(val)

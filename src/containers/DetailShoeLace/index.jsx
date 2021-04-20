@@ -7,16 +7,15 @@ import ReactReadMoreReadLess from "react-read-more-read-less";
 import { AddToCart } from '../../Slice/cartSlice';
 import { Button, Select } from 'antd';
 import Slider from 'react-slick';
-import './index.scss'
 import { getDetailShoelace } from '../../Slice/productSlice';
-function DetailShoeLace(props) {
+import './index.scss'
+function DetailShoeLace() {
     const param = useParams()
     const id = param.id;
     const dispatch = useDispatch()
     const { Option } = Select;
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
-    const [ salePrice , setSalePrice ] = useState("")
     const listShoeslace = useSelector(state => state.product.detailshoeslace)
     const [sizeChange , setSizeChange] = useState(null)
     const loading = useSelector(state => state.product.loading)
@@ -29,12 +28,10 @@ function DetailShoeLace(props) {
     const sale = listShoeslace.sale
     const status = listShoeslace.status
     let desc = listShoeslace && listShoeslace.description
+    const salePrice = price - sale * price
     useEffect(() => {
         dispatch(getDetailShoelace(id))
     }, [ dispatch ,  id])
-    useEffect(() => {
-        setSalePrice(price - sale * price)
-    },[price , sale])
     const handleChange = (val) => {
         setSizeChange(val)
     }
@@ -68,7 +65,7 @@ function DetailShoeLace(props) {
     }
     return (
         <>
-            <div className="product-detail">
+            <div className="detail-shoe">
                 { loading ? <Loading/> : <div className="container">
                 <div className="main" style={{ maxWidth : "100%" }}>
                     <div className="img">
