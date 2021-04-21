@@ -1,0 +1,2 @@
+(this["webpackJsonpmy-shop"]=this["webpackJsonpmy-shop"]||[]).push([[27],{375:function(t,e,n){"use strict";n.r(e);n(0);var s=n(4);e.default=function(){return Object(s.jsx)("div",{style:{textAlign:"center",marginTop:"auto"},children:Object(s.jsx)("h1",{children:" Page Not Found "})})}}}]);
+//# sourceMappingURL=27.a20b32fc.chunk.js.map
