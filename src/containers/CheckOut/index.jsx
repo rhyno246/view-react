@@ -1,11 +1,11 @@
 import { Card, Col, Radio, Row , Button , Modal  } from 'antd';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import icon from '../../img_local/icon-payment-method-cod.svg';
 import { useAuth } from "../../contexts/AuthContext";
 import './index.scss'
 import NotFound from '../NotFound';
-import { getCountry, removeAllCart } from '../../Slice/cartSlice';
+import { removeAllCart } from '../../Slice/cartSlice';
 import { useHistory } from 'react-router-dom';
 import { Formik, Form , FastField } from 'formik';
 import * as Yup from 'yup';
@@ -14,7 +14,7 @@ import SelectField from '../../components/InputField/SelectField';
 function CheckOut() {
     const checkoutList = useSelector(state => state.cart.checkout)
     const totalCart = useSelector(state => state.cart.total)
-    const address = useSelector(state => state.cart.address)
+
     const setAddress = useSelector(state => state.cart.setAddress)
     const dispatch = useDispatch()
     const history = useHistory()
@@ -43,9 +43,7 @@ function CheckOut() {
         setModal(false)
     }
     
-    useEffect(() => {
-        dispatch(getCountry())
-    } , [dispatch])
+   
 
 
     const initialValues ={ 
@@ -100,19 +98,18 @@ function CheckOut() {
                                             name="select" 
                                             component = { SelectField } 
                                             placeholder="Choose your city"
-                                            options={ address }
                                         />
-                                        <Button type="primary" style={{ marginTop : "15px" , width : "100%" }} htmlType="submit">Buy Now</Button>
+                                        <h2 className="heading">Order</h2>
+                                        <ul className="information">
+                                            <li><strong>Price : </strong>{ totalCart.toFixed(2) }$</li>
+                                            <li><strong>Ship : </strong>{ plain }$</li>
+                                        </ul>
+                                        <p><strong>Total Amout : </strong><span style={{ color : "red" , fontWeight : "bold" }}>{ totalAmout.toFixed(2) }$</span></p>
+                                        <Button type="primary" style={{ marginTop : "10px" , width : "100%" }} htmlType="submit">Buy Now</Button>
                                     </Form>
                                     
                                 </Formik>
                             </ul>
-                            <h2 className="heading">Order</h2>
-                            <ul className="information">
-                                <li><strong>Price : </strong>{ totalCart.toFixed(2) }$</li>
-                                <li><strong>Ship : </strong>{ plain }$</li>
-                            </ul>
-                            <p><strong>Total Amout : </strong><span style={{ color : "red" , fontWeight : "bold" }}>{ totalAmout.toFixed(2) }$</span></p>
                         </Card>
                         
                         

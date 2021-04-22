@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Select  } from 'antd';
-import { useDispatch } from 'react-redux';
-import { setAddress } from '../../Slice/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCountry, setAddress } from '../../Slice/cartSlice';
 function SelectField(props) {
     const { Option } = Select;
-    const { field ,  form , options , placeholder } = props;
+    const { field ,  form , placeholder } = props;
     const { errors, touched }  = form;
     const { name } = field;
     const showError = errors[name] && touched[name];
+    const address = useSelector(state => state.cart.address)
     const dispatch = useDispatch()
-
+    useEffect(() => {
+        dispatch(getCountry())
+    } , [dispatch])
     const handleChangeSelect = (val) => {
         const changeEvent = {
             target : {name : name,value : val}
@@ -21,7 +24,7 @@ function SelectField(props) {
         <div>
             <Select
                 showSearch
-                style={{ width: "100%" , margin: "10px 0 0 0" }}
+                style={{ width: "100%" , margin: "10px 0 10px 0" }}
                 placeholder={ placeholder }
                 onChange={ handleChangeSelect }
                 optionFilterProp="children"
@@ -33,7 +36,7 @@ function SelectField(props) {
                 }
             >
                 
-                { options.map(item => (
+                { address.map(item => (
                     <Option value= { item.country } key={ item.id }>{ item.country }</Option>
                 )) }
             </Select>

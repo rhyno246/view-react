@@ -1,25 +1,6 @@
 .check-out{
     margin-top: auto;
     padding-top: 100px;
-    .information{
-        padding-left: 0;
-        list-style: none;
-        padding-bottom: 10px;
-        border-bottom:  1px solid #ddd;
-        li{
-            margin-bottom: 5px;
-        }
-    }
-    .Heading{
-        font-size: 30px;
-        text-align: center;
-        text-transform: uppercase;
-        color: #80CBC4;
-        margin: 0;
-    }
-    .title{
-        text-align: center;
-    }
     .box-checkout{
         border: 1px solid #ddd;
         border-radius: 5px;
@@ -45,4 +26,31 @@
 }
 span.anticon.anticon-close.ant-modal-close-icon {
     display: none;
+}
+
+.error{
+    color: red;
+    margin-bottom: 0;
+}
+
+.information{
+    padding-left: 0;
+    list-style: none;
+    padding-bottom: 10px;
+    li{
+        margin-bottom: 5px;
+    }
+}
+.heading{
+    font-size: 18px;
+}
+.Heading{
+    font-size: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #80CBC4;
+    margin: 0;
+}
+.title{
+    text-align: center;
 }
